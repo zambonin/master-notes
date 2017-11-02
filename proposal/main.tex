@@ -5,8 +5,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage{parskip}
 
-\pagenumbering{gobble}
-
 \title{Parametrização de desempenho do esquema de
 assinatura digital Winternitz e suas variantes}
 \author{Novembro de 2017}
@@ -53,21 +51,21 @@ construção de esquemas bem comportados. \cite{Rompel:1990:OFN:100216.100269}
 Esquemas de assinatura digital baseados em funções de resumo criptográfico
 consistem da combinação de um esquema de assinatura digital única, onde
 apenas uma mensagem pode ser assinada de modo seguro, e uma estrutura
-chamada de árvore de Merkle, que abriga diversos pares de chave únicos
-como suas folhas, e reduz a verificação destes para uma única chave,
-codificada em sua raiz. Esta árvore é construída com a concatenação de
-resumos criptográficos do conteúdo dos nós, habilitando assim a assinatura
-de diversas mensagens. Como uma função específica não é necessária, é
-possível obter uma grande variedade de esquemas, garantindo a versatilidade
-desta abordagem para utilização de assinaturas digitais.
+chamada de árvore de Merkle \cite{Merkle1990}, que abriga diversos pares
+de chave únicos como suas folhas, e reduz a verificação destes para uma
+única chave, codificada em sua raiz. Esta árvore é construída com a
+concatenação de resumos criptográficos do conteúdo dos nós, habilitando
+assim a assinatura de diversas mensagens. Como uma função específica não é
+necessária, é possível obter uma grande variedade de esquemas, garantindo
+a versatilidade desta abordagem para utilização de assinaturas digitais.
 
 Embora os esquemas iniciais tenham sido construídos sem atenção particular
 à eficiência de modo geral (e.g. o esquema de assinatura única de
-Lamport-Diffie assina apenas um \emph{bit} de informação em sua forma mais
-simples), muitos resultados práticos habilitam a redução contínua do tempo de
-verificação da assinatura, tamanho e tempo para geração do par de chaves
-e assinatura, bem como avanços teóricos possibilitam a utilização de funções
-com requisitos de segurança mínimos, garantem o conceito de sigilo encaminhado
+Lamport-Diffie \cite{Lamport1979} assina apenas um \emph{bit} de informação
+em sua forma mais simples), muitos resultados práticos habilitam a redução
+contínua do tempo de verificação da assinatura, tamanho e tempo para
+geração do par de chaves e assinatura, bem como avanços teóricos possibilitam
+a utilização de funções com requisitos de segurança mínimos, garantem o conceito de sigilo encaminhado
 (comprometimento de uma chave não implica na segurança de mensagens que
 utilizaram esta chave anteriormente) e da ausência de estado (o esquema não
 necessita registrar quais chaves já foram utilizadas, e.g. marcando as folhas
