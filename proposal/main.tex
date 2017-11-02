@@ -12,6 +12,8 @@
 
 \maketitle
 
+\section{Esquemas de assinatura digital }
+
 % Algoritmos utilizados em esquemas de assinatura digital atualmente, como RSA
 % e ECDSA, têm sua segurança baseada em calcular a fatoração de números muito
 % grandes ou logaritmos discretos. Este tipo de cômputo pode ser realizado por
@@ -30,74 +32,74 @@
 % características, particularmente os baseados em árvores de Merkle e variantes
 % do esquema Winternitz.
 
-Funções de resumo criptográficas são essenciais em diversas aplicações de
-segurança da informação, como códigos de autenticação de mensagens (MACs),
-identificação de arquivos a partir de uma `'impressão digital`' única, detecção
-de perda de informações em uma transmissão volátil etc., e têm uso disseminado
-em esquemas de assinatura digital, os quais são o foco deste trabalho. Uma
-característica relevante destes é a possibilidade da demonstração matemática da
-autenticidade de uma mensagem transmitida entre entidades, sejam estas
-confiáveis ou não, utilizando as funções citadas anteriormente, para que seja
-estabelecida uma comunicação segura.
+% Funções de resumo criptográficas são essenciais em diversas aplicações de
+% segurança da informação, como códigos de autenticação de mensagens (MACs),
+% identificação de arquivos a partir de uma `'impressão digital`' única, detecção
+% de perda de informações em uma transmissão volátil etc., e têm uso disseminado
+% em esquemas de assinatura digital, os quais são o foco deste trabalho. Uma
+% característica relevante destes é a possibilidade da demonstração matemática da
+% autenticidade de uma mensagem transmitida entre entidades, sejam estas
+% confiáveis ou não, utilizando as funções citadas anteriormente, para que seja
+% estabelecida uma comunicação segura.
 
-A maior parte dos esquemas de assinatura digital, na prática, utilizam
-criptossistemas de chave pública baseados em problemas de teoria de números --
-fatoração de inteiros, logaritmo discreto -- que, atualmente, não podem ser
-computados em tempo polinomial (ou seja, seu tempo de execução é limitado por
-uma expressão polinomial relacionada com o tamanho da entrada do algoritmo).
-Entretanto, utilizando-se de um computador quântico, tais problemas podem ser
-resolvidos em tempo polinomial \cite{shor1999polynomial}.
+% A maior parte dos esquemas de assinatura digital, na prática, utilizam
+% criptossistemas de chave pública baseados em problemas de teoria de números --
+% fatoração de inteiros, logaritmo discreto -- que, atualmente, não podem ser
+% computados em tempo polinomial (ou seja, seu tempo de execução é limitado por
+% uma expressão polinomial relacionada com o tamanho da entrada do algoritmo).
+% Entretanto, utilizando-se de um computador quântico, tais problemas podem ser
+% resolvidos em tempo polinomial \cite{shor1999polynomial}.
 
-A criptografia \emph{pós-quântica} encarrega-se de buscar algoritmos
-criptográficos cuja complexidade independe de problemas futuramente
-solucionáveis em teoria de números. Como visto em \cite{Merkle1990}, um
-criptossistema de chaves públicas pode ser definido de forma independente da
-função de resumo criptográfica utilizada, assim possibilitando a exploração de
-diversas combinações, cujos elementos essenciais (e.g. árvores de Merkle) não
-influenciam na segurança do esquema.
+% A criptografia \emph{pós-quântica} encarrega-se de buscar algoritmos
+% criptográficos cuja complexidade independe de problemas futuramente
+% solucionáveis em teoria de números. Como visto em \cite{Merkle1990}, um
+% criptossistema de chaves públicas pode ser definido de forma independente da
+% função de resumo criptográfica utilizada, assim possibilitando a exploração de
+% diversas combinações, cujos elementos essenciais (e.g. árvores de Merkle) não
+% influenciam na segurança do esquema.
 
-Neste trabalho, utilizamos funções de resumo criptográficas para a construção
-de esquemas de assinatura digital, considerados seguros se e somente as funções
-forem resistentes à colisão (a inviabilidade computacional de encontrar duas
-mensagens distintas que, submetidas à mesma função, retornam a mesma saída),
-tornando os requisitos de segurança mínimos para os esquemas.
+% Neste trabalho, utilizamos funções de resumo criptográficas para a construção
+% de esquemas de assinatura digital, considerados seguros se e somente as funções
+% forem resistentes à colisão (a inviabilidade computacional de encontrar duas
+% mensagens distintas que, submetidas à mesma função, retornam a mesma saída),
+% tornando os requisitos de segurança mínimos para os esquemas.
 
-\section{Objetivos}
+% \section{Objetivos}
 
-\noindent \emph{Objetivo geral.} Apresentar um estudo detalhado sobre esquemas
-de assinatura digital baseados em funções de resumo criptográficas, partindo de
-esquemas de assinatura única \cite{Lamport1979}, observando o refinamento
-destes, até o estado da arte, onde não é necessário saber quantas assinaturas
-foram geradas anteriormente \cite{Bernstein2015}, bem como implementações em
-linguagem de alto nível para a fácil compreensão destes esquemas. \\
+% \noindent \emph{Objetivo geral.} Apresentar um estudo detalhado sobre esquemas
+% de assinatura digital baseados em funções de resumo criptográficas, partindo de
+% esquemas de assinatura única \cite{Lamport1979}, observando o refinamento
+% destes, até o estado da arte, onde não é necessário saber quantas assinaturas
+% foram geradas anteriormente \cite{Bernstein2015}, bem como implementações em
+% linguagem de alto nível para a fácil compreensão destes esquemas. \\
 
-\noindent \emph{Objetivos específicos.} Descrever os esquemas de assinatura
-digital única Lamport-Diffie e Winternitz; descrever os esquemas de assinatura
-digital baseado em árvores de Merkle -- \emph{Merkle Signature Scheme},
-\emph{eXtended Merkle Signature Scheme}; implementar os esquemas supracitados;
-comparar o desempenho destes algoritmos entre si, utilizando funções de resumo
-criptográficas e parâmetros internos aos algoritmos distintos, onde aplicável.
-\\
+% \noindent \emph{Objetivos específicos.} Descrever os esquemas de assinatura
+% digital única Lamport-Diffie e Winternitz; descrever os esquemas de assinatura
+% digital baseado em árvores de Merkle -- \emph{Merkle Signature Scheme},
+% \emph{eXtended Merkle Signature Scheme}; implementar os esquemas supracitados;
+% comparar o desempenho destes algoritmos entre si, utilizando funções de resumo
+% criptográficas e parâmetros internos aos algoritmos distintos, onde aplicável.
+% \\
 
-\noindent \emph{Escopo do trabalho.} Não se aplica ao conteúdo deste trabalho
-a análise profunda de provas de segurança definidas por um modelo adversarial
-teórico -- ou seja, demonstrar que um atacante deve resolver um problema muito
-difícil para tornar o algoritmo inseguro, bem como algoritmos de criptografia
-pós-quânticos baseados em outras estruturas matemáticas (reticulados, teoria
-de códigos etc.) ou algoritmos clássicos (RSA, DSA, ECDSA etc.). \\
+% \noindent \emph{Escopo do trabalho.} Não se aplica ao conteúdo deste trabalho
+% a análise profunda de provas de segurança definidas por um modelo adversarial
+% teórico -- ou seja, demonstrar que um atacante deve resolver um problema muito
+% difícil para tornar o algoritmo inseguro, bem como algoritmos de criptografia
+% pós-quânticos baseados em outras estruturas matemáticas (reticulados, teoria
+% de códigos etc.) ou algoritmos clássicos (RSA, DSA, ECDSA etc.). \\
 
-\noindent \emph{Critérios de aceitação.} Estudo e implementação de pelo menos
-dois esquemas de assinatura digital única (Lamport-Diffie, Winternitz),
-a estrutura de dados chamada de árvore de Merkle e um esquema de assinatura
-digital composto da união destes elementos, como o XMSS \cite{Buchmann2011}. \\
+% \noindent \emph{Critérios de aceitação.} Estudo e implementação de pelo menos
+% dois esquemas de assinatura digital única (Lamport-Diffie, Winternitz),
+% a estrutura de dados chamada de árvore de Merkle e um esquema de assinatura
+% digital composto da união destes elementos, como o XMSS \cite{Buchmann2011}. \\
 
-O trabalho será desenvolvido utilizando a infraestrutura e recursos do
-Laboratório de Segurança em Computação (LabSEC/UFSC), onde será estudada
-bibliografia referente aos temas abordados nesta pesquisa buscando encontrar
-as vantagens e desvantagens entre cada um dos esquemas de assinatura digital
-escolhidos, bem como observar seu desempenho e tamanho de elementos como
-par de chaves e assinatura, ao utilizar funções de resumo criptográficas
-distintas em implementações produzidas ou fornecidas.
+% O trabalho será desenvolvido utilizando a infraestrutura e recursos do
+% Laboratório de Segurança em Computação (LabSEC/UFSC), onde será estudada
+% bibliografia referente aos temas abordados nesta pesquisa buscando encontrar
+% as vantagens e desvantagens entre cada um dos esquemas de assinatura digital
+% escolhidos, bem como observar seu desempenho e tamanho de elementos como
+% par de chaves e assinatura, ao utilizar funções de resumo criptográficas
+% distintas em implementações produzidas ou fornecidas.
 
 \bibliographystyle{plain}
 \bibliography{main}
