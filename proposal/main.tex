@@ -4,7 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
-\title{}
+\title{Parametrização de desempenho do esquema de assinatura digital Winternitz}
 \author{}
 \date{Novembro de 2017}
 
@@ -12,23 +12,23 @@
 
 \maketitle
 
-Algoritmos utilizados em esquemas de assinatura digital atualmente, como RSA
-e ECDSA, têm sua segurança baseada em calcular a fatoração de números muito
-grandes ou logaritmos discretos. Este tipo de cômputo pode ser realizado por
-um computador quântico suficientemente poderoso, utilizando algoritmos já
-conhecidos (e.g. algoritmo de Shor). Deste modo, para manter o ecossistema de
-assinaturas digitais continuamente seguro, é necessário oferecer alternativas
-pós-quânticas, ou seja, resistentes a computadores quânticos. Este trabalho
-busca apresentar esquemas baseados apenas em funções de resumo
-criptográficas, cuja segurança baseia-se apenas na resistência à colisão da
-função escolhida, com o objetivo de mostrar que a construção de esquemas de
-assinatura seguros independe de problemas considerados difíceis em teoria de
-números ou álgebra, levando em conta apenas algoritmos quânticos, como o
-algoritmo de Grover. Ademais, apresentam-se soluções para alguns problemas
-deste tipo de esquema, como o tamanho e possibilidade de reutilização das
-chaves pública e privada, assim como uma variada gama de algoritmos com estas
-características, particularmente os baseados em árvores de Merkle e variantes
-do esquema Winternitz.
+% Algoritmos utilizados em esquemas de assinatura digital atualmente, como RSA
+% e ECDSA, têm sua segurança baseada em calcular a fatoração de números muito
+% grandes ou logaritmos discretos. Este tipo de cômputo pode ser realizado por
+% um computador quântico suficientemente poderoso, utilizando algoritmos já
+% conhecidos (e.g. algoritmo de Shor). Deste modo, para manter o ecossistema de
+% assinaturas digitais continuamente seguro, é necessário oferecer alternativas
+% pós-quânticas, ou seja, resistentes a computadores quânticos. Este trabalho
+% busca apresentar esquemas baseados apenas em funções de resumo
+% criptográficas, cuja segurança baseia-se apenas na resistência à colisão da
+% função escolhida, com o objetivo de mostrar que a construção de esquemas de
+% assinatura seguros independe de problemas considerados difíceis em teoria de
+% números ou álgebra, levando em conta apenas algoritmos quânticos, como o
+% algoritmo de Grover. Ademais, apresentam-se soluções para alguns problemas
+% deste tipo de esquema, como o tamanho e possibilidade de reutilização das
+% chaves pública e privada, assim como uma variada gama de algoritmos com estas
+% características, particularmente os baseados em árvores de Merkle e variantes
+% do esquema Winternitz.
 
 Funções de resumo criptográficas são essenciais em diversas aplicações de
 segurança da informação, como códigos de autenticação de mensagens (MACs),
