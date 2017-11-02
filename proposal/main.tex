@@ -31,12 +31,14 @@ assinatura de próprio punho no mundo real.
 Na prática, a maior parte destes esquemas utilizam criptossistemas de
 chave pública baseados em problemas da teoria dos números, como a
 fatoração de inteiros ou resolução do logaritmo discreto para números
-grandes (e.g. RSA e ECDSA). Este fato provê a segurança necessária para
-os esquemas em computadores clássicos -- mecânicos -- em virtude da
+grandes (e.g. RSA \cite{Rivest:1978:MOD:359340.359342}
+e ECDSA \cite{Johnson2001}). Este fato provê a segurança necessária para
+os esquemas em computadores clássicos (mecânicos) em virtude da
 não-existência de algoritmos de tempo polinomial para a resolução destes
 problemas. Entretanto, em computadores quânticos, algoritmos dessa forma
-já existem, efetivamente tornando estes esquemas inseguros neste novo
-contexto.
+já existem -- em especial, o algoritmo de Shor \cite{shor1999polynomial}
+--, efetivamente tornando estes esquemas inseguros neste novo
+contexto. 
 
 Para combater esta situação, a criptografia pós-quântica encarrega-se
 de buscar algoritmos criptográficos cuja segurança é considerada razoável,
@@ -46,7 +48,7 @@ resistente a este tipo de computador pode ser dada apenas com funções de
 resumo criptográfico, construídas a partir de funções de mão única. De fato,
 estas funções, desde que apresentem requisitos de segurança como resistência
 à segunda pré-imagem e à colisões, são necessárias e suficientes para a
-construção de esquemas bem comportados.
+construção de esquemas bem comportados. \cite{Rompel:1990:OFN:100216.100269}
 
 Esquemas de assinatura digital baseados em funções de resumo criptográfico
 consistem da combinação de um esquema de assinatura digital única, onde
