@@ -3,6 +3,7 @@
 \usepackage[brazil]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{parskip}
 
 \title{Parametrização de desempenho do esquema de
 assinatura digital Winternitz e suas variantes}
@@ -22,11 +23,17 @@ em virtude da possível criticalidade e sensibilidade atribuídas aos dados
 transmitidos. Esquemas de assinatura digital são comumente utilizados para
 assegurar, de maneira formal, esta validação através da autenticidade e
 não-repúdio do remetente e certeza da integridade dos dados em um contexto,
-de maneira formal, a fim de traduzir o resguardo provido por uma assinatura
-de próprio punho no mundo real. A maior parte destes esquemas, na prática,
-utilizam criptossistemas de chave pública baseados em problemas da teoria
-dos números, como a fatoração de inteiros ou resolução do logaritmo discreto
-para números grandes. Factualmente
+a fim de traduzir o resguardo provido por uma assinatura de próprio punho
+no mundo real.
+
+Na prática, a maior parte destes esquemas utilizam criptossistemas de
+chave pública baseados em problemas da teoria dos números, como a
+fatoração de inteiros ou resolução do logaritmo discreto para números
+grandes. Este fato provê a segurança necessária para os esquemas em
+computadores clássicos -- mecânicos -- em virtude da não-existência de
+algoritmos de tempo polinomial para a resolução destes problemas.
+Entretanto, em computadores quânticos, algoritmos dessa forma já existem,
+
 
 \section{Motivação}
 
