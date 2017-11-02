@@ -31,11 +31,12 @@ no mundo real.
 Na prática, a maior parte destes esquemas utilizam criptossistemas de
 chave pública baseados em problemas da teoria dos números, como a
 fatoração de inteiros ou resolução do logaritmo discreto para números
-grandes. Este fato provê a segurança necessária para os esquemas em
-computadores clássicos -- mecânicos -- em virtude da não-existência de
-algoritmos de tempo polinomial para a resolução destes problemas.
-Entretanto, em computadores quânticos, algoritmos dessa forma já existem,
-efetivamente tornando estes esquemas inseguros neste novo contexto.
+grandes (e.g. RSA e ECDSA). Este fato provê a segurança necessária para
+os esquemas em computadores clássicos -- mecânicos -- em virtude da
+não-existência de algoritmos de tempo polinomial para a resolução destes
+problemas. Entretanto, em computadores quânticos, algoritmos dessa forma
+já existem, efetivamente tornando estes esquemas inseguros neste novo
+contexto.
 
 Para combater esta situação, a criptografia pós-quântica encarrega-se
 de buscar algoritmos criptográficos cuja segurança é considerada razoável,
@@ -66,8 +67,9 @@ verificação da assinatura, tamanho e tempo para geração do par de chaves
 e assinatura, bem como avanços teóricos possibilitam a utilização de funções
 com requisitos de segurança mínimos, garantem o conceito de sigilo encaminhado
 (comprometimento de uma chave não implica na segurança de mensagens que
-utilizaram esta chave anteriormente)
-e da ausência de estado
+utilizaram esta chave anteriormente) e da ausência de estado (o esquema não
+necessita registrar quais chaves já foram utilizadas, e.g. marcando as folhas
+da árvore de Merkle).
 
 % \section{Motivação}
 
