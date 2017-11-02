@@ -50,14 +50,13 @@ construção de esquemas bem comportados.
 Esquemas de assinatura digital baseados em funções de resumo criptográfico
 consistem da combinação de um esquema de assinatura digital única, onde
 apenas uma mensagem pode ser assinada de modo seguro, e uma estrutura
-chamada de árvore de Merkle, que abriga diversos pares de chave únicos,
-as folhas da árvore, e reduz a verificação destes para uma única
-chave -- a raiz da árvore,
+chamada de árvore de Merkle, que abriga diversos pares de chave únicos
+como suas folhas, e reduz a verificação destes para uma única chave,
+codificada em sua raiz. Esta árvore é construída com a concatenação de
+resumos criptográficos do conteúdo dos nós, habilitando assim a assinatura
+de diversas mensagens.
 
-
-construída com a concatenação de resumos
-criptográficos do conteúdo de nodos, habilitando a assinatura de diversas
-mensagens, codificadas nesta árvore. 
+Embora os esquemas iniciais tenham sido construídos sem 
 
 % \section{Motivação}
 
