@@ -29,19 +29,19 @@ um contexto, a fim de traduzir o resguardo provido por uma assinatura de
 próprio punho no mundo real.
 
 Na prática, a maior parte destes esquemas utilizam criptossistemas de chave
-pública baseados em problemas de teoria dos números (e.g. RSA
-\cite{Rivest:1978:MOD:359340.359342} e ECDSA \cite{Johnson2001}), como a
-fatoração de inteiros ou resolução do logaritmo discreto para números grandes.
-Este fato provê a segurança necessária para os esquemas em computadores
-clássicos, em virtude da não-existência de algoritmos de tempo polinomial para
-a resolução destes problemas. Entretanto, em computadores quânticos, algoritmos
-dessa forma já existem --- em especial, o algoritmo de Shor
+pública baseados em problemas de teoria dos números, como a fatoração de
+inteiros ou resolução do logaritmo discreto para números grandes. Este fato
+provê a segurança necessária para os esquemas em computadores clássicos
+(eletrônicos), em virtude da não-existência de algoritmos de tempo polinomial
+para a resolução destes problemas. Entretanto, em computadores quânticos,
+algoritmos dessa forma já existem --- em especial, o algoritmo de Shor
 \cite{Shor:1997:PAP:264393.264406} --- efetivamente tornando estes esquemas
 inseguros neste novo contexto. 
 
 Para combater esta situação, a criptografia pós-quântica encarrega-se de buscar
 algoritmos criptográficos cuja segurança é considerada razoável, mesmo
-utilizando-se de um computador quântico e algoritmos especializados para o
+utilizando-se de um computador quântico e ataques especializados, como o
+algoritmo 
 ataque. Uma definição viável de esquema de assinatura digital resistente a este
 tipo de computador pode ser dada apenas com funções de resumo criptográfico,
 construídas a partir de funções de mão única \cite{cryptoeprint:2005:328}. De
