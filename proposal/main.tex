@@ -80,7 +80,7 @@ generalização de \cite{Lamport1979}, permitindo a assinatura de múltiplos
 $w$, que implica imediatamente no tamanho do par de chaves e na velocidade que
 a assinatura é criada e/ou verificada. Com um parâmetro $w$ bem escolhido, o
 esquema torna-se relativamente eficiente, e a valer, este esquema, e sua
-variante \cite{cryptoeprint:2017:965} cujos requisitos de segurança são
+variante WOTS+ \cite{cryptoeprint:2017:965} cujos requisitos de segurança são
 diminuídos, têm sido utilizados amplamente como parte de diversos esquemas
 baseados em funções de resumo criptográfico, como SPHINCS \cite{Bernstein2015},
 MSS \cite{Merkle:1989:CDS:118209.118230}, CMSS \cite{Buchmann2006}, GMSS
@@ -99,7 +99,11 @@ de resumos criptográficos da chave privada.
 
 Winternitz figura como o esquema escolhido para assinar as folhas das
 árvores de grande parte da literatura prática em cima de esquemas baseados
-nesta estrutura de dados. No caso do SPHINCS
+nesta estrutura de dados. Por exemplo, no caso do SPHINCS, que utiliza
+hiper-árvores a fim de aumentar o número de possíveis assinaturas e
+
+WOTS+ é
+utilizado para autenticar cada uma das camadas de árvores de Merkle
 
 Devido à construção do algoritmo, e como os processos de geração de chaves
 
