@@ -82,8 +82,8 @@ a assinatura é criada e/ou verificada. Com um parâmetro $w$ bem escolhido, o
 esquema torna-se relativamente eficiente, e a valer, este esquema, e sua
 variante \cite{cryptoeprint:2017:965} cujos requisitos de segurança são
 diminuídos, têm sido utilizados amplamente como parte de diversos esquemas
-baseados em funções de resumo criptográfico \cite{Bernstein2015,
-Merkle:1989:CDS:118209.118230, Buchmann:2011:XPF:2184003.2184011, Buchmann2007,
+baseados em funções de resumo criptográfico, como SPHINCS \cite{Bernstein2015},
+MSS, CMSS, GMSS e XMSS. \cite{Merkle:1989:CDS:118209.118230, Buchmann:2011:XPF:2184003.2184011, Buchmann2007,
 Buchmann2006}.
 
 Como descrito em \cite{Bernstein:2008:PQC:1522375}, o algoritmo consiste na
@@ -97,7 +97,10 @@ obtendo uma fração de $w$ \emph{bits} do resumo criptográfico da mensagem
 que se deseja assinar. Uma assinatura, portanto, é um conjunto de cadeias
 de resumos criptográficos da chave privada.
 
-Devido à construção do algoritmo,
+Winternitz figura como o esquema escolhido para assinar as folhas das
+árvores da grande 
+
+Devido à construção do algoritmo, e como os processos de geração de chaves
 
 % \section{Contribuição}
 
