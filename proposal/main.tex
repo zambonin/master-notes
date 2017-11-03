@@ -4,8 +4,9 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper, margin=3cm]{geometry}
-
 \usepackage{parskip}
+
+\pagenumbering{gobble}
 
 \title{Parametrização de desempenho do esquema de
 assinatura digital Winternitz e suas variantes}
@@ -58,7 +59,7 @@ destes para uma única chave, codificada em sua raiz. Esta árvore é construíd
 com a concatenação de resumos criptográficos do conteúdo dos nós, habilitando
 assim a assinatura de diversas mensagens. Como uma função específica não é
 necessária, é possível obter uma grande variedade de esquemas, garantindo a
-versatilidade desta abordagem para fácil utilização em assinaturas digitais.
+versatilidade desta abordagem.
 
 Embora os esquemas iniciais tenham sido construídos sem atenção particular à
 eficiência de modo geral (e.g. o esquema de assinatura única de Lamport-Diffie
