@@ -121,8 +121,13 @@ Ademais, como a saída de uma função de resumo criptográfico deve conter,
 em média, o mesmo número de 0s e 1s, isso implica que metade do processo
 de encadeamento estará localizado na parte da assinatura, e a outra
 metade na verificação. Entretanto, em situações onde assinaturas são
-raramente produzidas mas frequentemente verificadas e vice-versa, esta
-distribuição de cômputos torna o proceso
+raramente produzidas mas frequentemente verificadas, e vice-versa, esta
+distribuição de cômputos torna o processo não otimizado, de modo a
+sugerir uma possível alteração no comportamento do algoritmo a fim de
+considerar estes diversos casos de uso.
+
+Isto implica na introdução de processos determinísticos a fim de
+modificar o processo de encadeamento de resumos
 
 \bibliographystyle{alpha}
 \bibliography{main}
