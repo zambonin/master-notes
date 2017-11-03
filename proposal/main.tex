@@ -70,7 +70,7 @@ requisitos de segurança mínimos, garantem o conceito de sigilo encaminhado
 \cite{Buchmann:2011:XPF:2184003.2184011} (i.e. comprometimento de uma chave não
 implica na segurança de mensagens que utilizaram esta chave anteriormente) e da
 ausência de estado \cite{Bernstein2015} (i.e. esquema não necessita registrar
-quais chaves já foram utilizadas, e.g. marcando as folhas da árvore de Merkle).
+quais chaves de assinatura única já foram utilizadas).
 
 \section{Motivação}
 
@@ -79,7 +79,7 @@ generalização de \cite{Lamport1979}, permitindo a assinatura de múltiplos
 \emph{bits} simultaneamente. Tal comportamento é configurado por um parâmetro
 $w$, que implica imediatamente no tamanho do par de chaves e na velocidade que
 a assinatura é criada e/ou verificada. Com um parâmetro $w$ bem escolhido, o
-esquema torna-se relativamente eficiente, e a valer, este esquema, e sua
+esquema torna-se relativamente eficiente, e a valer, este e sua
 variante WOTS+ \cite{cryptoeprint:2017:965} cujos requisitos de segurança são
 diminuídos, têm sido utilizados amplamente como parte de diversos esquemas
 baseados em funções de resumo criptográficas, como SPHINCS \cite{Bernstein2015},
