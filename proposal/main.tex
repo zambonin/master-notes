@@ -65,20 +65,21 @@ simples), muitos resultados práticos habilitam a redução contínua do tempo d
 verificação da assinatura, tamanho e tempo para geração do par de chaves e
 assinatura, bem como avanços teóricos possibilitam a utilização de funções com
 requisitos de segurança mínimos, garantem o conceito de sigilo encaminhado
-\cite{Buchmann2011} (comprometimento de uma chave não implica na segurança de
+\cite{Buchmann:2011:XPF:2184003.2184011} (comprometimento de uma chave não implica na segurança de
 mensagens que utilizaram esta chave anteriormente) e da ausência de estado
 \cite{Bernstein2015} (o esquema não necessita registrar quais chaves já foram
 utilizadas, e.g. marcando as folhas da árvore de Merkle).
 
 \section{Motivação}
 
-O esquema de assinatura digital única Winternitz é uma generalização de
-\cite{Lamport1979} que permite a assinatura de múltiplos \emph{bits}
-simultaneamente, configurado por um parâmetro $w$ que implica imediatamente
-no tamanho do par de chaves e na velocidade que a assinatura digital é
+O esquema de assinatura digital única Winternitz é proposto como uma
+generalização de \cite{Lamport1979}, permitindo a assinatura de múltiplos \emph{bits}
+simultaneamente. Tal comportamento é configurado por um parâmetro $w$, que implica imediatamente
+no tamanho do par de chaves e na velocidade que a assinatura é
 criada e/ou verificada. Com um parâmetro $w$ bem escolhido, o esquema
 torna-se relativamente eficiente, e a valer, tem sido utilizado amplamente
-como parte de diversos esquemas de assinatura digital 
+como parte de diversos esquemas de assinatura digital \cite{Bernstein2015,
+Merkle:1989:CDS:118209.118230, Buchmann:2011:XPF:2184003.2184011, Buchmann2007, Buchmann2006f}
 
 % \section{Contribuição}
 
