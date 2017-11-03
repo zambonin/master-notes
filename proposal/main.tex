@@ -132,11 +132,15 @@ modificar o processo de encadeamento de resumos. O trabalho de
 \cite{Steinwandt:2008:OSU:1412758.1412979} propõe um esquema de
 assinatura digital baseado em Winternitz utilizando compressão de
 cadeias repetidas (\emph{run-length encoding}) que resulta na
-diminuição em $33\%$ do tempo de verificação para uma assinatura.
-Diferentemente deste esquema, propõe-se a criação de passos
-adicionais ao Winternitz convencional, na etapa de geração da
-assinatura, a fim de customizar o tamanho da cadeia de resumos
-e obter um resultado paramétrico à situação desejada.
+diminuição em $33\%$ do tempo de verificação para uma assinatura,
+com $w < 4$; diferentemente deste esquema, propõe-se a criação
+de passos adicionais ao Winternitz convencional, na etapa de
+geração da assinatura, a fim de customizar o tamanho da cadeia de
+resumos e obter um resultado paramétrico à situação desejada.
+Implementações iniciais demonstram o mesmo ganho relativo, mas
+para valores de $w$ maiores, implicando em ganhos absolutos mais
+significativos, visto que o número de resumos criptográficos
+cresce exponencialmente em função deste parâmetro.
 
 \bibliographystyle{alpha}
 \bibliography{main}
