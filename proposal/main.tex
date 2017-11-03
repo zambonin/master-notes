@@ -91,15 +91,13 @@ aplicação da função de resumo criptográfico escolhida repetidamente sobre
 blocos da chave privada, i.e. um encadeamento da função. O número de blocos
 é decidido pelo parâmetro $w$ e representará quantos bits serão assinados
 simultaneamente, bem como o tamanho máximo da cadeia de resumos para um
-bloco ($2^w - 1$) para realizar a assinatura de cada bloco, é preciso
-determinar a quantidade de vezes que o encadeamento será repetido. Isto
-pode ser feito obtendo uma fração de $w$ \emph{bits} do resumo criptográfico
-da mensagem que se deseja assinar. Uma assinatura, portanto, é um conjunto
-de cadeias de resumos criptográficos da chave privada.
+bloco para realizar a assinatura de cada bloco, é preciso determinar a
+quantidade de vezes que o encadeamento será repetido. Isto pode ser feito
+obtendo uma fração de $w$ \emph{bits} do resumo criptográfico da mensagem
+que se deseja assinar. Uma assinatura, portanto, é um conjunto de cadeias
+de resumos criptográficos da chave privada.
 
-Tomando $w = 16$, parâmetro utilizado nos esquemas supracitados, tem-se um
-número máximo de $2^16 - 1$ resumos computados para cada bloco. Devido à
-construção do algoritmo,
+Devido à construção do algoritmo,
 
 % \section{Contribuição}
 
