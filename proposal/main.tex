@@ -43,13 +43,13 @@ algoritmos criptográficos cuja segurança é considerada razoável, mesmo
 utilizando-se de um computador quântico e ataques especializados, como o
 algoritmo de Grover \cite{Grover:1996:FQM:237814.237866}. Uma definição viável
 de esquema de assinatura digital resistente a este tipo de computador pode ser
-dada apenas com funções de resumo criptográficas, construídas a partir de
+dada apenas com funções de resumo criptográfico, construídas a partir de
 funções de mão única \cite{cryptoeprint:2005:328}. De fato, estas funções,
 desde que apresentem requisitos de segurança como resistência à segunda
 pré-imagem e à colisões, são necessárias e suficientes para a construção de
 esquemas bem comportados e seguros \cite{Rompel:1990:OFN:100216.100269}.
 
-Esquemas de assinatura digital baseados em funções de resumo criptográficas
+Esquemas de assinatura digital baseados em funções de resumo criptográfico
 consistem da combinação de um esquema de assinatura digital única, onde apenas
 uma mensagem pode ser assinada de modo seguro, e uma estrutura chamada de
 árvore de Merkle \cite{Merkle:1989:CDS:118209.118230}, que abriga diversos
@@ -79,67 +79,64 @@ generalização de \cite{Lamport1979}, permitindo a assinatura de múltiplos
 \emph{bits} simultaneamente. Tal comportamento é configurado por um parâmetro
 $w$, que implica imediatamente no tamanho do par de chaves e na velocidade que
 a assinatura é criada e/ou verificada. Com um parâmetro $w$ bem escolhido, o
-esquema torna-se relativamente eficiente, e a valer, este e sua
-variante WOTS+ \cite{cryptoeprint:2017:965} cujos requisitos de segurança são
-diminuídos, têm sido utilizados amplamente como parte de diversos esquemas
-baseados em funções de resumo criptográficas, como SPHINCS \cite{Bernstein2015},
-MSS \cite{Merkle:1989:CDS:118209.118230}, CMSS \cite{Buchmann2006}, GMSS
+esquema torna-se relativamente eficiente, e a valer, este e sua variante WOTS+
+\cite{cryptoeprint:2017:965}, cujos requisitos de segurança são diminuídos, têm
+sido utilizados amplamente como parte de diversos esquemas baseados em funções
+de resumo criptográfico, como SPHINCS \cite{Bernstein2015}, MSS
+\cite{Merkle:1989:CDS:118209.118230}, CMSS \cite{Buchmann2006}, GMSS
 \cite{Buchmann2007} e XMSS \cite{Buchmann:2011:XPF:2184003.2184011}.
 
 Como descrito em \cite{Bernstein:2008:PQC:1522375}, o algoritmo consiste na
 aplicação da função de resumo criptográfico escolhida repetidamente sobre
-blocos da chave privada, i.e. um encadeamento da função. O número de blocos
-é decidido pelo parâmetro $w$ e representará quantos bits serão assinados
-simultaneamente, bem como o tamanho máximo da cadeia de resumos para um
-bloco para realizar a assinatura de cada bloco, é preciso determinar a
+blocos da chave privada, i.e. um encadeamento da função. O número de blocos é
+decidido pelo parâmetro $w$ e representará quantos bits serão assinados
+simultaneamente, bem como o tamanho máximo da cadeia de resumos para um bloco
+($2^w - 1$). Para realizar a assinatura de cada bloco, é preciso determinar a
 quantidade de vezes que o encadeamento será repetido. Isto pode ser feito
-obtendo uma fração de $w$ \emph{bits} do resumo criptográfico da mensagem
-que se deseja assinar. Uma assinatura, portanto, é um conjunto de cadeias
-de resumos criptográficos da chave privada.
+obtendo uma fração de $w$ \emph{bits} do resumo criptográfico da mensagem que
+deseja-se assinar. Uma assinatura, portanto, é um conjunto de cadeias de
+resumos criptográficos da chave privada.
 
-Winternitz figura como o esquema escolhido para assinar as folhas das
-árvores de grande parte da literatura prática em cima de esquemas baseados
-nesta estrutura de dados. Por exemplo, no caso do SPHINCS, construído em
-cima do conceito de camadas de árvores de Merkle (a fim de descartar a
-necessidade de manter o estado do esquema de assinatura digital), WOTS+ é
-utilizado para a autenticação entre estas. Afirma-se, então, que é um
-dos esquemas de assinatura única mais populares, tanto em resultados
-práticos como teóricos -- denotando um interesse da comunidade acadêmica
-por resultados que impliquem em melhoras no algoritmo.
+Winternitz figura como o esquema escolhido para assinar as folhas das árvores
+de grande parte da literatura prática em cima de esquemas baseados nesta
+estrutura de dados. Por exemplo, no caso do SPHINCS, construído em cima do
+conceito de camadas de árvores de Merkle (a fim de descartar a necessidade de
+manter o estado do esquema de assinatura digital), WOTS+ é utilizado para a
+autenticação entre estas. Afirma-se, então, que é um dos esquemas de assinatura
+única mais populares, tanto em resultados práticos como teóricos -- denotando
+um interesse da comunidade acadêmica por resultados que impliquem em melhorias
+no algoritmo.
 
 \section{Contribuições propostas}
 
 Devido à construção do algoritmo, e como os processos de geração de chaves,
-assinatura e verificação são realizados, demasiadas aplicações da função
-de resumo criptográfico escolhida são realizadas na vida útil de uma
-assinatura digital. Assim, uma possível fronte de pesquisa consiste na
-utilização ótima de recursos computacionais para que o desempenho de
-Winternitz, e consequentemente de outros esquemas baseados em funções de
-resumo criptográfico, seja melhorado.
+assinatura e verificação são realizados, demasiadas aplicações da função de
+resumo criptográfico escolhida são realizadas na vida útil de uma assinatura
+digital. Assim, uma possível fronte de pesquisa consiste na utilização ótima de
+recursos computacionais na computação de resumos criptográficos para que o
+desempenho de Winternitz, e consequentemente de outros esquemas baseados em
+funções de resumo criptográfico, seja melhorado.
 
-Ademais, como a saída de uma função de resumo criptográfico deve conter,
-em média, o mesmo número de 0s e 1s, isso implica que metade do processo
-de encadeamento estará localizado na parte da assinatura, e a outra
-metade na verificação. Entretanto, em situações onde assinaturas são
-raramente produzidas mas frequentemente verificadas, e vice-versa, esta
-distribuição de cômputos torna o processo não otimizado, de modo a
-sugerir uma possível alteração no comportamento do algoritmo a fim de
-considerar estes diversos casos de uso.
+Ademais, como a saída de uma função de resumo criptográfico deve conter, em
+média, o mesmo número de 0s e 1s, é possível concluir que metade do processo de
+encadeamento estará localizado na geração da assinatura, e a outra metade na
+verificação. Entretanto, em situações onde assinaturas são raramente produzidas
+mas frequentemente verificadas, e vice-versa, esta distribuição de cômputos
+torna o processo não otimizado, de modo a sugerir uma possível alteração no
+comportamento do algoritmo a fim de considerar estes diversos casos de uso.
 
-Isto implica na introdução de técnicas determinísticas a fim de
-modificar o processo de encadeamento de resumos. O trabalho de
-\cite{Steinwandt:2008:OSU:1412758.1412979} propõe um esquema de
-assinatura digital baseado em Winternitz utilizando compressão de
-cadeias repetidas (\emph{run-length encoding}) que resulta na
-diminuição em $33\%$ do tempo de verificação para uma assinatura,
-com $w < 4$; diferentemente deste esquema, propõe-se a criação
-de passos adicionais ao Winternitz convencional, na etapa de
-geração da assinatura, a fim de customizar o tamanho da cadeia de
-resumos e obter um resultado paramétrico à situação desejada.
-Implementações iniciais demonstram o mesmo ganho relativo, mas
-para valores de $w$ maiores, implicando em ganhos absolutos mais
-significativos, visto que o número de resumos criptográficos
-cresce exponencialmente em função deste parâmetro.
+Isto implica na introdução de técnicas determinísticas a fim de modificar o
+processo de encadeamento de resumos. O trabalho de
+\cite{Steinwandt:2008:OSU:1412758.1412979} propõe um esquema de assinatura
+digital baseado em Winternitz utilizando compressão de cadeias repetidas
+(\emph{run-length encoding}) que resulta na diminuição em $33\%$ do tempo de
+verificação para uma assinatura, com $w < 4$; diferentemente deste esquema,
+propõe-se a criação de passos adicionais ao Winternitz convencional, na etapa
+de geração da assinatura, a fim de customizar o tamanho da cadeia de resumos e
+obter um resultado paramétrico à situação desejada.  Implementações iniciais
+demonstram o mesmo ganho relativo, mas para valores de $w$ maiores, implicando
+em ganhos absolutos mais significativos, visto que o número de resumos
+criptográficos cresce exponencialmente em função deste parâmetro.
 
 \bibliographystyle{alpha}
 \bibliography{main}
