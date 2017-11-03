@@ -14,7 +14,61 @@ assinatura digital Winternitz e suas variantes}
 
 \maketitle
 
-% \section{Introdução}
+\section{Introdução}
+
+A utilização de protocolos criptográficos entre dispositivos e entidades é
+amplamente disseminada e considerada um fator crítico no contexto da validação
+de quaisquer atos de comunicação realizados por estes indivíduos, em virtude da
+possível criticalidade e sensibilidade atribuídas aos dados transmitidos.
+Esquemas de assinatura digital são comumente utilizados para assegurar, de
+maneira formal \cite{Goldreich:2004:FCV:975541}, esta validação através da
+autenticidade e não-repúdio do remetente e certeza da integridade dos dados em
+um contexto, a fim de traduzir o resguardo provido por uma assinatura de
+próprio punho no mundo real.
+
+Na prática, a maior parte destes esquemas utilizam criptossistemas de chave
+pública baseados em problemas da teoria dos números, como a fatoração de
+inteiros ou resolução do logaritmo discreto para números grandes (e.g. RSA
+\cite{Rivest:1978:MOD:359340.359342} e ECDSA \cite{Johnson2001}). Este fato
+provê a segurança necessária para os esquemas em computadores clássicos
+(mecânicos) em virtude da não-existência de algoritmos de tempo polinomial para
+a resolução destes problemas. Entretanto, em computadores quânticos, algoritmos
+dessa forma já existem -- em especial, o algoritmo de Shor
+\cite{Shor:1997:PAP:264393.264406} -- efetivamente tornando estes esquemas
+inseguros neste novo contexto. 
+
+Para combater esta situação, a criptografia pós-quântica encarrega-se de buscar
+algoritmos criptográficos cuja segurança é considerada razoável, mesmo
+utilizando-se de um computador quântico e algoritmos especializados para o
+ataque. Uma definição viável de esquema de assinatura digital resistente a este
+tipo de computador pode ser dada apenas com funções de resumo criptográfico,
+construídas a partir de funções de mão única. De fato, estas funções, desde que
+apresentem requisitos de segurança como resistência à segunda pré-imagem e à
+colisões, são necessárias e suficientes para a construção de esquemas bem
+comportados. \cite{Rompel:1990:OFN:100216.100269}
+
+Esquemas de assinatura digital baseados em funções de resumo criptográfico
+consistem da combinação de um esquema de assinatura digital única, onde apenas
+uma mensagem pode ser assinada de modo seguro, e uma estrutura chamada de
+árvore de Merkle \cite{Merkle:1989:CDS:118209.118230}, que abriga diversos
+pares de chave únicos como suas folhas, e reduz a verificação destes para uma
+única chave, codificada em sua raiz. Esta árvore é construída com a
+concatenação de resumos criptográficos do conteúdo dos nós, habilitando assim a
+assinatura de diversas mensagens. Como uma função específica não é necessária,
+é possível obter uma grande variedade de esquemas, garantindo a versatilidade
+desta abordagem para utilização de assinaturas digitais.
+
+Embora os esquemas iniciais tenham sido construídos sem atenção particular à
+eficiência de modo geral (e.g. o esquema de assinatura única de Lamport-Diffie
+\cite{Lamport1979} assina apenas um \emph{bit} de informação em sua forma mais
+simples), muitos resultados práticos habilitam a redução contínua do tempo de
+verificação da assinatura, tamanho e tempo para geração do par de chaves e
+assinatura, bem como avanços teóricos possibilitam a utilização de funções com
+requisitos de segurança mínimos, garantem o conceito de sigilo encaminhado
+\cite{Buchmann2011} (comprometimento de uma chave não implica na segurança de
+mensagens que utilizaram esta chave anteriormente) e da ausência de estado
+\cite{Bernstein2015} (o esquema não necessita registrar quais chaves já foram
+utilizadas, e.g. marcando as folhas da árvore de Merkle).
 
 A utilização de protocolos criptográficos entre dispositivos e entidades
 é amplamente disseminada e considerada um fator crítico no contexto da
@@ -71,59 +125,11 @@ utilizaram esta chave anteriormente) e da ausência de estado \cite{Bernstein201
 necessita registrar quais chaves já foram utilizadas, e.g. marcando as folhas
 da árvore de Merkle).
 
-% \section{Motivação}
+\section{Motivação}
+
+
 
 % \section{Contribuição}
-
-% Algoritmos utilizados em esquemas de assinatura digital atualmente, como RSA
-% e ECDSA, têm sua segurança baseada em calcular a fatoração de números muito
-% grandes ou logaritmos discretos. Este tipo de cômputo pode ser realizado por
-% um computador quântico suficientemente poderoso, utilizando algoritmos já
-% conhecidos (e.g. algoritmo de Shor). Deste modo, para manter o ecossistema de
-% assinaturas digitais continuamente seguro, é necessário oferecer alternativas
-% pós-quânticas, ou seja, resistentes a computadores quânticos. Este trabalho
-% busca apresentar esquemas baseados apenas em funções de resumo
-% criptográficas, cuja segurança baseia-se apenas na resistência à colisão da
-% função escolhida, com o objetivo de mostrar que a construção de esquemas de
-% assinatura seguros independe de problemas considerados difíceis em teoria de
-% números ou álgebra, levando em conta apenas algoritmos quânticos, como o
-% algoritmo de Grover. Ademais, apresentam-se soluções para alguns problemas
-% deste tipo de esquema, como o tamanho e possibilidade de reutilização das
-% chaves pública e privada, assim como uma variada gama de algoritmos com estas
-% características, particularmente os baseados em árvores de Merkle e variantes
-% do esquema Winternitz.
-
-% Funções de resumo criptográficas são essenciais em diversas aplicações de
-% segurança da informação, como códigos de autenticação de mensagens (MACs),
-% identificação de arquivos a partir de uma `'impressão digital`' única, detecção
-% de perda de informações em uma transmissão volátil etc., e têm uso disseminado
-% em esquemas de assinatura digital, os quais são o foco deste trabalho. Uma
-% característica relevante destes é a possibilidade da demonstração matemática da
-% autenticidade de uma mensagem transmitida entre entidades, sejam estas
-% confiáveis ou não, utilizando as funções citadas anteriormente, para que seja
-% estabelecida uma comunicação segura.
-
-% A maior parte dos esquemas de assinatura digital, na prática, utilizam
-% criptossistemas de chave pública baseados em problemas de teoria de números --
-% fatoração de inteiros, logaritmo discreto -- que, atualmente, não podem ser
-% computados em tempo polinomial (ou seja, seu tempo de execução é limitado por
-% uma expressão polinomial relacionada com o tamanho da entrada do algoritmo).
-% Entretanto, utilizando-se de um computador quântico, tais problemas podem ser
-% resolvidos em tempo polinomial \cite{shor1999polynomial}.
-
-% A criptografia \emph{pós-quântica} encarrega-se de buscar algoritmos
-% criptográficos cuja complexidade independe de problemas futuramente
-% solucionáveis em teoria de números. Como visto em \cite{Merkle1990}, um
-% criptossistema de chaves públicas pode ser definido de forma independente da
-% função de resumo criptográfica utilizada, assim possibilitando a exploração de
-% diversas combinações, cujos elementos essenciais (e.g. árvores de Merkle) não
-% influenciam na segurança do esquema.
-
-% Neste trabalho, utilizamos funções de resumo criptográficas para a construção
-% de esquemas de assinatura digital, considerados seguros se e somente as funções
-% forem resistentes à colisão (a inviabilidade computacional de encontrar duas
-% mensagens distintas que, submetidas à mesma função, retornam a mesma saída),
-% tornando os requisitos de segurança mínimos para os esquemas.
 
 % \section{Objetivos}
 
