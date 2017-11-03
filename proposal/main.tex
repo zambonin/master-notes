@@ -90,7 +90,10 @@ Como descrito em \cite{Bernstein:2008:PQC:1522375}, o algoritmo consiste na
 aplicação da função de resumo criptográfico (ou função de compressão)
 repetidamente sobre blocos da chave privada, i.e. um encadeamento da função.
 O número de blocos é decidido pelo parâmetro $w$ e representará quantos
-bits serão assinados simultanemanet
+bits serão assinados simultaneamente; o número de repetições do encadeamento,
+para cada bloco, é determinado pela fração respectiva do resumo da mensagem
+que se deseja assinar. Uma assinatura, portanto, é um conjunto de cadeias
+incompletas de resumos criptográficos da chave privada.
 
 % \section{Contribuição}
 
