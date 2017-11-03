@@ -100,14 +100,14 @@ de resumos criptográficos da chave privada.
 Winternitz figura como o esquema escolhido para assinar as folhas das
 árvores de grande parte da literatura prática em cima de esquemas baseados
 nesta estrutura de dados. Por exemplo, no caso do SPHINCS, construído em
-cima do conceito de camadas de árvores de Merkle,
+cima do conceito de camadas de árvores de Merkle (a fim de descartar a
+necessidade de manter o estado do esquema de assinatura digital), WOTS+ é
+utilizado para a autenticação entre estas.
 
-
-WOTS+ é utilizado para a
-autenticação entre estas, a fim de descartar a necessidade de manter o
-estado do esquema de assinatura digital.
-
-Devido à construção do algoritmo, e como os processos de geração de chaves
+Devido à construção do algoritmo, e como os processos de geração de chaves,
+assinatura e verificação são realizados, demasiadas\footnote{Assumindo $w = 16$ e um parâmetro de segurança $n = 256$, e a vida útil para a mensagem de um ano, o número total de aplicações da função de resumo criptográfico é de $\mathbf{}$ para o esquema Winternitz convencional.} aplicações da função
+de resumo criptográfico escolhida são realizadas na vida útil de uma
+assinatura digital.
 
 % \section{Contribuição}
 
