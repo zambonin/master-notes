@@ -1,0 +1,143 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, margin=1.5cm]{geometry}
+\usepackage[colorlinks, urlcolor=blue, citecolor=red]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsfonts, enumitem, parskip}
+
+\newcommand{\hh}{\mathcal{H}}
+\newcommand{\pk}{\mathcal{P}_{k}}
+\newcommand{\sk}{\mathcal{S}_{k}}
+\newcommand{\binwds}[1]{\{0, 1\}^{#1}}
+\newcommand{\hash}[2][]{\mathcal{H}^{#1} (#2)}
+
+\begin{document}
+
+\textsc{Graduate Program in Computer Science,
+  Universidade Federal de Santa Catarina} \\
+\textsc{INE410135 (Blockchain and Cryptocurrencies Technologies)}
+
+\textsc{Notes on Coursera's ``Bitcoin and Cryptocurrency Technologies''
+  1st Lecture} \\
+\textsc{Gustavo Zambonin}
+
+\subsection*{Introduction}
+
+Currencies of any kind, even in their most primitive forms, need some sense of
+security to achieve pertinent ownership of valuable goods, and enable users to
+exchange these accordingly. This concept is generally represented by means of
+physical money, such as coins, notes and checks, and oversight by a bank.
+However, transactions nowadays are frequently done in the virtual medium,
+executed through ATMs, payment cards, personal computers and other devices with
+digital components. It could be argued that this paradigm shift facilitates the
+migration of entire currency infrastructures to entirely digital approaches.
+Yet, various issues arise when taking into account the security of said systems
+with respect to decentralization of trust, anonymity of transactions, storage
+of digital coins and various other problems that touch economic and social
+disciplines.
+
+To efficiently address these situations, a \emph{cryptocurrency} may be
+established through the use of cryptography to allow secure transactions and
+creation of new currency units. By design, dissociation from central banking is
+given special emphasis, therefore making these currencies inherently
+unregulated.  Nevertheless, there has been considerable adhesion from
+individuals and businesses alike. Ergo, it is reasonable to understand how
+concepts such as cryptographic hash functions, digital signatures, data
+structures, distributed ledgers and merge these to construct simple examples of
+cryptocurrencies.
+
+\subsection*{Cryptographic hash functions}
+
+A hash function $\hh{}$ deterministically maps values from a set with possibly
+infinite size to another, strictly smaller finite set. Hash functions with added
+properties that make them suitable for use in security applications are called
+cryptographic hash functions; these can provide assurance of data integrity,
+even if the data is stored in an insecure place. Outputs of these functions are
+generally called digests. For any $\hh{}$ to be considered cryptographic,
+solving the three problems listed below should be computationally infeasible:
+
+\begin{enumerate}[label=(\roman*)]
+  \item Given a digest $h$, find the original message $m$ such that
+    $\hash{m} = h$. $\hh{}$ is said to be \emph{preimage} resistant if
+    this cannot be solved efficiently.
+  \item Given a message $m_0$, find a message $m_1$ such that $m_0 \neq m_1$
+    and $\hash{m_0} = \hash{m_1}$. $\hh{}$ is said to be \emph{second preimage}
+    resistant if this cannot be solved efficiently.
+  \item Given messages $m_0$ and $m_1$ such that $m_0 \neq m_1$, then
+    $\hash{m_0} = \hash{m_1}$. $\hh{}$ is said to be \emph{collision} resistant
+    if this cannot be solved efficiently.
+\end{enumerate}
+
+Note that (ii) and (iii) present a slight difference: in the former, an
+adversary may not choose the first message, whereas in the latter, it is free
+to choose any pair of messages. It is also desirable for $\hh{}$ that its
+mappings happen in such a way that digests have no apparent relation between
+themselves and their preimages. Furthermore, another suitable characteristic is
+the avalanche effect, based on the concept of diffusion, stating that any
+changes in a message $m$ should result in a totally different resulting digest.
+
+\subsection*{Digital signatures}
+
+A digital signature scheme is a mathematical construction that enables certain
+properties to be derived from signed messages. Specifically, it uniquely
+identifies and therefore \emph{authenticates} the signer; it preserves the
+\emph{integrity} of messages, confirming that these were not modified in
+transit; and it prevents denial from the signer that the message was signed and
+sent --- \emph{non-repudiation}.
+
+These schemes are based on public key cryptography, in which an entity has
+possession of a key pair, used in a way such that a document signed with one of
+the keys may only be verified using its correspondent in the pair. Evidently,
+to prevent impersonation, one of the keys is kept private, while the other is
+published to enable verification by any party. Digital signature schemes are
+defined as a triple of algorithms, listed below.
+
+\begin{enumerate}[label=(\roman*)]
+  \item Key pair generation \textsc{Gen}, that takes as input a security
+    parameter $1^{n}, n \in \mathbb{N}^{*}$ and outputs a random key pair
+    $(\sk{}, \pk{})$.
+  \item Signature generation \textsc{Sig}, that takes as input a message $m$
+    and the secret key $\sk{}$, and outputs a signature $\sigma$. A common
+    practice is to first hash the message then sign the resulting digest.
+  \item Signature verification \textsc{Ver}, that takes as input $m$, $\sigma$
+    and the public key $\pk{}$, and outputs either $0$ for a failed
+    verification or $1$ for a correct one.
+\end{enumerate}
+
+These algorithms are constructed such that signatures on any possible messages
+are verifiable using any generated keys, that is,
+$\forall (p, s) \in \textsc{Gen}(1^{n}), \forall w \in \binwds{*},
+\text{Pr}[\textsc{Ver}(p, w, \textsc{Sig}(s, w)) = 1] = 1$. However, being in
+accordance to this description is not a sufficient condition for a scheme to
+be secure, only correct. This notion is achieved in its strongest form when an
+adversary can forge a valid signature using any message.
+
+\subsection*{Distributed ledgers}
+
+A ledger summarizes financial information in the form of debits and credits,
+showing balances for certain periods of time, allowing visualization and
+management of transactions. To achieve decentralization, the ledger must be
+replicated and synchronized across heterogeneous nodes, generally through peer
+to peer networks. Design of distributed ledgers generally come in the form of
+graphs, in which nodes containing transaction data are connected by pointers to
+hashes of other transactions, either linearly (in the case of blockchain), in
+the form of a directed acyclic graph, or using a binary hash tree, called a
+Merkle tree. Hence, to falsify a transaction, an adversary would have to forge
+every transaction before it.
+
+\subsection*{Examples of cryptocurrencies}
+
+Summarizing these concepts into an example may be done through the presentation
+of GoofyCoin. Goofy may create coins whenever needed, and this transaction
+shall be signed by its private key. Available currency may then be transferred
+to any recipient with a transaction signed by the coin's owner. Clearly, these
+transactions are linked through hash pointers. However, this design does not
+prevent the \emph{double-spending problem}, in which an entity may create
+transfer transactions haphazardly. To be secure, this cryptocurrency could make
+use of the blockchain design, that takes in account the history of
+transactions. Hence, transactions are only valid if coins were really created,
+were not already consumed, the value being received is equal to the value being
+given, and shall be signed by all owners of the coins being transacted.
+
+\end{document}
