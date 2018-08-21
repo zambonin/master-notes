@@ -1,0 +1,128 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, margin=1.5cm]{geometry}
+\usepackage[colorlinks, urlcolor=blue, citecolor=red]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsfonts, enumitem, parskip}
+
+\newcommand{\hh}{\mathcal{H}}
+\newcommand{\pk}{\mathcal{P}_{k}}
+\newcommand{\sk}{\mathcal{S}_{k}}
+\newcommand{\binwds}[1]{\{0, 1\}^{#1}}
+\newcommand{\hash}[2][]{\mathcal{H}^{#1} (#2)}
+\newcommand{\wots}{\textsc{Wots}}
+
+\begin{document}
+
+\textsc{Graduate Program in Computer Science,
+  Universidade Federal de Santa Catarina} \\
+\textsc{INE410111 (Research Methodology in Computer Science)}
+
+\textsc{Tuning the Winternitz Hash-Based Digital Signature Scheme} \\
+
+Digital signature schemes are widely used in situations requiring secure and
+tamper-free communication, some of which are software distribution and SSL
+tunnelling. Predominantly used are schemes in which the underlying security
+argument is derived from computational hardness assumptions of problems in
+number theory, such as integer factorization discrete logarithm. However, with
+the advent of quantum computers, these problems can be solved more efficiently
+with the aid of Shor's algorithm~\cite{Shor:article:1997:oct}. Ergo, such
+schemes will become fragile and may no longer guarantee properties required for
+digital signatures. The alternative is to use post-quantum cryptography, that
+is, algorithms that are thought to be resistant against such techniques.
+
+There are various strategies proposed in the literature designed to produce
+quantum-resilient digital signatures, making use of concepts such as coding
+theory, lattice structures, multivariate polynomials over finite fields and
+cryptographic hash functions. In special, for the latter option, the robust
+flexibility and abundant availability of these functions in all kinds of
+computational systems make hash-based digital signature schemes potential
+candidates to replace traditional schemes. Additionally, it has been shown that
+one-way functions (the theoretical foundations of a hash function) are the only
+constructions needed to build a secure digital signature
+scheme~\cite{Rompel:inproc:1990:may}. These reasons are strong indicators that
+hash-based signature schemes are presumably safe, and extremely fast in
+practice.
+
+The idea of using only hashes to sign digital messages is not new. Lamport
+proposed~\cite{Lamport:report:1979:oct} a very simple and secure scheme to
+generate and verify digital signatures by the end of the seventies. It
+considers a pair of pseudorandom words as the private key and their hashes as
+the public key. The signer signs a single bit of information by choosing to
+distribute one string from the private key, on whether the bit is 0 or 1, as
+the signature. The verifier then computes the hash of this string, comparing it
+with part of the public key. By extending this idea to sign messages of
+arbitrary sizes, some drawbacks emerge, such as large sizes for key pairs and
+signatures.
+
+These obstacles have been the subject of research and several improvements have
+been proposed since the publication of the initial design. Perhaps the most
+promising method is the Winternitz one time signature scheme (\wots{})
+due to Merkle~\cite{Merkle:inproc:1989:aug}. This scheme is a generalization of
+the Lamport scheme. Unlike its predecessor, \wots{} allows more than one
+bit to be signed simultaneously through the parameter $w$, decreasing the size
+of key pairs and signatures. In fact, the lower cost of the key has been
+replaced with a higher processing cost, since the total number of hashes to
+sign a document and verify a signature depends on this parameter.
+
+Various hash-based signature schemes have been proposed based on, or using
+\wots{} as part of the scheme. By way of illustration, organizations such
+as the U.S. National Institute of Standards and Technology (NIST) and the
+Internet Research Task Force (IRTF) have shown great interest in the
+research and standardization of these algorithms. The SPHINCS+
+proposal~\cite{Bernstein:misc:2017:dec}, a variant
+of~\cite{Bernstein:inproc:2015:apr} that reduces the signature size and overall
+execution time, was submitted to NIST as a candidate for this process. Besides,
+there has been continuous activity on the development of informational
+documents from the IRTF~\cite{Huelsing:report:2018:may,McGrew:report:2018:apr},
+featuring variant schemes derived from \wots{}.
+
+Observe that the aforementioned costs for signature generation and verification
+are not distributed evenly, since they are derived from the result of the
+application of the fingerprint function to a message. Hence, these can be
+tailored to a faster signature generation or verification by carefully choosing
+a message derived from the original. We believe that the cost difference
+between these steps is not exploited to fit specific needs. Often, signatures
+are generated only once on a targeted device, which can be properly configured
+to accommodate the required resources. However, the resources available for the
+signature verification are unlikely to be predictable in advance, since this
+step can be performed by any other kind of devices. For this reason, in
+practice, it is common to choose parameters that make it easier for a third
+party to verify signatures (\emph{e.g.} the use of the public exponent
+$65{,}537$ of the RSA signature scheme). Conversely, there may exist devices
+with constraints for signature generation.
+
+This situation is no different with hash-based signature schemes. Several
+papers proposed in the literature aim to improve the performance of the
+verification step for \wots{}, such
+as~\cite{Cruz:inproc:2016:oct,McGrew:report:2018:apr,Steinwandt:article:2008:oct}.
+While these works modify the structure of the Winternitz scheme, our main
+proposal consists of a pre-processing of the message, keeping the scheme
+intact. Another advantage of our scheme is the possibility of using larger
+values for the parameter $w$, substantially reducing the size of the
+\wots{} signature. Furthermore, these proposals focus only on the
+optimization of the signature verification step, whereas our method also works
+for hastening the creation of signatures.
+
+We propose two methods to reduce costs for the signature generation or
+verification steps in \wots{}. Our first method changes the checksum
+computation slightly, by padding unused bits with ones in the place of zeros.
+This can only be used to improve signature verification run times, while
+padding with zeros is already optimal for signature generation. Our main
+approach is based on~\cite{Steinwandt:article:2008:oct}, where we append a
+cryptographic nonce to a document to be signed and hash it. We repeat the
+process and search for hash outputs that can optimize signature generation or
+verification. In fact, by doing this, we do not change the underlying
+\wots{} algorithm.  We propose a fixed amount of operations before the
+signature is generated, so that the chosen step can be computed much faster.
+This is actually a trade-off choice, where improving one step results in more
+computations for the other. However, there is always an additional fixed cost
+to the signature generation. Both proposals can be applied independently or
+together for better results.
+
+\bibliographystyle{alpha}
+{\footnotesize
+\bibliography{\jobname}}
+
+\end{document}
