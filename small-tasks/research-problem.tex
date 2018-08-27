@@ -19,18 +19,21 @@
   Universidade Federal de Santa Catarina} \\
 \textsc{INE410111 (Research Methodology in Computer Science)}
 
-\textsc{Tuning the Winternitz Hash-Based Digital Signature Scheme} \\
+\textsc{Gustavo Zambonin} \\
+\textsc{Optimizing the Winternitz Digital Signature Scheme with
+Message Randomizers} \\
 
 Digital signature schemes are widely used in situations requiring secure and
-tamper-free communication, some of which are software distribution and SSL
-tunnelling. Predominantly used are schemes in which the underlying security
-argument is derived from computational hardness assumptions of problems in
-number theory, such as integer factorization discrete logarithm. However, with
-the advent of quantum computers, these problems can be solved more efficiently
-with the aid of Shor's algorithm~\cite{Shor:article:1997:oct}. Ergo, such
-schemes will become fragile and may no longer guarantee properties required for
-digital signatures. The alternative is to use post-quantum cryptography, that
-is, algorithms that are thought to be resistant against such techniques.
+tamper-free communication, some of which are software distribution and
+communications over computer networks. Predominantly used are schemes in which
+the underlying security argument is derived from computational hardness
+assumptions of problems in number theory, such as integer factorization
+discrete logarithm. However, with the advent of quantum computers, these
+problems can be solved more efficiently with the aid of Shor's
+algorithm~\cite{Shor:article:1997:oct}. Ergo, such schemes will become fragile
+and may no longer guarantee properties required for digital signatures. The
+alternative is to use post-quantum cryptography, that is, algorithms that are
+thought to be resistant against such techniques.
 
 There are various strategies proposed in the literature designed to produce
 quantum-resilient digital signatures, making use of concepts such as coding
@@ -109,11 +112,11 @@ We propose two methods to reduce costs for the signature generation or
 verification steps in \wots{}. Our first method changes the checksum
 computation slightly, by padding unused bits with ones in the place of zeros.
 This can only be used to improve signature verification run times, while
-padding with zeros is already optimal for signature generation. Our main
-approach is based on~\cite{Steinwandt:article:2008:oct}, where we append a
-cryptographic nonce to a document to be signed and hash it. We repeat the
-process and search for hash outputs that can optimize signature generation or
-verification. In fact, by doing this, we do not change the underlying
+padding with zeros is already optimal for signature generation. Our second
+and main approach is based on~\cite{Steinwandt:article:2008:oct}, where we
+append a cryptographic nonce to a document to be signed and hash it. We repeat
+the process and search for hash outputs that can optimize signature generation
+or verification. In fact, by doing this, we do not change the underlying
 \wots{} algorithm.  We propose a fixed amount of operations before the
 signature is generated, so that the chosen step can be computed much faster.
 This is actually a trade-off choice, where improving one step results in more
