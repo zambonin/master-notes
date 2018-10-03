@@ -61,15 +61,17 @@ with $k \in \{v_{1} + 1, \dots, n\}$, where $\ell$ is the only integer such that
 
 \section{Obtaining a Cyclical Structure}\label{sec:cyclic}
 
-We apply the rationale given by Petzoldt \emph{et al.} in~\cite{Petzoldt:inproc:2010:jun} to the key generation step of the Rainbow scheme. We restrict ourselves to the case of $u = 2$, but the generalised process can be found in~\cite[Section 7.2]{Petzoldt:phd:2013:jul}. Recall that the public key of Rainbow is the composition of three maps, $\mathcal{P} = \mathcal{S} \circ \mathcal{F} \circ \mathcal{T}$. Let $\mathcal{Q} = \mathcal{F} \circ \mathcal{T}$. By fixing the affine map $\mathcal{T}$, the public key composition represents a linear relation between the coefficients of the monomial $x$ of $\mathcal{F}$ and $\mathcal{Q}$, with the form
+We apply the rationale given by Petzoldt \emph{et al.} in~\cite{Petzoldt:inproc:2010:jun} to the key generation step of the Rainbow scheme. We restrict ourselves to the case of $u = 2$, but the generalised process can be found in~\cite[Section 7.2]{Petzoldt:phd:2013:jul}. Recall that the public key of Rainbow is the composition of three maps, $\mathcal{P} = \mathcal{S} \circ \mathcal{F} \circ \mathcal{T}$. Let $\mathcal{Q} = \mathcal{F} \circ \mathcal{T}$. 
+
+If we fix the affine map $\mathcal{T}$, the public key composition represents a linear relation between the coefficients $q_{ij}^{(k)}, f_{ij}^{(k)}$ of the monomial $x_{i} x_{j}$ in $\mathcal{Q}$ and $\mathcal{F}$ respectively, with the form
 \begin{equation}\label{eq:1}
-q_{ij}^{(k)} = \sum_{r = 1}^{n} \sum_{s = i}^{n} \alpha_{ij}^{rs} f_{rs}^{(k)}, \quad \alpha_{ij}^{rs} =
+q_{ij}^{(k)} = \sum_{r = 1}^{n} \sum_{s = r}^{n} \alpha_{ij}^{rs} f_{rs}^{(k)}, \quad \alpha_{ij}^{rs} =
 \begin{cases}
 t_{ri} t_{si}                   & \text{if } i = j, \\
 t_{ri} t_{sj} + t_{rj} t_{si}   & \text{otherwise}
 \end{cases},
 \end{equation}
-and $k \in \{1, \dots, m\}$. Eq.~\ref{eq:1} can be represented in a more compact form, since $f_{rs}^{(k)} = 0$ if $r, s \in O_{\ell}$.
+and $k \in \{v_{1}, \dots, n\}, \; i, j \in \{1, \dots, n\}$. Eq.~\ref{eq:1} can be represented in a more compact form, since $f_{rs}^{(k)} = 0$ if $r, s \in O_{\ell}$.
 
 
 
