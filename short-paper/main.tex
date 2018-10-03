@@ -3,7 +3,7 @@
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{amsfonts, geometry, multirow, parskip, hyperref}
+\usepackage{amsfonts, array, geometry, multirow, parskip, hyperref}
 \geometry{
     paperheight = 11in,
     paperwidth  = 8.5in,
@@ -12,6 +12,8 @@
     top    = 1.0in,
     bottom = 1.0in
 }
+\newcolumntype{L}{>{\centering\arraybackslash}m{2.25cm}}
+\newcolumntype{A}{>{\centering\arraybackslash}m{5cm}}
 
 \begin{document}
 
@@ -75,19 +77,19 @@ To prevent efficient attacks by known methods, we suggest parameter sets that ar
 
 \section{Conclusion}\label{sec:conclusion}
 
-\begin{table}[]
-\begin{tabular}{lllll}
-security level (bit) & instance                                        & signature size (bit) & private key size (KB)  & public key size (KB) \\
-\multirow{6}{*}{80}  & Rainbow$(\mathbb{F}_{2}^{4}, 17, 23, 17)$       & \multirow{2}{*}{228} & \multirow{2}{*}{21.9}  & 33.4                 \\
-                     & CyclicRainbow$(\mathbb{F}_{2}^{4}, 17, 23, 17)$ &                      &                        & 15.6                 \\
-                     & Rainbow$(\mathbb{F}_{2}^{4}, 14, 19, 14)$       & \multirow{2}{*}{256} & \multirow{2}{*}{17.1}  & 25.3                 \\
-                     & CyclicRainbow$(\mathbb{F}_{2}^{4}, 14, 19, 14)$ &                      &                        & 12.0                 \\
-                     & Rainbow$(\mathbb{F}_{2}^{4}, 17, 17, 13)$       & \multirow{2}{*}{344} & \multirow{2}{*}{19.1}  & 25.1                 \\
-                     & CyclicRainbow$(\mathbb{F}_{2}^{4}, 17, 17, 13)$ &                      &                        & 10.4                 \\
-\multirow{2}{*}{100} & Rainbow$(\mathbb{F}_{2}^{4}, 26, 16, 17)$       & \multirow{2}{*}{472} & \multirow{2}{*}{45.0}  & 59.0                 \\
-                     & CyclicRainbow$(\mathbb{F}_{2}^{4}, 26, 16, 17)$ &                      &                        & 21.7                 \\
-\multirow{2}{*}{128} & Rainbow$(\mathbb{F}_{2}^{4}, 36, 21, 22)$       & \multirow{2}{*}{632} & \multirow{2}{*}{102.5} & 136.1                \\
-                     & CyclicRainbow$(\mathbb{F}_{2}^{4}, 36, 21, 22)$ &                      &                        & 47.3                
+\begin{table}[htbp]
+\begin{tabular}{L|A|L|L|L}
+security level (bit) & instance                                              & signature (bit) & private key (KB) & public key (KB) \\
+\multirow{6}{*}{80}  & Rainbow$(\mathbb{F}_{{2}^{4}}, 17, 23, 17)$           & \multirow{2}{*}{228} & \multirow{2}{*}{21.9}  & 33.4                 \\
+                     & CyclicRainbow$(\mathbb{F}_{{2}^{4}}, 17, 23, 17)$     &                      &                        & 15.6                 \\
+                     & Rainbow$(\mathbb{F}_{{2}^{5} - 1}, 14, 19, 14)$       & \multirow{2}{*}{256} & \multirow{2}{*}{17.1}  & 25.3                 \\
+                     & CyclicRainbow$(\mathbb{F}_{{2}^{5} - 1}, 14, 19, 14)$ &                      &                        & 12.0                 \\
+                     & Rainbow$(\mathbb{F}_{{2}^{8}}, 17, 17, 13)$           & \multirow{2}{*}{344} & \multirow{2}{*}{19.1}  & 25.1                 \\
+                     & CyclicRainbow$(\mathbb{F}_{{2}^{8}}, 17, 17, 13)$     &                      &                        & 10.4                 \\
+\multirow{2}{*}{100} & Rainbow$(\mathbb{F}_{{2}^{8}}, 26, 16, 17)$           & \multirow{2}{*}{472} & \multirow{2}{*}{45.0}  & 59.0                 \\
+                     & CyclicRainbow$(\mathbb{F}_{{2}^{8}}, 26, 16, 17)$     &                      &                        & 21.7                 \\
+\multirow{2}{*}{128} & Rainbow$(\mathbb{F}_{{2}^{8}}, 36, 21, 22)$           & \multirow{2}{*}{632} & \multirow{2}{*}{102.5} & 136.1                \\
+                     & CyclicRainbow$(\mathbb{F}_{{2}^{8}}, 36, 21, 22)$     &                      &                        & 47.3                
 \end{tabular}
 \end{table}
 
