@@ -84,10 +84,15 @@ Eq.~\ref{eq:2} can be represented in a more compact form. Define a $D_{2} \times
 $
     A = (\alpha_{ij}^{rs}),\; 1 \leq i \leq v_{2}, i \leq j \leq n \text{ (rows)},\; 1 \leq r \leq v_{2}, r \leq s \leq n \text{ (columns)},
 $
-with the above ordering. Additionally, you can create similar matrices for the coefficients of $\mathcal{P}, \mathcal{Q}$ and $\mathcal{F}$, as pictured in~\cite[Figure 7.5]{Petzoldt:phd:2013:jul}. By contemplating only the coefficients of quadratic terms, we have matrices $P, Q, F$ with $D_{2}$ columns, and we obtain the following equalities:
-$$
-    P = S \cdot Q 
-$$
+with the above ordering. Additionally, you can create similar matrices for the coefficients of $\mathcal{P}, \mathcal{Q}$ and $\mathcal{F}$, as pictured in~\cite[Figure 7.5]{Petzoldt:phd:2013:jul}. By contemplating only the coefficients of quadratic terms, we have matrices $P, Q, F$ with $D_{2}$ columns. Let $A_{11}$ be the upper left $D_{1} \times D_{1}$ submatrix of $A$, $S_{22}$ be the lower right $o_{2} \times o_{2}$ submatrix of $S$, with other submatrices defined analogously. By also specifically partitioning $P$ and $F$, we get the following relations:
+\begin{equation}
+    P = S \cdot Q, \quad \begin{bmatrix}
+    x_{11}       & x_{12} & x_{13} & \dots & x_{1n} \\
+           & x_{d2} & x_{d3} & \dots & x_{dn}
+\end{bmatrix}
+\end{equation}
+
+
 The signature generation and verification steps are left unmodified. The new scheme is called CyclicRainbow.
 
 \section{Effect of the Construction}\label{sec:effect}
