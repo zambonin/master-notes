@@ -47,13 +47,19 @@ We focus on reducing the public key size of the Rainbow scheme~\cite{Ding:inproc
 
 \section{Classical Rainbow Signature Scheme}\label{sec:rainbow}
 
-We describe below the Rainbow digital signature scheme due to Ding and Schmidt~\cite{Ding:inproc:2005:jun}. Consider a finite field $\mathbb{F}_{q}$
+We describe below the Rainbow digital signature scheme due to Ding and Schmidt~\cite{Ding:inproc:2005:jun}. Consider a finite field $\mathbb{F}_{q}$, and a sequence of positive integers $0 = v_{0} < v_{1} < v_{2} < \dots < v_{u+1} = n$. For $i = \{1, \dots, u\}$, let $V_{i} = \{1, \dots, v_{i}\}$ and $O_{i} = \{v_{i} + 1, \dots, v_{i+1}\}$.
 
 \begin{equation}
     f^{(k)} = \sum_{i, j \in V_{\ell}, i \leq j} a_{ij}^{(k)} x_{i} x_{j}
         + \sum_{i \in V_{\ell}, j \in O_{\ell}} b_{ij}^{(k)} x_{i} x_{j}
         + \sum_{i \in V_{\ell} \cup O_{\ell}} c_{i}^{(k)} x_{i} + d^{(k)}
 \end{equation}
+
+\emph{Key generation.}
+
+\emph{Signature generation.}
+
+\emph{Signature verification.}
 
 \section{Obtaining a Cyclical Structure}\label{sec:cyclic}
 
