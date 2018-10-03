@@ -61,7 +61,7 @@ with $k \in \{v_{1} + 1, \dots, n\}$, where $\ell$ is the only integer such that
 
 \section{Obtaining a Cyclical Structure}\label{sec:cyclic}
 
-We apply the rationale given in~\cite{} to the key generation step of the Rainbow scheme. We restrict ourselves to the case when $u = 2$, but the generalised process can be found in~\cite[Section 7.2]{Petzoldt:phd:2013:jul}. 
+We apply the rationale given by Petzoldt \emph{et al.} in~\cite{Petzoldt:inproc:2010:jun} to the key generation step of the Rainbow scheme. We restrict ourselves to the case when $u = 2$, but the generalised process can be found in~\cite[Section 7.2]{Petzoldt:phd:2013:jul}. 
 
 
 Let $D_{1} = v_{1}(v_{1} + 1)/2 + v_{1} o_{1}, D_{2} = v_{2}(v_{2} + 1)/2 + v_{2} o_{2}$ be the number of quadratic terms in the central polynomials of the first and second layers, respectively, and $D_{3} = n(n + 1)/2$ be the number of quadratic terms in the public polynomials.
@@ -70,7 +70,7 @@ The signature generation and verification steps are left unmodified. The new sch
 
 \section{Effect of the Construction}\label{sec:effect}
 
-To prevent efficient attacks by known methods, we suggest parameter sets that are similar to the original Rainbow$(\mathbb{F}_{2^{8}}, 17, 13, 13)$. Table~\ref{tab:comp} compares our scheme with regards to various security levels and layer sizes. Note that the reduction factor grows with the increase in the number of polynomials and variables, varying between a half and a third of the original public key size.
+As seen in~\cite[Section 9.3]{Petzoldt:phd:2013:jul}, none of the known attacks against the classical Rainbow scheme work better against CyclicRainbow. As such, finding weaknesses in this construction remains an open question. Hence, to prevent efficient instances of these attacks, we suggest parameter sets that are similar to the original Rainbow$(\mathbb{F}_{2^{8}}, 17, 13, 13)$.
 
 \begin{table}[htbp]
 \centering
@@ -91,9 +91,11 @@ CR$(\mathbb{F}_{{2}^{8}}, 36, 21, 22)$     &                      &             
 \caption{Comparison between instances of the Rainbow scheme with (CR) and without (R) partially cyclic keys. Adapted from~\cite[Table 9.8]{Petzoldt:phd:2013:jul}.}\label{tab:comp}
 \end{table}
 
-\emph{Security.} As seen in~\cite[Section 9.3]{Petzoldt:phd:2013:jul}, none of the known attacks against the classical Rainbow scheme work better against CyclicRainbow. As such, finding weaknesses in this construction remains an open question.
+Table~\ref{tab:comp} compares our scheme with regards to various security levels and layer sizes. Note that the reduction factor grows with the increase in the number of polynomials and variables, varying between a half and a third of the original public key size.
 
 \section{Conclusion}\label{sec:conclusion}
+
+
 
 \bibliographystyle{alpha}
 {\footnotesize
