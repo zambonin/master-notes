@@ -56,12 +56,7 @@ $$f^{(k)} = \sum_{i, j \in V_{\ell}, i \leq j} a_{ij}^{(k)} x_{i} x_{j}
         + \sum_{i \in V_{\ell} \cup O_{\ell}} c_{i}^{(k)} x_{i} + d^{(k)},$$
 with $k \in \{v_{1} + 1, \dots, n\}$, where $\ell$ is the only integer such that $k \in O_{\ell}$. The private key is the triple $(\mathcal{S}, \mathcal{F}, \mathcal{T})$. We hide the structure of $\mathcal{F}$ in the public key through its composition with the other maps. Hence, the public key is the map $\mathcal{P} = \mathcal{S} \circ \mathcal{F} \circ \mathcal{T} : \mathbb{F}_{q}^{n} \rightarrow \mathbb{F}_{q}^{m}$.
 
-\emph{Signature generation.} To sign a message $\alpha$, consider a cryptographic hash function $\mathcal{H} : \{0, 1\}^{*} \rightarrow \mathbb{F}_{q}^{m}$, and obtain the digest $d = \mathcal{H}(\alpha)$. Compute $x = \mathcal{S}^{-1}(d)$. 
-
-
-To invert $\mathcal{F}$, every UOV layer must be inverted recursively. Randomly choose values of $x_{1}, \dots, x_{v_{1}}$ and substitute in the polynomials accordingly. Due to the construction of $\mathcal{F}$, by assigning values to the vinegar variables, the first will obtain a system of $|O_{1}|$ linear equations, solvable through Gaussian elimination.
-
-Finally, compute $\sigma = \mathcal{T}^{-1}(y)$.
+\emph{Signature generation.} To sign a message $\alpha$, consider a cryptographic hash function $\mathcal{H} : \{0, 1\}^{*} \rightarrow \mathbb{F}_{q}^{m}$, and obtain the digest $d = \mathcal{H}(\alpha)$. Compute $x = \mathcal{S}^{-1}(d)$. To invert $\mathcal{F}$, every UOV layer must be inverted recursively. Randomly choose values of $x_{1}, \dots, x_{v_{1}}$ and substitute them into $\mathcal{F}$. Due to its construction, assigning values to the vinegar variables will lead to a system of linear equations formed by the first $|O_{1}|$ polynomials in $x_{v_{1} + 1}, \dots, x_{v_{2}}$, solvable through Gaussian elimination. The newly-obtained variables may then be substituted into the remaining polynomials. This process can be repeated for all layers, resulting in $y = (x_{1}, \dots, x_{n}) = \mathcal{F}^{-1}(x)$. Finally, compute $\sigma = \mathcal{T}^{-1}(y)$.
 
 \emph{Signature verification.} To verify a signature, compute $d' = \mathcal{P}(\sigma)$. If $d = d'$, then the signature is accepted, and otherwise rejected.
 
