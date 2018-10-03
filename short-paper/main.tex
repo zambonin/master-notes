@@ -12,7 +12,7 @@
     top    = 1.0in,
     bottom = 1.0in
 }
-\newcolumntype{L}{>{\centering\arraybackslash}m{2.35cm}}
+\newcolumntype{L}{>{\centering\arraybackslash}m{2.4cm}}
 
 \begin{document}
 
@@ -70,15 +70,13 @@ The signature generation and verification steps are left unmodified. The new sch
 
 \section{Effect of the Construction}\label{sec:effect}
 
-To prevent efficient attacks by known methods, we suggest parameter sets that are similar to the original Rainbow$(\mathbb{F}_{2^{8}}, 17, 13, 13)$. Table~\ref{tab:comp} compares our scheme with regards to various security levels and layer sizes. Note that the reduction factor grows with the increase in the number of polynomials and variables.
-
-\emph{Security.} As seen in~\cite[Section 9.3]{Petzoldt:phd:2013:jul}, none of the known attacks against the classical Rainbow scheme work better against CyclicRainbow. As such, finding weaknesses in this construction remains an open question.
+To prevent efficient attacks by known methods, we suggest parameter sets that are similar to the original Rainbow$(\mathbb{F}_{2^{8}}, 17, 13, 13)$. Table~\ref{tab:comp} compares our scheme with regards to various security levels and layer sizes. Note that the reduction factor grows with the increase in the number of polynomials and variables, varying between a half and a third of the original public key size.
 
 \begin{table}[htbp]
 \centering
 \begin{tabular}{|l|L|L|L|L|}
 \hline
-instance                                              & security level (bit) & signature size (bit) & private key size (KB)  & public key size (KB) \\ \hline
+Parameters & Security level (bit) & Signature size (bit) & Private key size (KB) & Public key size (KB) \\ \hline
 R$(\mathbb{F}_{{2}^{4}}, 17, 23, 17)$           & \multirow{2}{*}{80}  & \multirow{2}{*}{228} & \multirow{2}{*}{21.9}  & 33.4                 \\ \cline{1-1} \cline{5-5} 
 CR$(\mathbb{F}_{{2}^{4}}, 17, 23, 17)$     &                      &                      &                        & 15.6                 \\ \hline
 R$(\mathbb{F}_{{2}^{5} - 1}, 14, 19, 14)$       & \multirow{2}{*}{80}  & \multirow{2}{*}{256} & \multirow{2}{*}{17.1}  & 25.3                 \\ \cline{1-1} \cline{5-5} 
@@ -90,7 +88,10 @@ CR$(\mathbb{F}_{{2}^{8}}, 26, 16, 17)$     &                      &             
 R$(\mathbb{F}_{{2}^{8}}, 36, 21, 22)$           & \multirow{2}{*}{128} & \multirow{2}{*}{632} & \multirow{2}{*}{102.5} & 136.1                \\ \cline{1-1} \cline{5-5} 
 CR$(\mathbb{F}_{{2}^{8}}, 36, 21, 22)$     &                      &                      &                        & 47.3                 \\ \hline
 \end{tabular}
+\caption{Comparison between instances of the Rainbow scheme with (CR) and without (R) partially cyclic keys. Adapted from~\cite[Table 9.8]{Petzoldt:phd:2013:jul}.}\label{tab:comp}
 \end{table}
+
+\emph{Security.} As seen in~\cite[Section 9.3]{Petzoldt:phd:2013:jul}, none of the known attacks against the classical Rainbow scheme work better against CyclicRainbow. As such, finding weaknesses in this construction remains an open question.
 
 \section{Conclusion}\label{sec:conclusion}
 
