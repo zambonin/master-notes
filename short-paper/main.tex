@@ -46,7 +46,7 @@ We focus on reducing the public key size of the Rainbow scheme~\cite{Ding:inproc
 
 \section{Classical Rainbow Signature Scheme}\label{sec:rainbow}
 
-We describe below the Rainbow digital signature scheme due to Ding and Schmidt~\cite{Ding:inproc:2005:jun}, that consists of several layers of ``oil and vinegar''. Consider a finite field $\mathbb{F}_{q}$, and a sequence of integers $0 = v_{0} < v_{1} < v_{2} < \dots < v_{u+1} = n$, with $m = n - v_{1}$. For $i = \{1, \dots, u\}$, let the vinegar variables be $V_{i} = \{1, \dots, v_{i}\}$ and oil variables be $O_{i} = \{v_{i} + 1, \dots, v_{i+1}\}$. Denote an instance of the scheme by Rainbow$(\mathbb{F}_{q}, v_{1}, o_{1}, \dots, o_{u})$. Note that when $u = 1$, we get the UOV scheme. 
+We describe below the Rainbow digital signature scheme due to Ding and Schmidt~\cite{Ding:inproc:2005:jun}, that consists of several layers of ``oil and vinegar''. Consider a finite field $\mathbb{F}_{q}$, and a sequence of integers $0 = v_{0} < v_{1} < v_{2} < \dots < v_{u+1} = n$, with $m = n - v_{1}$. For $i = \{1, \dots, u\}$, let the vinegar variables be $V_{i} = \{1, \dots, v_{i}\}$ and oil variables be $O_{i} = \{v_{i} + 1, \dots, v_{i+1}\}$, with $o_{i} = |O_{i}|$. Denote an instance of the scheme by Rainbow$(\mathbb{F}_{q}, v_{1}, o_{1}, \dots, o_{u})$. Note that when $u = 1$, we get the UOV scheme. 
 
 \emph{Key generation.} We randomly generate linear or affine maps $\mathcal{S}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{m}$ and $\mathcal{T}: \mathbb{F}_{q}^{n} \rightarrow \mathbb{F}_{q}^{n}$. The central map $\mathcal{F}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{n}$
 has a special structure. It consists of $m$ quadratic polynomials of the form
@@ -55,7 +55,7 @@ $$f^{(k)} = \sum_{i, j \in V_{\ell}, i \leq j} a_{ij}^{(k)} x_{i} x_{j}
         + \sum_{i \in V_{\ell} \cup O_{\ell}} c_{i}^{(k)} x_{i} + d^{(k)},$$
 with $k \in \{v_{1} + 1, \dots, n\}$, where $\ell$ is the only integer such that $k \in O_{\ell}$. The private key is the triple $(\mathcal{S}, \mathcal{F}, \mathcal{T})$. We hide the structure of $\mathcal{F}$ in the public key through its composition with the other maps. Hence, the public key is the map $\mathcal{P} = \mathcal{S} \circ \mathcal{F} \circ \mathcal{T} : \mathbb{F}_{q}^{n} \rightarrow \mathbb{F}_{q}^{m}$.
 
-\emph{Signature generation.} To sign a message $\alpha$, consider a cryptographic hash function $\mathcal{H} : \{0, 1\}^{*} \rightarrow \mathbb{F}_{q}^{m}$, and obtain the digest $d = \mathcal{H}(\alpha)$. Compute $x = \mathcal{S}^{-1}(d)$. To compute $y = \mathcal{F}^{-1}(x)$, every UOV layer must be inverted recursively. Randomly choose values of $x_{1}, \dots, x_{v_{1}}$ and substitute them into $\mathcal{F}$. Due to its construction, assigning values to the vinegar variables will lead to a system of linear equations formed by the first $|O_{1}|$ polynomials in $x_{v_{1} + 1}, \dots, x_{v_{2}}$, that may be solvable through Gaussian elimination. If the system does not have a solution, the first variables need to be randomly chosen again. The newly-obtained variables may then be substituted into the remaining polynomials. This process can be repeated for all layers, resulting in $y = (x_{1}, \dots, x_{n})$. Finally, compute $\sigma = \mathcal{T}^{-1}(y)$.
+\emph{Signature generation.} To sign a message $\alpha$, consider a cryptographic hash function $\mathcal{H} : \{0, 1\}^{*} \rightarrow \mathbb{F}_{q}^{m}$, and obtain the digest $d = \mathcal{H}(\alpha)$. Compute $x = \mathcal{S}^{-1}(d)$. To compute $y = \mathcal{F}^{-1}(x)$, every UOV layer must be inverted recursively. Randomly choose values of $x_{1}, \dots, x_{v_{1}}$ and substitute them into $\mathcal{F}$. Due to its construction, assigning values to the vinegar variables will lead to a system of linear equations formed by the first $o_{1}$ polynomials in $x_{v_{1} + 1}, \dots, x_{v_{2}}$, that may be solvable through Gaussian elimination. If the system does not have a solution, the first variables need to be randomly chosen again. The newly-obtained variables may then be substituted into the remaining polynomials. This process can be repeated for all layers, resulting in $y = (x_{1}, \dots, x_{n})$. Finally, compute $\sigma = \mathcal{T}^{-1}(y)$.
 
 \emph{Signature verification.} To verify a signature, compute $d' = \mathcal{P}(\sigma)$. If $d = d'$, then the signature is accepted, and otherwise rejected.
 
@@ -72,12 +72,10 @@ t_{ri} t_{sj} + t_{rj} t_{si}   & \text{otherwise}
 \end{cases},
 \end{equation}
 and $k \in \{v_{1} + 1, \dots, n\}, \; i, j \in \{1, \dots, n\}$. Eq.~\ref{eq:1} can be represented in a more compact form if we consider that $\mathcal{F}$ does not allow quadratic monomials with only oil variables. Hence,
-\begin{equation}
-    q_{ij}^{(k)} = 
-    \begin{cases}
-        \sum_{r = 1}^{v_{1}} \sum_{s = r}^{v_{2}} \alpha_{ij}^{rs} f_{rs}^{(k)} & \text{if } 
-    \end{cases}
-\end{equation}
+\begin{align}
+    q_{ij}^{(k)} &= \sum_{r = 1}^{v_{1}} \sum_{s = r}^{v_{2}} \alpha_{ij}^{rs} f_{rs}^{(k)}, \; k \in \{1, \dots, o_{1}\} \\
+    q_{ij}^{(k)} &= \sum_{r = 1}^{v_{2}} \sum_{s = r}^{n} \alpha_{ij}^{rs} f_{rs}^{(k)}, \; k \in \{o_{1} + 1, \dots,  m\}.
+\end{align}
 
 
 
