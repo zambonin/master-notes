@@ -42,7 +42,7 @@ Furthermore, to prevent forgery of signatures by a malicious actor, schemes are 
 
 One of the approaches for constructing post-quantum schemes is based on systems of linear equations with multiple variables, and is appropriately called multivariate cryptography. Performing computations with these equations is generally very efficient, suitable for performance- or energy-constrained devices. Still, considering common key sizes of 512 bytes for ECDSA, the size of keys for multivariate schemes is prohibitive, as seen in~\cite[Table 6.4]{Petzoldt:phd:2013:jul}. Naturally, it is imperative to research strategies with the intent of reducing these keys.
 
-We focus on reducing the public key size of the Rainbow scheme~\cite{}, a generalised version of the Unbalanced Oil and Vinegar (UOV) scheme~\cite{} that reduces key sizes and signature length. We apply the strategy described in~\cite{}, 
+We focus on reducing the public key size of the Rainbow scheme~\cite{}, a generalised version of the Unbalanced Oil and Vinegar (UOV) scheme~\cite{} that reduces key sizes and signature length. We apply the strategy described in~\cite[Chapter 7]{Petzoldt:phd:2013:jul}, namely choosing part of the public key instead of a central map, and generating remaining elements as needed.
 
 \emph{Related works.}
 
