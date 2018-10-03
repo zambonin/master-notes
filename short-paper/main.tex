@@ -27,7 +27,7 @@
     88040-900, Florianópolis, Brazil \\
     \texttt{gustavo.zambonin@posgrad.ufsc.br,ricardo.custodio@ufsc.br}
     
-     Written for the INE410111 class (Research Methodology in Computer Science), based on~\cite{petzoldt2013selecting}. \textbf{This is not a real paper.} \vspace{.75cm}
+     Written for the INE410111 class (Research Methodology in Computer Science), based on~\cite{Petzoldt:phd:2013:jul}. \textbf{This is not a real paper.} \vspace{.75cm}
 \end{center}
 
 \textbf{Abstract.} Cryptography based on multivariate equations are one of main the approaches for creating algorithms that are quantum-resistant. Nonetheless, digital signature schemes based on these concepts feature impractical key pair sizes, orders of magnitude greater than commonly-used schemes. We identify a special structure on the public key of the Rainbow signature scheme. This strategy can be used to create a key with a partially cyclic construction, reducing its storage requirements by up to a factor of three.
@@ -40,11 +40,9 @@ Security in communications is necessary to ensure trust between parties. For exa
 
 Furthermore, to prevent forgery of signatures by a malicious actor, schemes are naturally bound to computational problems that are virtually unsolvable without the private key. Integer factorisation and discrete logarithm are the most common examples, respectively related to the RSA and ECDSA schemes. Yet, such problems are provably computable in polynomial time by a quantum computer~\cite{Shor:article:1997:oct}. Ergo, post-quantum digital signature schemes are paramount in maintaining secure inter-communications.
 
-One of the approaches for constructing post-quantum schemes is based on systems of linear equations with multiple variables, and is appropriately called multivariate cryptography. Performing computations with these equations is generally very efficient, suitable for performance- or energy-constrained devices. Still, considering common key sizes are below 4KB, size of keys for multivariate schemes is prohibitive, as seen in~\cite[Table 6.4]{petzoldt2013selecting}. Naturally, it is imperative to research strategies with the intent of reducing these keys.
+One of the approaches for constructing post-quantum schemes is based on systems of linear equations with multiple variables, and is appropriately called multivariate cryptography. Performing computations with these equations is generally very efficient, suitable for performance- or energy-constrained devices. Still, considering common key sizes of 512 bytes for ECDSA, the size of keys for multivariate schemes is prohibitive, as seen in~\cite[Table 6.4]{Petzoldt:phd:2013:jul}. Naturally, it is imperative to research strategies with the intent of reducing these keys.
 
 \emph{Related works.}
-
-\emph{Notation.}
 
 \emph{Organization.}
 
