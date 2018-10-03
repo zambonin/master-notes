@@ -50,9 +50,11 @@ We describe below the Rainbow digital signature scheme due to Ding and Schmidt~\
 
 \emph{Key generation.} We randomly generate linear or affine maps $\mathcal{S}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{m}$ and $\mathcal{T}: \mathbb{F}_{q}^{n} \rightarrow \mathbb{F}_{q}^{n}$. The central map $\mathcal{F}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{n}$
 has a special structure. It consists of $m$ quadratic polynomials of the form
-$$f^{(k)} = \sum_{i, j \in V_{\ell}, i \leq j} a_{ij}^{(k)} x_{i} x_{j}
+\begin{equation}\label{eq:0}
+f^{(k)} = \sum_{i, j \in V_{\ell}, i \leq j} a_{ij}^{(k)} x_{i} x_{j}
         + \sum_{i \in V_{\ell}, j \in O_{\ell}} b_{ij}^{(k)} x_{i} x_{j}
-        + \sum_{i \in V_{\ell} \cup O_{\ell}} c_{i}^{(k)} x_{i} + d^{(k)},$$
+        + \sum_{i \in V_{\ell} \cup O_{\ell}} c_{i}^{(k)} x_{i} + d^{(k)},
+\end{equation}
 with $k \in \{v_{1} + 1, \dots, n\}$, where $\ell$ is the only integer such that $k \in O_{\ell}$. The private key is the triple $(\mathcal{S}, \mathcal{F}, \mathcal{T})$. We hide the structure of $\mathcal{F}$ in the public key through its composition with the other maps. Hence, the public key is the map $\mathcal{P} = \mathcal{S} \circ \mathcal{F} \circ \mathcal{T} : \mathbb{F}_{q}^{n} \rightarrow \mathbb{F}_{q}^{m}$.
 
 \emph{Signature generation.} To sign a message $\alpha$, consider a cryptographic hash function $\mathcal{H} : \{0, 1\}^{*} \rightarrow \mathbb{F}_{q}^{m}$, and obtain the digest $d = \mathcal{H}(\alpha)$. Compute $x = \mathcal{S}^{-1}(d)$. To compute $y = \mathcal{F}^{-1}(x)$, every UOV layer must be inverted recursively. Randomly choose values of $x_{1}, \dots, x_{v_{1}}$ and substitute them into $\mathcal{F}$. Due to its construction, assigning values to the vinegar variables will lead to a system of linear equations formed by the first $o_{1}$ polynomials in $x_{v_{1} + 1}, \dots, x_{v_{2}}$, that may be solvable through Gaussian elimination. If the system does not have a solution, the first variables need to be randomly chosen again. The newly-obtained variables may then be substituted into the remaining polynomials. This process can be repeated for all layers, resulting in $y = (x_{1}, \dots, x_{n})$. Finally, compute $\sigma = \mathcal{T}^{-1}(y)$.
@@ -78,7 +80,11 @@ and $k \in \{v_{1} + 1, \dots, n\}, \; i, j \in \{1, \dots, n\}$. Eq.~\ref{eq:1}
 
 Operating on these coefficients will lead us to useful relations. Let $D_{w} = v_{w}(v_{w} + 1)/2 + v_{w} o_{w}$ be the number of quadratic terms in the central polynomials of the $w$-th layer, and $D = n(n + 1)/2$ be the number of quadratic terms in the public polynomials. Further, define a monomial ordering that acts as following. The $D_{w}$ monomials that appear only in the central polynomials of the $w$-th layer shall appear before the $D_{w + 1}$ monomials, with $w \in \{1, \dots, u\}$. The remaining $D - D_{u}$ quadratic monomials come after these. The linear and constant monomials come last. Lexicographic ordering is used to order the elements inside of these ``blocks''.
 
-Eq.~\ref{eq:2} can be represented in a more compact form by creating a $D_{2} \times D_{2}$ matrix $A$ with the coefficients $\alpha_{ij}^{rs}$, ordered with the strategy given above.
+Eq.~\ref{eq:2} can be represented in a more compact form. Define a $D_{2} \times D_{2}$ matrix as
+$
+    A = (\alpha_{ij}^{rs}),\; 1 \leq i \leq v_{2}, i \leq j \leq n \text{ (rows)},\; 1 \leq r \leq v_{2}, r \leq s \leq n \text{ (columns)},
+$
+with the above ordering.
 
 The signature generation and verification steps are left unmodified. The new scheme is called CyclicRainbow.
 
