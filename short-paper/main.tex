@@ -51,14 +51,14 @@ We describe below the Rainbow digital signature scheme due to Ding and Schmidt~\
 
 \emph{Key generation.}
 
-The private key is a triple of invertible maps. We randomly generate linear or affine maps $\mathcal{S}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{m}$ and $\mathcal{T}: \mathbb{F}_{q}^{n} \rightarrow \mathbb{F}_{q}^{n}$. The central map $\mathcal{F}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{n}$
-has a special structure. It consists of $m$ quadratic polynomials $f^{(v_{1} + 1}, \dots, f^{(n)}$ of the form
-
+We randomly generate linear or affine maps $\mathcal{S}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{m}$ and $\mathcal{T}: \mathbb{F}_{q}^{n} \rightarrow \mathbb{F}_{q}^{n}$. The central map $\mathcal{F}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{n}$
+has a special structure. It consists of $m$ quadratic polynomials of the form
 \begin{equation}
     f^{(k)} = \sum_{i, j \in V_{\ell}, i \leq j} a_{ij}^{(k)} x_{i} x_{j}
         + \sum_{i \in V_{\ell}, j \in O_{\ell}} b_{ij}^{(k)} x_{i} x_{j}
-        + \sum_{i \in V_{\ell} \cup O_{\ell}} c_{i}^{(k)} x_{i} + d^{(k)}
+        + \sum_{i \in V_{\ell} \cup O_{\ell}} c_{i}^{(k)} x_{i} + d^{(k)},
 \end{equation}
+with $k \in \{v_{1} + 1, \dots, n\}$, where $\ell$ is the only integer such that $k \in O_{\ell}$. We hide the structure of $\mathcal{F}$ in the public key through its composition with 
 
 \emph{Signature generation.}
 
