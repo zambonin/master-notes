@@ -84,12 +84,12 @@ Eq.~\ref{eq:2} can be represented in a more compact form. Define a $D_{2} \times
 $
     A = (\alpha_{ij}^{rs}),\; 1 \leq i \leq v_{2}, i \leq j \leq n \text{ (rows)},\; 1 \leq r \leq v_{2}, r \leq s \leq n \text{ (columns)},
 $
-with the above ordering. Additionally, you can create similar matrices for the coefficients of $\mathcal{P}, \mathcal{Q}$ and $\mathcal{F}$, as pictured in~\cite[Figure 7.5]{Petzoldt:phd:2013:jul}. By contemplating only the coefficients of quadratic terms, we have matrices $P, Q, F$ with $D_{2}$ columns. Let $A_{11}$ be the upper left $D_{1} \times D_{1}$ submatrix of $A$, $S_{22}$ be the lower right $o_{2} \times o_{2}$ submatrix of $S$, with other submatrices defined analogously. By also specifically partitioning $P$ and $F$, we get the following relations:
+with the above ordering. Additionally, you can create similar matrices for the coefficients of $\mathcal{P}, \mathcal{Q}$ and $\mathcal{F}$, as pictured in~\cite[Figure 7.5]{Petzoldt:phd:2013:jul}. By contemplating only the coefficients of quadratic terms, we have matrices $P, Q, F$ with $D_{2}$ columns. Let $A_{11}$ be the upper left $D_{1} \times D_{1}$ submatrix of $A$, $S_{22}$ be the lower right $o_{2} \times o_{2}$ submatrix of $S$, and other submatrices defined analogously. By also specifically partitioning $P$ and $F$, we get the following relations:
 \begin{align}
     P &= S \cdot Q, & 
     \begin{pmatrix}
         B_{1} & \begin{matrix} C_{1} \\ B_{2} \end{matrix} \\
-    \end{pmatrix} =
+    \end{pmatrix} &=
     \begin{pmatrix}
         S_{11} & S_{12} \\
         S_{21} & S_{22}
@@ -100,15 +100,16 @@ with the above ordering. Additionally, you can create similar matrices for the c
     \end{pmatrix}, \\
     Q &= F \cdot A^{T}, & 
     \begin{pmatrix}
-        B_{1} & \begin{matrix} C_{1} \\ B_{2} \end{matrix} \\
-    \end{pmatrix} =
-    \begin{pmatrix}
-        S_{11} & S_{12} \\
-        S_{21} & S_{22}
-    \end{pmatrix} \cdot
-    \begin{pmatrix}
         Q_{11} & Q_{12} \\
         Q_{21} & Q_{22}
+    \end{pmatrix} &=
+    \begin{pmatrix}
+        F_{1} & 0 \\
+    F_{2}
+    \end{pmatrix} \cdot
+    \begin{pmatrix}
+        A_{11}^{T} & A_{12}^{T} \\
+        A_{21}^{T} & A_{22}^{T}
     \end{pmatrix}.
 \end{align}
 
