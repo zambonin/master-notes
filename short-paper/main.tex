@@ -59,7 +59,7 @@ with $k \in \{v_{1} + 1, \dots, n\}$, where $\ell$ is the only integer such that
 \emph{Signature generation.} To sign a message $\alpha$, consider a cryptographic hash function $\mathcal{H} : \{0, 1\}^{*} \rightarrow \mathbb{F}_{q}^{m}$, and obtain the digest $d = \mathcal{H}(\alpha)$. Compute $x = \mathcal{S}^{-1}(d)$. 
 
 
-To invert $\mathcal{F}$, every UOV layer must be inverted recursively. The variables of a layer will be used as vinegar variables of the next layer. Choose values of $V_{1}$
+To invert $\mathcal{F}$, every UOV layer must be inverted recursively. Randomly choose values of $x_{1}, \dots, x_{v_{1}}$ and substitute in the polynomials accordingly. Due to the construction of $\mathcal{F}$, by assigning values to the vinegar variables, the first will obtain a system of $|O_{1}|$ linear equations, solvable through Gaussian elimination.
 
 Finally, compute $\sigma = \mathcal{T}^{-1}(y)$.
 
