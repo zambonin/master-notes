@@ -1,8 +1,9 @@
 \documentclass[a4paper, 14pt]{extarticle}
+
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{geometry, parskip, hyperref}
+\usepackage{amsfonts, geometry, parskip, hyperref}
 \geometry{
     paperheight = 11in,
     paperwidth  = 8.5in,
@@ -11,10 +12,6 @@
     top    = 1.0in,
     bottom = 1.0in
 }
-
-\title{cyclic-rainbow}
-\author{Gustavo Zambonin}
-\date{October 2018}
 
 \begin{document}
 
@@ -50,10 +47,12 @@ We focus on reducing the public key size of the Rainbow scheme~\cite{Ding:inproc
 
 \section{Classical Rainbow Signature Scheme}\label{sec:rainbow}
 
+We describe below the Rainbow digital signature scheme due to Ding and Schmidt~\cite{Ding:inproc:2005:jun}. Consider a finite field $\mathbb{F}_{q}$
+
 \begin{equation}
-    f^{k} = \Sum_{i \in V_{\ell}} \Sum_{j \in V_{\ell}} a_{ij}^{k} x_{i} x_{j}
-        + \Sum_{i \in V_{\ell}} \Sum_{j \in O_{\ell}} b_{ij}^{k} x_{i} x_{j}
-        + \Sum_{i \in V_{\ell} \cup O_{\ell}} c_{i}^{k} x_{i} + d^{k}
+    f^{(k)} = \sum_{i, j \in V_{\ell}, i \leq j} a_{ij}^{(k)} x_{i} x_{j}
+        + \sum_{i \in V_{\ell}, j \in O_{\ell}} b_{ij}^{(k)} x_{i} x_{j}
+        + \sum_{i \in V_{\ell} \cup O_{\ell}} c_{i}^{(k)} x_{i} + d^{(k)}
 \end{equation}
 
 \section{Obtaining a Cyclical Structure}\label{sec:cyclic}
