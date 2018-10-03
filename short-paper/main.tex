@@ -45,7 +45,7 @@ We focus on reducing the public key size of the Rainbow scheme~\cite{Ding:inproc
 
 \section{Classical Rainbow Signature Scheme}\label{sec:rainbow}
 
-We describe below the Rainbow digital signature scheme due to Ding and Schmidt~\cite{Ding:inproc:2005:jun}, that consists of several layers of ``oil and vinegar''. Consider a finite field $\mathbb{F}_{q}$, and a sequence of integers $0 = v_{0} < v_{1} < v_{2} < \dots < v_{u+1} = n$, with $m = n - v_{1}$. For $i = \{1, \dots, u\}$, let the vinegar variables be $V_{i} = \{1, \dots, v_{i}\}$ and oil variables be $O_{i} = \{v_{i} + 1, \dots, v_{i+1}\}$. Denote an instance of the scheme by Rainbow$(v_{1}, o_{1}, \dots, o_{u})$. Note that when $u = 1$, we get the UOV scheme. 
+We describe below the Rainbow digital signature scheme due to Ding and Schmidt~\cite{Ding:inproc:2005:jun}, that consists of several layers of ``oil and vinegar''. Consider a finite field $\mathbb{F}_{q}$, and a sequence of integers $0 = v_{0} < v_{1} < v_{2} < \dots < v_{u+1} = n$, with $m = n - v_{1}$. For $i = \{1, \dots, u\}$, let the vinegar variables be $V_{i} = \{1, \dots, v_{i}\}$ and oil variables be $O_{i} = \{v_{i} + 1, \dots, v_{i+1}\}$. Denote an instance of the scheme by Rainbow$(\mathbb{F}_{q}, v_{1}, o_{1}, \dots, o_{u})$. Note that when $u = 1$, we get the UOV scheme. 
 
 \emph{Key generation.} We randomly generate linear or affine maps $\mathcal{S}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{m}$ and $\mathcal{T}: \mathbb{F}_{q}^{n} \rightarrow \mathbb{F}_{q}^{n}$. The central map $\mathcal{F}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{n}$
 has a special structure. It consists of $m$ quadratic polynomials of the form
@@ -60,7 +60,10 @@ with $k \in \{v_{1} + 1, \dots, n\}$, where $\ell$ is the only integer such that
 
 \section{Obtaining a Cyclical Structure}\label{sec:cyclic}
 
-We apply the rationale below to the key generation step of the Rainbow scheme. We restrict ourselves to the case when $u = 2$, but the generalised process can be found in~\cite[Section 7.2]{Petzoldt:phd:2013:jul}. Let $D_{1} = v_{1}(v_{1} + 1)/2 + v_{1} o_{1}, D_{2} = v_{2}(v_{2} + 1)/2 + v_{2} o_{2}$ be the number of quadratic terms in the central polynomials of the first and second layers, respectively, and $D_{3} = n(n + 1)/2$ be the number of quadratic terms in the public polynomials.
+We apply the rationale below to the key generation step of the Rainbow scheme. We restrict ourselves to the case when $u = 2$, but the generalised process can be found in~\cite[Section 7.2]{Petzoldt:phd:2013:jul}. 
+
+
+Let $D_{1} = v_{1}(v_{1} + 1)/2 + v_{1} o_{1}, D_{2} = v_{2}(v_{2} + 1)/2 + v_{2} o_{2}$ be the number of quadratic terms in the central polynomials of the first and second layers, respectively, and $D_{3} = n(n + 1)/2$ be the number of quadratic terms in the public polynomials.
 
 The signature generation and verification steps are left unmodified. The new scheme is called CyclicRainbow.
 
@@ -69,6 +72,8 @@ The signature generation and verification steps are left unmodified. The new sch
 \emph{Security.} As seen in~\cite[Section 9.3]{Petzoldt:phd:2013:jul}, none of the known attacks against the classical Rainbow scheme work better against CyclicRainbow. As such, finding weaknesses in this construction remains an open question.
 
 \section{Conclusion}\label{sec:conclusion}
+
+To prevent efficient attacks by known methods, we suggest sets of parameters according to 
 
 \bibliographystyle{alpha}
 {\footnotesize
