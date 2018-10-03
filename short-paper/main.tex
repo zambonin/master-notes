@@ -51,7 +51,8 @@ We describe below the Rainbow digital signature scheme due to Ding and Schmidt~\
 
 \emph{Key generation.}
 
-The private key 
+The private key is a triple of invertible maps. We randomly generate linear or affine maps $\mathcal{S}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{m}$ and $\mathcal{T}: \mathbb{F}_{q}^{n} \rightarrow \mathbb{F}_{q}^{n}$. The central map $\mathcal{F}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{n}$
+has a special structure. It consists of $m$ quadratic polynomials $f^{(v_{1} + 1}, \dots, f^{(n)}$ of the form
 
 \begin{equation}
     f^{(k)} = \sum_{i, j \in V_{\ell}, i \leq j} a_{ij}^{(k)} x_{i} x_{j}
