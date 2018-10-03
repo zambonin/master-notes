@@ -63,7 +63,7 @@ with $k \in \{v_{1} + 1, \dots, n\}$, where $\ell$ is the only integer such that
 
 We apply the rationale given by Petzoldt \emph{et al.} in~\cite{Petzoldt:inproc:2010:jun} to the key generation step of the Rainbow scheme. We restrict ourselves to the case of $u = 2$, but the generalised process can be found in~\cite[Section 7.2]{Petzoldt:phd:2013:jul}. Recall that the public key of Rainbow is the composition of three maps, $\mathcal{P} = \mathcal{S} \circ \mathcal{F} \circ \mathcal{T}$. Let $\mathcal{Q} = \mathcal{F} \circ \mathcal{T}$. 
 
-If we fix the affine map $\mathcal{T}$, the public key composition represents a linear relation between the coefficients $q_{ij}^{(k)}, f_{ij}^{(k)}$ of the monomial $x_{i} x_{j}$ in $\mathcal{Q}$ and $\mathcal{F}$ respectively, with the form
+If we fix the affine map $\mathcal{T}$, the public key composition represents a linear relation between the coefficients $q_{ij}^{(k)}, f_{ij}^{(k)}$ of the monomial $x_{i} x_{j}$ in the $k$-th component of $\mathcal{Q}$ and $\mathcal{F}$ respectively, with the form
 \begin{equation}\label{eq:1}
 q_{ij}^{(k)} = \sum_{r = 1}^{n} \sum_{s = r}^{n} \alpha_{ij}^{rs} f_{rs}^{(k)}, \quad \alpha_{ij}^{rs} =
 \begin{cases}
@@ -71,11 +71,11 @@ t_{ri} t_{si}                   & \text{if } i = j, \\
 t_{ri} t_{sj} + t_{rj} t_{si}   & \text{otherwise}
 \end{cases},
 \end{equation}
-and $k \in \{v_{1}, \dots, n\}, \; i, j \in \{1, \dots, n\}$. Eq.~\ref{eq:1} can be represented in a more compact form, since $f_{rs}^{(k)} = 0$ if $r, s \in O_{\ell}$.
+and $k \in \{v_{1} + 1, \dots, n\}, \; i, j \in \{1, \dots, n\}$. Eq.~\ref{eq:1} can be represented in a more compact form if we consider that $\mathcal{F}$ does not allow quadratic monomials with only oil variables. Hence, 
 
 
 
-Let $D_{1} = v_{1}(v_{1} + 1)/2 + v_{1} o_{1}, D_{2} = v_{2}(v_{2} + 1)/2 + v_{2} o_{2}$ be the number of quadratic terms in the central polynomials of the first and second layers, respectively, and $D_{3} = n(n + 1)/2$ be the number of quadratic terms in the public polynomials.
+Let $D_{w} = v_{w}(v_{w} + 1)/2 + v_{w} o_{w}$ be the number of quadratic terms in the central polynomials of the $w$-th layer, and $D = n(n + 1)/2$ be the number of quadratic terms in the public polynomials.
 
 The signature generation and verification steps are left unmodified. The new scheme is called CyclicRainbow.
 
