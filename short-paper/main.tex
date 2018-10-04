@@ -86,10 +86,10 @@ $
 $
 with the above ordering. Additionally, you can create similar matrices for the coefficients of $\mathcal{P}, \mathcal{Q}$ and $\mathcal{F}$, as pictured in~\cite[Figure 7.5]{Petzoldt:phd:2013:jul}. By contemplating only the coefficients of quadratic terms, we have matrices $P, Q, F$ with $D_{2}$ columns. Let $A_{11}$ be the upper left $D_{1} \times D_{1}$ submatrix of $A$, $S_{22}$ be the lower right $o_{2} \times o_{2}$ submatrix of $S$, and other submatrices defined analogously. By also specifically partitioning $P$ and $F$, we get the following relations:
 \begin{align}
-    P &= S \cdot Q, & 
+    P &= S \cdot Q \rightarrow
     \begin{pmatrix}
         B_{1} & \begin{matrix} C_{1} \\ B_{2} \end{matrix} \\
-    \end{pmatrix} &=
+    \end{pmatrix} =
     \begin{pmatrix}
         S_{11} & S_{12} \\
         S_{21} & S_{22}
@@ -98,11 +98,11 @@ with the above ordering. Additionally, you can create similar matrices for the c
         Q_{11} & Q_{12} \\
         Q_{21} & Q_{22}
     \end{pmatrix}, \\
-    Q &= F \cdot A^{T}, & 
+    Q &= F \cdot A^{T} \rightarrow
     \begin{pmatrix}
         Q_{11} & Q_{12} \\
         Q_{21} & Q_{22}
-    \end{pmatrix} &=
+    \end{pmatrix} =
     \begin{pmatrix}
         F_{1} & 0 \\
         \multicolumn{2}{c}{F_{2}}
@@ -112,6 +112,8 @@ with the above ordering. Additionally, you can create similar matrices for the c
         A_{21}^{T} & A_{22}^{T}
     \end{pmatrix}.
 \end{align}
+
+
 
 The signature generation and verification steps are left unmodified. The new scheme is called CyclicRainbow.
 
