@@ -19,18 +19,21 @@
 \begin{center}
     {\Large\bf Partially Cyclic Public Keys on the Rainbow Signature Scheme} \vspace{.75cm}
     
-    Gustavo Zambonin$^{1}$
+    Gustavo Zambonin$^{1}$ \\
+    (Albrecht Petzoldt$^{2}$, Johannes Buchmann$^{2}$)
     
     $^{1}$Departamento de Informática e Estatística, Universidade Federal de Santa Catarina \\
-    88040-900, Florianópolis, Brazil \\
+    88040-900 Florianópolis, Brazil \\
     \texttt{gustavo.zambonin@posgrad.ufsc.br}
     
-    $^{2}$
+    $^{2}$Department of Computer Science, Technische Universität Darmstadt \\
+    Hochschulstraße 10, 64289 Darmstadt, Germany \\
+    \texttt{\{apetzoldt,buchmann\}@cdc.informatik.tu-darmstadt.de}
     
-     Written for the INE410111 class (Research Methodology in Computer Science), based on~\cite{Petzoldt:phd:2013:jul}. \textbf{This is not a real paper.} \vspace{.75cm}
+    Written for the INE410111 class (Research Methodology in Computer Science), based on~\cite{Petzoldt:phd:2013:jul}. \textbf{This is not a real paper.} \vspace{.75cm}
 \end{center}
 
-\textbf{Abstract.} Cryptography based on multivariate equations are one of main the approaches for creating algorithms that are quantum-resistant. Nonetheless, digital signature schemes based on these concepts feature impractical key pair sizes, orders of magnitude greater than commonly-used schemes. We identify a special structure on components of the Rainbow signature scheme that can be used to create a key with a partially cyclic construction, reducing its storage requirements by up to approximately a factor of three.
+\textbf{Abstract.} Cryptography based on multivariate equations is one of main the approaches for creating algorithms that are quantum-resistant. Nonetheless, digital signature schemes based on these concepts feature impractical key pair sizes, orders of magnitude greater than commonly-used schemes. We identify a special structure on components of the Rainbow signature scheme that allows for the creation of public keys with a partially cyclic construction, reducing storage requirements by up to approximately a factor of three.
 
 \section{Introduction}\label{sec:intro}
 
@@ -40,7 +43,7 @@ Furthermore, to prevent forgery of signatures by a malicious actor, schemes are 
 
 One of the approaches for constructing post-quantum schemes is based on systems of linear equations with multiple variables, and is appropriately called multivariate cryptography. Performing computations with these equations is generally very efficient, suitable for performance- or energy-constrained devices. Still, considering common key sizes of 512 bytes for ECDSA, the size of keys for multivariate schemes is prohibitive, as seen in~\cite[Table 6.4]{Petzoldt:phd:2013:jul} and~\cite[Table 1]{Ding:article:2017:jul}. Naturally, it is imperative to research strategies with the intent of reducing these keys.
 
-We focus on reducing the public key size of the Rainbow scheme~\cite{Ding:inproc:2005:jun}, a generalised version of the Unbalanced Oil and Vinegar (UOV) scheme~\cite{Kipnis:inproc:1999:apr}, that reduces key sizes and signature length. We apply the strategy described in~\cite[Chapter 7]{Petzoldt:phd:2013:jul}, namely choosing part of the public key instead of a central map, and generating remaining elements as needed.
+We focus on reducing the public key size of the Rainbow scheme~\cite{Ding:inproc:2005:jun}, a generalised version of the Unbalanced Oil and Vinegar (UOV) scheme~\cite{Kipnis:inproc:1999:apr}, that already reduces key sizes and signature length. We apply the strategy described in~\cite[Chapter 7]{Petzoldt:phd:2013:jul}, namely choosing part of the public key instead of a central map, and generating remaining elements as needed.
 
 \emph{Related works.} Most authors focus on reducing the private key size, as seen in the works of Yasuda \emph{et al.}~\cite{Yasuda:inproc:2013:may, Yasuda:inproc:2014:apr, Yasuda:article:2014:sep} and, more recently, Peng and Tang~\cite{Peng:article:2017:jun}, through the use of clever matrix representations. While these approaches cut up to $80\%$ of the private key, we note that public keys are (evidently) more frequently distributed and stored throughout various devices, creating additional limitations for devices that sign or verify messages with various public keys.
 
