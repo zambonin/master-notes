@@ -113,7 +113,13 @@ with the above ordering. Additionally, you can create similar matrices for the c
     \end{pmatrix}.
 \end{align}
 
-With this strategy, we can configure the $m \times D_{1}$ matrix $B_{1}$ and the $o_{2} \times (D_{2} - D_{1})$ matrix $B_{2}$ with elements that generate a succinct structure. Randomly choose vectors $a^{(1)} \in \mathbb{F}_{q}^{D_{1}}, a^{(2)} \in \mathbb{F}_{q}^{D_{2} - D_{1}}$, and set $b_{ij}^{(1)} = a_{((j - i) \pmod{D_{1}}) + 1}^{(1)}, b_{ij}^{(2)} = a_{((j - i) \pmod{D_{2} - D_{1}}) + 1}^{(1)}$
+With this strategy, we can configure the $m \times D_{1}$ matrix $B_{1}$ and the $o_{2} \times (D_{2} - D_{1})$ matrix $B_{2}$ with elements that generate a succinct structure, deriving the central map from $\mathcal{P}$.
+
+\emph{Key generation.} Randomly choose vectors $a^{(1)} \in \mathbb{F}_{q}^{D_{1}}, a^{(2)} \in \mathbb{F}_{q}^{D_{2} - D_{1}}$, and set 
+\begin{equation}
+    b_{ij}^{(1)} = a_{((j - i) \pmod{D_{1}}) + 1}^{(1)}, \quad b_{ij}^{(2)} = a_{((j - i) \pmod{D_{2} - D_{1}}) + 1}^{(2)}.
+\end{equation}
+Again, randomly choose two affine 
 
 The signature generation and verification steps are left unmodified. The new scheme is called CyclicRainbow.
 
