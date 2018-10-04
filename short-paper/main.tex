@@ -85,7 +85,7 @@ $
     A = (\alpha_{ij}^{rs}),\; 1 \leq i \leq v_{2}, i \leq j \leq n \text{ (rows)},\; 1 \leq r \leq v_{2}, r \leq s \leq n \text{ (columns)},
 $
 with the above ordering. Additionally, you can create similar matrices for the coefficients of $\mathcal{P}, \mathcal{Q}$ and $\mathcal{F}$, as pictured in~\cite[Figure 7.5]{Petzoldt:phd:2013:jul}. By contemplating only the coefficients of quadratic terms, we have matrices $P, Q, F$ with $D_{2}$ columns. Let $A_{11}$ be the upper left $D_{1} \times D_{1}$ submatrix of $A$, $S_{22}$ be the lower right $o_{2} \times o_{2}$ submatrix of $S$, and other submatrices defined analogously. By also specifically partitioning $P$ and $F$, we get the following relations:
-\begin{align}
+\begin{align}\label{eq:3}
     P &= S \cdot Q \rightarrow
     \begin{pmatrix}
         B_{1} & \begin{matrix} C_{1} \\ B_{2} \end{matrix} \\
@@ -98,6 +98,7 @@ with the above ordering. Additionally, you can create similar matrices for the c
         Q_{11} & Q_{12} \\
         Q_{21} & Q_{22}
     \end{pmatrix}, \\
+    \label{eq:4}
     Q &= F \cdot A^{T} \rightarrow
     \begin{pmatrix}
         Q_{11} & Q_{12} \\
@@ -119,7 +120,7 @@ With this strategy, we can configure the $m \times D_{1}$ matrix $B_{1}$ and the
 \begin{equation}
     b_{ij}^{(1)} = a_{((j - i) \pmod{D_{1}}) + 1}^{(1)}, \quad b_{ij}^{(2)} = a_{((j - i) \pmod{D_{2} - D_{1}}) + 1}^{(2)}.
 \end{equation}
-Choose at random a map $\mathcal{S}$ with the additional restriction that $S_{22}$ must be invertible. Also generate randomly a map $\mathcal{T}$ and compute $A$ through Eq.~\ref{eq:2}. If $A$ or $A_{11}$ are not invertible, choose another $\mathcal{T}$.
+Choose at random a map $\mathcal{S}$ with the additional restriction that $S_{22}$ must be invertible. Also generate randomly a map $\mathcal{T}$ and compute $A$ through Eq.~\ref{eq:2}. If $A$ or $A_{11}$ are not invertible, choose another $\mathcal{T}$. By Eq.~\ref{eq:3}, compute $(Q_{11} \; Q_{21})^{T} = S^{-1} \cdot B_{1}$, and obtain the quadratic coefficients of the central polynomials for the first Rainbow layer through Eq.~\ref{eq:4}, with $F_{1} = Q_{11} \cdot (A_{11}^{-1})^{T}$.
 
 The signature generation and verification steps are left unmodified. The new scheme is called CyclicRainbow.
 
