@@ -119,7 +119,7 @@ With this strategy, we can configure the $m \times D_{1}$ matrix $B_{1}$ and the
 \begin{equation}
     b_{ij}^{(1)} = a_{((j - i) \pmod{D_{1}}) + 1}^{(1)}, \quad b_{ij}^{(2)} = a_{((j - i) \pmod{D_{2} - D_{1}}) + 1}^{(2)}.
 \end{equation}
-Again, randomly choose two affine 
+Choose at random a map $\mathcal{S}$ with the additional restriction that $S_{22}$ must be invertible. Also generate randomly a map $\mathcal{T}$ and compute $A$ through Eq.~\ref{eq:2}. If $A$ or $A_{11}$ are not invertible, choose another $\mathcal{T}$.
 
 The signature generation and verification steps are left unmodified. The new scheme is called CyclicRainbow.
 
