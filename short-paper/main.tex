@@ -43,15 +43,15 @@ Furthermore, to prevent forgery of signatures by a malicious actor, schemes are 
 
 One of the approaches for constructing post-quantum schemes is based on systems of linear equations with multiple variables, and is appropriately called multivariate cryptography. Performing computations with these equations is generally very efficient, suitable for performance- or energy-constrained devices. Still, considering common key sizes of 512 bytes for ECDSA, the size of keys for multivariate schemes is prohibitive, as seen in~\cite[Table 6.4]{Petzoldt:phd:2013:jul} and~\cite[Table 1]{Ding:article:2017:jul}. Naturally, it is imperative to research strategies with the intent of reducing these keys.
 
-We focus on reducing the public key size of the Rainbow scheme~\cite{Ding:inproc:2005:jun}, a generalised version of the Unbalanced Oil and Vinegar (UOV) scheme~\cite{Kipnis:inproc:1999:apr}, that already reduces key sizes and signature length. We apply the strategy described in~\cite[Chapter 7]{Petzoldt:phd:2013:jul}, namely choosing part of the public key instead of a central map, and generating remaining elements as needed.
+We focus on reducing the public key size of the Rainbow scheme due to Ding and Schmidt~\cite{Ding:inproc:2005:jun}, a generalised version of the Unbalanced Oil and Vinegar (UOV) scheme by Kipnis \emph{et al.}~\cite{Kipnis:inproc:1999:apr} that already reduces key sizes and signature length. We apply the strategy described in~\cite[Chapter 7]{Petzoldt:phd:2013:jul}, namely choosing part of the public key instead of a central map, and generating remaining elements as needed.
 
 \emph{Related works.} Most authors focus on reducing the private key size, as seen in the works of Yasuda \emph{et al.}~\cite{Yasuda:inproc:2013:may, Yasuda:inproc:2014:apr, Yasuda:article:2014:sep} and, more recently, Peng and Tang~\cite{Peng:article:2017:jun}, through the use of clever matrix representations. While these approaches cut up to $80\%$ of the private key, we note that public keys are (evidently) more frequently distributed and stored throughout various devices, creating additional limitations for devices that sign or verify messages with various public keys.
 
 \emph{Organization.} In Section~\ref{sec:rainbow}, a straightforward description of the Rainbow signature scheme is given. Afterwards, the rationale behind generating a public key with a special structure is explained in Section~\ref{sec:cyclic}. A comparison between practical instances of the new and old schemes is given in Section~\ref{sec:effect}. Finally, Section~\ref{sec:conclusion} finishes the paper.
 
-\section{Classical Rainbow Signature Scheme}\label{sec:rainbow}
+\section{Classic Rainbow Signature Scheme}\label{sec:rainbow}
 
-We describe below the Rainbow digital signature scheme due to Ding and Schmidt~\cite{Ding:inproc:2005:jun}, that consists of several layers of ``oil and vinegar''. Consider a finite field $\mathbb{F}_{q}$, and a sequence of integers $0 = v_{0} < v_{1} < v_{2} < \dots < v_{u+1} = n$, with $m = n - v_{1}$. For $i = \{1, \dots, u\}$, let the vinegar variables be $V_{i} = \{1, \dots, v_{i}\}$ and oil variables be $O_{i} = \{v_{i} + 1, \dots, v_{i+1}\}$, with $o_{i} = |O_{i}|$. Denote an instance of the scheme by Rainbow$(\mathbb{F}_{q}, v_{1}, o_{1}, \dots, o_{u})$. Note that when $u = 1$, we get the UOV scheme. 
+We describe below the Rainbow digital signature scheme, that consists of several ``oil and vinegar'' layers. Consider a finite field $\mathbb{F}_{q}$, and a sequence of integers $0 = v_{0} < v_{1} < v_{2} < \dots < v_{u+1} = n$, with $m = n - v_{1}$. For $i = \{1, \dots, u\}$, let the vinegar variables be $V_{i} = \{1, \dots, v_{i}\}$ and oil variables be $O_{i} = \{v_{i} + 1, \dots, v_{i+1}\}$, with $o_{i} = |O_{i}|$. Denote an instance of the scheme by Rainbow$(\mathbb{F}_{q}, v_{1}, o_{1}, \dots, o_{u})$. Note that when $u = 1$, we get the UOV scheme. 
 
 \emph{Key generation.} We randomly generate linear or affine maps $\mathcal{S}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{m}$ and $\mathcal{T}: \mathbb{F}_{q}^{n} \rightarrow \mathbb{F}_{q}^{n}$. The central map $\mathcal{F}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{n}$
 has a special structure. It consists of $m$ quadratic polynomials of the form
@@ -68,9 +68,9 @@ with $k \in \{v_{1} + 1, \dots, n\}$, where $\ell$ is the only integer such that
 
 \section{Obtaining a Cyclical Structure}\label{sec:cyclic}
 
-We apply the rationale given by Petzoldt \emph{et al.} in~\cite{Petzoldt:inproc:2010:jun} to the key generation step of the Rainbow scheme. We restrict ourselves to the case of $u = 2$, but the generalised process can be found in~\cite[Section 7.2]{Petzoldt:phd:2013:jul}. Recall that the public key of Rainbow is the composition of three maps, $\mathcal{P} = \mathcal{S} \circ \mathcal{F} \circ \mathcal{T}$. Let $\mathcal{Q} = \mathcal{F} \circ \mathcal{T}$. 
+We apply the rationale given by Petzoldt \emph{et al.} in~\cite{Petzoldt:inproc:2010:jun} to the key generation step of the Rainbow scheme. We restrict ourselves to the case of $u = 2$, but the generalised process is akin~\cite[Section 7.2]{Petzoldt:phd:2013:jul}. Recall that the public key of Rainbow is the composition of three maps, $\mathcal{P} = \mathcal{S} \circ \mathcal{F} \circ \mathcal{T}$. Let $\mathcal{Q} = \mathcal{F} \circ \mathcal{T}$. 
 
-If we fix the coefficients $t_{ij} \in \mathcal{T}$, the public key composition represents a linear relation between the coefficients $q_{ij}^{(k)}, f_{ij}^{(k)}$ of the monomial $x_{i} x_{j}$ in the $k$-th component of $\mathcal{Q}$ and $\mathcal{F}$ respectively, with the form
+If we fix coefficients $t_{ij} \in \mathcal{T}$, the public key composition represents a linear relation between coefficients $q_{ij}^{(k)}, f_{ij}^{(k)}$ of the monomial $x_{i} x_{j}$ in the $k$-th component of $\mathcal{Q}$ and $\mathcal{F}$ respectively, with the form
 \begin{equation}\label{eq:1}
 q_{ij}^{(k)} = \sum_{r = 1}^{n} \sum_{s = r}^{n} \alpha_{ij}^{rs} f_{rs}^{(k)}, \quad \alpha_{ij}^{rs} =
 \begin{cases}
