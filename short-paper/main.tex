@@ -135,10 +135,8 @@ The signature generation and verification steps are left unmodified. The new sch
 
 As seen in~\cite[Section 9.3]{Petzoldt:phd:2013:jul}, none of the known attacks against the classical Rainbow scheme work better against CyclicRainbow. As such, finding weaknesses in this construction remains an open question. Hence, to prevent efficient instances of these attacks, we suggest parameter sets that are similar to the original Rainbow$(\mathbb{F}_{2^{8}}, 17, 13, 13)$.
 
-
 \begin{table}[htbp]
 \centering
-\tiny
 \begin{tabular}{|l|L|L|L|L|}
 \hline
 Parameters & Security level (bit) & Signature size (bit) & Private key size (KB) & Public key size (KB) \\ \hline
@@ -163,7 +161,8 @@ Deriving the size of public keys from the schemes described in Sections~\ref{sec
 
 By extending the approach presented in~\cite{Petzoldt:inproc:2010:jun}, we are able to introduce a cyclic structure in the public key of the Rainbow signature scheme, yielding a new scheme featuring public keys with almost a third of their original size. This scheme can be used in computational devices with constraints in storage or networking. Furthermore, it is also shown that these modifications do not impact the security of the scheme. As points of interest for future works, we suggest the inspection of characteristics in the new scheme that may introduce security weaknesses, and the use of pseudo-random number generators to construct the public key, further reducing its size.
 
-\bibliographystyle{sbc}
-\bibliography{ref}
+\bibliographystyle{plain}
+{\small
+\bibliography{ref}}
 
 \end{document}
