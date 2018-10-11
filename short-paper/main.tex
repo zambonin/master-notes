@@ -41,15 +41,18 @@ One of the approaches for constructing post-quantum schemes is based on systems 
 
 We focus on reducing the public key size of the Rainbow scheme due to Ding and Schmidt~\cite{Ding:inproc:2005:jun}, a generalised version of the Unbalanced Oil and Vinegar (UOV) scheme by Kipnis \emph{et al.}~\cite{Kipnis:inproc:1999:apr} that already reduces key sizes and signature length. We apply the strategy described in~\cite[Chapter 7]{Petzoldt:phd:2013:jul}, namely choosing part of the public key instead of a central map, and generating remaining elements as needed.
 
-\emph{Related works.} Most authors focus on reducing the private key size, as seen in the works of Yasuda \emph{et al.}~\cite{Yasuda:inproc:2013:may, Yasuda:inproc:2014:apr, Yasuda:article:2014:sep} and, more recently, Peng and Tang~\cite{Peng:article:2017:jun}, through the use of clever matrix representations. While these approaches cut up to $80\%$ of the private key, we note that public keys are (evidently) more frequently distributed and stored throughout various devices, creating additional limitations for devices that sign or verify messages with various public keys.
+\subsection{Related Works}
+Most authors focus on reducing the private key size, as seen in the works of Yasuda \emph{et al.}~\cite{Yasuda:inproc:2013:may, Yasuda:inproc:2014:apr, Yasuda:article:2014:sep} and, more recently, Peng and Tang~\cite{Peng:article:2017:jun}, through the use of clever matrix representations. While these approaches cut up to $80\%$ of the private key, we note that public keys are (evidently) more frequently distributed and stored throughout various devices, creating additional limitations for devices that sign or verify messages with various public keys.
 
-\emph{Organization.} In Section~\ref{sec:rainbow}, a straightforward description of the Rainbow signature scheme is given. Afterwards, the rationale behind generating a public key with a special structure is explained in Section~\ref{sec:cyclic}. A comparison between practical instances of the new and old schemes is given in Section~\ref{sec:effect}. Finally, Section~\ref{sec:conclusion} finishes the paper.
+\subsection{Organization}
+In Section~\ref{sec:rainbow}, a straightforward description of the Rainbow signature scheme is given. Afterwards, the rationale behind generating a public key with a special structure is explained in Section~\ref{sec:cyclic}. A comparison between practical instances of the new and old schemes is given in Section~\ref{sec:effect}. Finally, Section~\ref{sec:conclusion} finishes the paper.
 
 \section{Classic Rainbow Signature Scheme}\label{sec:rainbow}
 
 We describe below the Rainbow digital signature scheme, that consists of several ``oil and vinegar'' layers. Consider a finite field $\mathbb{F}_{q}$, and a sequence of integers $0 = v_{0} < v_{1} < v_{2} < \dots < v_{u+1} = n$, with $m = n - v_{1}$. For $i = \{1, \dots, u\}$, let the vinegar variables be $V_{i} = \{1, \dots, v_{i}\}$ and oil variables be $O_{i} = \{v_{i} + 1, \dots, v_{i+1}\}$, with $o_{i} = |O_{i}|$. Denote an instance of the scheme by Rainbow$(\mathbb{F}_{q}, v_{1}, o_{1}, \dots, o_{u})$. Note that when $u = 1$, we get the UOV scheme. 
 
-\emph{Key generation.} We randomly generate linear or affine maps $\mathcal{S}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{m}$ and $\mathcal{T}: \mathbb{F}_{q}^{n} \rightarrow \mathbb{F}_{q}^{n}$. The central map $\mathcal{F}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{n}$
+\subsection{Key Generation}
+We randomly generate linear or affine maps $\mathcal{S}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{m}$ and $\mathcal{T}: \mathbb{F}_{q}^{n} \rightarrow \mathbb{F}_{q}^{n}$. The central map $\mathcal{F}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{n}$
 has a special structure. It consists of $m$ quadratic polynomials of the form
 \begin{equation}\label{eq:0}
 f^{(k)} = \sum_{i, j \in V_{\ell}, i \leq j} a_{ij}^{(k)} x_{i} x_{j}
