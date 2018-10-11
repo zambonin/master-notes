@@ -135,8 +135,10 @@ The signature generation and verification steps are left unmodified. The new sch
 
 As seen in~\cite[Section 9.3]{Petzoldt:phd:2013:jul}, none of the known attacks against the classical Rainbow scheme work better against CyclicRainbow. As such, finding weaknesses in this construction remains an open question. Hence, to prevent efficient instances of these attacks, we suggest parameter sets that are similar to the original Rainbow$(\mathbb{F}_{2^{8}}, 17, 13, 13)$.
 
+
 \begin{table}[htbp]
 \centering
+\tiny
 \begin{tabular}{|l|L|L|L|L|}
 \hline
 Parameters & Security level (bit) & Signature size (bit) & Private key size (KB) & Public key size (KB) \\ \hline
@@ -153,6 +155,7 @@ CR$(\mathbb{F}_{{2}^{8}}, 36, 21, 22)$     &                      &             
 \end{tabular}
 \caption{Comparison between instances of the Rainbow scheme with (CR) and without (R) partially cyclic keys. Adapted from~\cite[Table 9.8]{Petzoldt:phd:2013:jul}.}\label{tab:comp}
 \end{table}
+
 
 Deriving the size of public keys from the schemes described in Sections~\ref{sec:rainbow} and~\ref{sec:cyclic}, the size for a Rainbow public key is $m \cdot (n + 1)(n + 2)/2$ field elements, and in the case of CyclicRainbow with two layers, the size is $(m \cdot (n + 1)(n + 2)/2) - o_{1} D_{1} - (o_{2} - 1) D_{2}$. Table~\ref{tab:comp} compares average instances of our scheme to the original Rainbow with regards to various security levels and layer sizes. Note that the reduction factor grows with the increase in the number of polynomials and variables, varying between a half and a third of the original public key size.
 
