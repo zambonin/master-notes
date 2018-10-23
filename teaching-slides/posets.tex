@@ -38,18 +38,18 @@
 \begin{frame}
   \frametitle{Contexto}
   \begin{itemize}
-    \item Relação: subconjunto do produto cartesiano de dois (ou mais)
+    \item<1-> Relação: subconjunto do produto Cartesiano de dois (ou mais)
         conjuntos quaisquer
     \begin{itemize}
       \item $\equiv_n$, a congruência módulo $n$ em $\mathbb{Z}$, ou seja,
           $x \equiv y \pmod{n}$
     \end{itemize}
-    \item Propriedades de relações: reflexividade, irreflexividade, simetria,
+    \item<2-> Propriedades de relações: reflexividade, irreflexividade, simetria,
         assimetria, antissimetria, transitividade
     \begin{itemize}
       \item $\equiv_n$ é uma relação de equivalência
     \end{itemize}
-    \item É intuitivo pensar que relações são utilizadas para construir
+    \item<3-> É intuitivo pensar que relações são utilizadas para construir
         ordenamentos
   \end{itemize}
 \end{frame}
@@ -66,7 +66,7 @@
       \item Matérias como pré-requisitos
     \end{itemize}
     \item Parentesco entre pessoas, escalonamento temporal de tarefas etc.
-    \item Ideia geral: comparação de (alguns) elementos entre conjuntos
+    \item<2-> Ideia geral: comparação de (alguns) elementos entre conjuntos
         quaisquer
   \end{itemize}
 \end{frame}
@@ -78,11 +78,11 @@
         $S \times S$
     \item $R$ é considerada uma relação \emph{parcial} se é reflexiva,
         antissimétrica e transitiva
-    \item Ou seja, $\forall a, b, c \in S$,
+    \item<1-> Ou seja, $\forall a, b, c \in S$,
     \begin{itemize}[itemsep=0pt]
-      \item $(a, a) \in R$ (reflexividade)
-      \item $(a, b), (b, a) \in R \Rightarrow a = b$ (antissimetria)
-      \item $(a, b), (b, c) \in R \Rightarrow (a, c) \in R$ (transitividade)
+      \item<2-> $(a, a) \in R$ (reflexividade)
+      \item<3-> $(a, b), (b, a) \in R \Rightarrow a = b$ (antissimetria)
+      \item<4-> $(a, b), (b, c) \in R \Rightarrow (a, c) \in R$ (transitividade)
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -106,17 +106,17 @@
   \frametitle{Exemplo}
   \framesubtitle{Conjuntos parcialmente ordenados}
   \begin{itemize}
-    \item Considere o conjunto dos inteiros $\mathbb{Z}$ e a relação de ``menor
-        ou igual'' $\leq$. $(\mathbb{Z}, \leq)$ é um \emph{poset}?
-    \item Tome inteiros quaisquer $a, b, c \in \mathbb{Z}$
+    \item<1-> Considere o conjunto dos inteiros $\mathbb{Z}$ e a relação de
+        ``menor ou igual'' $\leq$. $(\mathbb{Z}, \leq)$ é um \emph{poset}?
+    \item<2-> Tome inteiros quaisquer $a, b, c \in \mathbb{Z}$
     \begin{itemize}[itemsep=0pt]
-      \item $a \leq a$ para todo inteiro, portanto $\leq$ é reflexiva
-      \item $a \leq b, b \leq a \Rightarrow a = b$, portanto $\leq$ é
+      \item<3-> $a \leq a$ para todo inteiro, portanto $\leq$ é reflexiva
+      \item<4-> $a \leq b, b \leq a \Rightarrow a = b$, portanto $\leq$ é
           antissimétrica
-      \item $a \leq b, b \leq c \Rightarrow a \leq c$, portanto $\leq$ é
+      \item<5-> $a \leq b, b \leq c \Rightarrow a \leq c$, portanto $\leq$ é
           transitiva
     \end{itemize}
-    \item Logo, $(\mathbb{Z}, \leq)$ é um \emph{poset}
+    \item<6-> Logo, $(\mathbb{Z}, \leq)$ é um \emph{poset}
   \end{itemize}
 \end{frame}
 
@@ -124,19 +124,19 @@
   \frametitle{Exemplo}
   \framesubtitle{Conjuntos parcialmente ordenados}
   \begin{itemize}
-    \item Considere um conjunto $T$ e seu conjunto potência, $\mathcal{P}(T)$,
-        e a relação de ``subconjunto'' $\subseteq$. $(\mathcal{P}(T),
-          \subseteq)$ é um \emph{poset}?
-    \item Tome conjuntos quaisquer $t_1, t_2, t_3 \in \mathcal{P}(T)$
+    \item<1-> Considere um conjunto $T$ e seu conjunto potência,
+        $\mathcal{P}(T)$, e a relação de ``subconjunto'' $\subseteq$.
+          $(\mathcal{P}(T), \subseteq)$ é um \emph{poset}?
+    \item<2-> Tome conjuntos quaisquer $t_1, t_2, t_3 \in \mathcal{P}(T)$
     \begin{itemize}[itemsep=0pt]
-      \item $t_1 \subseteq t_1$ para todo conjunto, portanto $\subseteq$ é
+      \item<3-> $t_1 \subseteq t_1$ para todo conjunto, portanto $\subseteq$ é
           reflexiva
-      \item $t_1 \subseteq t_2, t_2 \subseteq t_1 \Rightarrow t_1 = t_2$,
+      \item<4-> $t_1 \subseteq t_2, t_2 \subseteq t_1 \Rightarrow t_1 = t_2$,
           portanto $\subseteq$ é antissimétrica
-      \item $t_1 \subseteq t_2, t_2 \subseteq t_3 \Rightarrow t_1 \subseteq
+      \item<5-> $t_1 \subseteq t_2, t_2 \subseteq t_3 \Rightarrow t_1 \subseteq
           t_3$, portanto $\subseteq$ é transitiva
     \end{itemize}
-    \item Logo, $(\mathcal{P}(T), \subseteq)$ é um \emph{poset}
+    \item<6-> Logo, $(\mathcal{P}(T), \subseteq)$ é um \emph{poset}
   \end{itemize}
 \end{frame}
 
@@ -144,20 +144,20 @@
   \frametitle{Exemplo}
   \framesubtitle{Conjuntos parcialmente ordenados}
   \begin{itemize}
-    \item Considere o conjunto de seres humanos $H$, e a relação de ``é mais
-        velho que'' $\preccurlyeq$. $(H, \preccurlyeq)$ é um \emph{poset}?
-    \item Tome pessoas quaisquer $h_1, h_2, h_3 \in H$
+    \item<1-> Considere o conjunto de seres humanos $H$, e a relação de ``é
+        mais velho que'' $\preccurlyeq$. $(H, \preccurlyeq)$ é um \emph{poset}?
+    \item<2-> Tome pessoas quaisquer $h_1, h_2, h_3 \in H$
     \begin{itemize}[itemsep=0pt]
-      \item $h_1 \preccurlyeq h_2 \Rightarrow h_2 \not\preccurlyeq h_1$
+      \item<3-> $h_1 \preccurlyeq h_2 \Rightarrow h_2 \not\preccurlyeq h_1$
           (antissimetria: se $h_1$ é mais velha que $h_2$, o oposto não pode
             ser verdade)
-      \item $h_1 \preccurlyeq h_2, h_2 \preccurlyeq h_3 \Rightarrow h_1
+      \item<4-> $h_1 \preccurlyeq h_2, h_2 \preccurlyeq h_3 \Rightarrow h_1
           \preccurlyeq h_3$ (transitividade: se $h_1$ é mais velha que $h_2$, e
             $h_2$ é mais velha que $h_3$, então $h_1$ é mais velha que $h_3$)
-      \item $h_1 \not\preccurlyeq h_1$ (reflexividade: uma pessoa não pode ser
-          mais velha do que si mesma)
+      \item<5-> $h_1 \not\preccurlyeq h_1$ (reflexividade: uma pessoa não pode
+          ser mais velha do que si mesma)
     \end{itemize}
-    \item Portanto, $(H, \preccurlyeq)$ não é um \emph{poset}
+    \item<6-> Portanto, $(H, \preccurlyeq)$ não é um \emph{poset}
   \end{itemize}
 \end{frame}
 
@@ -166,15 +166,16 @@
   \begin{itemize}
     \item Em alguns contextos, a definição de \emph{poset} apresentada é
         chamada de ``conjunto parcialmente ordenado não-estrito''
-    \item O par ordenado $(S, R)$ é um conjunto parcialmente ordenado estrito
-        se, $\forall a, b, c \in S$,
+    \item<1-> O par ordenado $(S, R)$ é um conjunto parcialmente ordenado
+        estrito se, $\forall a, b, c \in S$,
     \begin{itemize}[itemsep=0pt]
-      \item $(a, a) \not\in R$ (irreflexividade)
-      \item $(a, b), (b, c) \in R \Rightarrow (a, c) \in R$ (transitividade)
+      \item<2-> $(a, a) \not\in R$ (irreflexividade)
+      \item<3-> $(a, b), (b, c) \in R \Rightarrow (a, c) \in R$ (transitividade)
     \end{itemize}
-    \item Para transformar um \emph{poset} em um \emph{poset} estrito, remova
-      todos os pares $(a, a) \in R$ \item A notação para relações parciais
-        estritas arbitrárias é similar, utilizando os símbolos $<, \prec$
+    \item Para transformar um \emph{poset} em um \emph{poset} estrito,
+        remova todos os pares $(a, a) \in R$
+    \item A notação para relações parciais estritas arbitrárias é similar,
+        utilizando os símbolos $<, \prec$
   \end{itemize}
 \end{frame}
 
@@ -182,17 +183,18 @@
   \frametitle{Exemplo}
   \framesubtitle{Conjuntos parcialmente ordenados estritos}
   \begin{itemize}
-    \item Considere o conjunto de matérias em um currículo $C$, e a relação de
-        ``é pré-requisito de'' $\prec$. $(C, \prec)$ é um \emph{poset} estrito?
-    \item Tome matérias quaisquer $c_1, c_2, c_3 \in C$
+    \item<1-> Considere o conjunto de matérias em um currículo $C$, e a relação
+        de ``é pré-requisito de'' $\prec$. $(C, \prec)$ é um \emph{poset}
+          estrito?
+    \item<2-> Tome matérias quaisquer $c_1, c_2, c_3 \in C$
     \begin{itemize}[itemsep=0pt]
-      \item $c_1 \not\prec c_1$ (irreflexividade: $c_1$ não pode ser
+      \item<3-> $c_1 \not\prec c_1$ (irreflexividade: $c_1$ não pode ser
           pré-requisito dela mesma)
-      \item $c_1 \prec c_2, c_2 \prec c_3 \Rightarrow c_1 \prec c_3$
+      \item<4-> $c_1 \prec c_2, c_2 \prec c_3 \Rightarrow c_1 \prec c_3$
           (transitividade: se $c_1$ é pré-requisito de $c_2$, e $c_2$ é
             pré-requisito de $c_3$, então $c_1$ é pré-requisito de $c_3$)
     \end{itemize}
-    \item Portanto, $(C, \prec)$ é um \emph{poset} estrito
+    \item<5-> Portanto, $(C, \prec)$ é um \emph{poset} estrito
   \end{itemize}
 \end{frame}
 
@@ -215,15 +217,23 @@
 
 \begin{frame}
   \frametitle{Exemplo}
-  \framesubtitle{Conjuntos parcialmente ordenados}
+  \framesubtitle{Conjuntos parcialmente ordenados duais}
   \begin{itemize}
-    \item Considere o conjunto dos inteiros $\mathbb{Z}$ e a relação de ``maior
-        ou igual'' $\geq$. $(\mathbb{Z}, \geq)$ é um \emph{poset}
-    \item Considere um conjunto $T$ e seu conjunto potência, $\mathcal{P}(T)$,
-        e a relação de ``superconjunto'' $\supseteq$.  $(\mathcal{P}(T),
-          \supseteq)$ é um \emph{poset}
-    \item Considere o conjunto de matérias em um currículo $C$, e a relação de
-        ``é pós-requisito de'' $\succ$. $(C, \succ)$ é um \emph{poset} estrito
+    \item<1-> Considere o conjunto dos inteiros $\mathbb{Z}$ e a relação de
+        ``maior ou igual'' $\geq$
+    \begin{itemize}
+      \item<2-> $(\mathbb{Z}, \geq)$ é um \emph{poset}
+    \end{itemize}
+    \item<3-> Considere um conjunto $T$ e seu conjunto potência,
+        $\mathcal{P}(T)$, e a relação de ``superconjunto'' $\supseteq$
+    \begin{itemize}
+      \item<4-> $(\mathcal{P}(T), \supseteq)$ é um \emph{poset}
+    \end{itemize}
+    \item<5-> Considere o conjunto de matérias em um currículo $C$, e a relação
+        de ``é pós-requisito de'' $\succ$
+    \begin{itemize}
+      \item<6-> $(C, \succ)$ é um \emph{poset} estrito
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -232,11 +242,12 @@
   \begin{itemize}
     \item Quando todos os elementos de uma relação parcial são comparáveis,
         esta é chamada de \textbf{ordem total}
-    \item O par ordenado $(S, R)$ é chamado de conjunto totalmente ordenado, ou
-        \textbf{toset} (\emph{totally ordered set}) se, $\forall a, b \in S$,
+    \item<1-> O par ordenado $(S, R)$ é chamado de conjunto totalmente
+        ordenado, ou \textbf{toset} (\emph{totally ordered set}) se, $\forall
+          a, b \in S$,
     \begin{itemize}[itemsep=0pt]
-      \item $R$ é uma relação parcial
-      \item Ou $(a, b) \in R$, ou $(b, a) \in R$, ou $a = b$ (tricotomia)
+      \item<2-> $R$ é uma relação parcial
+      \item<3-> Ou $(a, b) \in R$, ou $(b, a) \in R$, ou $a = b$ (tricotomia)
     \end{itemize}
     \item São um caso particular de \emph{posets}, e portanto, a dualidade
         mantém-se
@@ -249,18 +260,18 @@
   \frametitle{Exemplo}
   \framesubtitle{Conjuntos totalmente ordenados}
   \begin{itemize}
-    \item Considere o conjunto dos inteiros positivos $\mathbb{Z}^{+}$ e a
+    \item<1-> Considere o conjunto dos inteiros positivos $\mathbb{Z}^{+}$ e a
         relação de divisibilidade $\mid$. $(\mathbb{Z}^{+}, \mid)$ é um
           \emph{poset}? Se sim, é também um \emph{toset}?
-    \item Para quaisquer inteiros $a, b, c \in \mathbb{Z}^{+}$, e quaisquer
+    \item<2-> Para quaisquer inteiros $a, b, c \in \mathbb{Z}^{+}$, e quaisquer
         dois primos $p_1, p_2 \in \mathbb{Z}^{+}$
     \begin{itemize}[itemsep=0pt]
-      \item $a \mid a$ (reflexividade)
-      \item $a \mid b, b \mid a \Rightarrow a = b$ (antissimetria)
-      \item $a \mid b, b \mid c \Rightarrow a \mid c$ (transitividade)
-      \item $p_1 \nmid p_2, p_2 \nmid p_1$ (existem elementos incomparáveis)
+      \item<3-> $a \mid a$ (reflexividade)
+      \item<4-> $a \mid b, b \mid a \Rightarrow a = b$ (antissimetria)
+      \item<5-> $a \mid b, b \mid c \Rightarrow a \mid c$ (transitividade)
+      \item<6-> $p_1 \nmid p_2, p_2 \nmid p_1$ (existem elementos incomparáveis)
     \end{itemize}
-    \item Então, $(\mathbb{Z}^{+}, \mid)$ é um \emph{poset}, mas não um
+    \item<7-> Então, $(\mathbb{Z}^{+}, \mid)$ é um \emph{poset}, mas não um
         \emph{toset}
   \end{itemize}
 \end{frame}
@@ -269,15 +280,15 @@
   \frametitle{Exemplo}
   \framesubtitle{Conjuntos totalmente ordenados}
   \begin{itemize}
-    \item O \emph{poset} $(\mathbb{Z}, \leq)$ é também um \emph{toset}, pois
-        quaisquer inteiros podem ser comparados com $\leq$
-    \item O \emph{poset} $(\mathcal{P}(T), \subseteq)$ não é um \emph{toset}
+    \item<1-> O \emph{poset} $(\mathbb{Z}, \leq)$ é também um \emph{toset},
+        pois quaisquer inteiros podem ser comparados com $\leq$
+    \item<2-> O \emph{poset} $(\mathcal{P}(T), \subseteq)$ não é um \emph{toset}
     \begin{itemize}
       \item Considere $T = \{x, y\}, \{x\}, \{y\} \in \mathcal{P}(T)$ e veja
           que $\{x\} \not\subseteq \{y\}, \{y\} \not\subseteq \{x\}$
     \end{itemize}
-    \item O produto cartesiano de qualquer número de \emph{tosets}, utilizando
-        ordenação lexicográfica, é um \emph{toset}
+    \item<3-> O produto cartesiano de qualquer número de \emph{tosets},
+        utilizando ordenação lexicográfica, é um \emph{toset}
     \begin{itemize}[itemsep=0pt]
       \item Dados dois \emph{tosets} $(P, \preccurlyeq_1), (Q,
           \preccurlyeq_2)$, e elementos quaisquer $p_1, p_2 \in P, q_1, q_2 \in
@@ -457,18 +468,18 @@
 \begin{frame}
   \frametitle{Elementos extremos}
   \begin{itemize}
-    \item É razoável conhecer os elementos que denotam as fronteiras de um
+    \item<1-> É razoável conhecer os elementos que denotam as fronteiras de um
         \emph{poset} $(S, \preccurlyeq)$
     \item Considere um elemento qualquer $s' \in S$, e $\forall s \in S$
     \begin{itemize}[itemsep=0pt]
-      \item $s'$ é \textbf{máximo} se é ``maior que'' todos os outros, ou seja,
-          $s \prec s'$
-      \item $s'$ é \textbf{mínimo} se é ``menor que'' todos os outros, ou seja,
-          $s' \prec s$
-      \item $s'$ é \textbf{maximal} se não existe outro ``maior que'' este, ou
-          seja, $s' \preccurlyeq s$
-      \item $s'$ é \textbf{minimal} se não existe outro ``menor que'' este, ou
-          seja, $s \preccurlyeq s'$
+      \item<2-> $s'$ é \textbf{máximo} se é ``maior que'' todos os outros, ou
+          seja, $s \prec s'$
+      \item<3-> $s'$ é \textbf{mínimo} se é ``menor que'' todos os outros, ou
+          seja, $s' \prec s$
+      \item<4-> $s'$ é \textbf{maximal} se não existe outro ``maior que'' este,
+          ou seja, $s' \preccurlyeq s$
+      \item<5-> $s'$ é \textbf{minimal} se não existe outro ``menor que'' este,
+          ou seja, $s \preccurlyeq s'$
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -491,19 +502,20 @@
   \frametitle{Exemplo}
   \framesubtitle{Elementos extremos}
   \begin{itemize}
-    \item Considere o \emph{poset} $(\mathbb{Z}^{+}, \mid)$. É possível
+    \item<1-> Considere o \emph{poset} $(\mathbb{Z}^{+}, \mid)$. É possível
         identificar elementos extremos?
     \begin{itemize}[itemsep=0pt]
-      \item Como o \emph{poset} tende a $+\infty$, não existem elementos
+      \item<2-> Como o \emph{poset} tende a $+\infty$, não existem elementos
           maximais e máximo
-      \item $\bot = 1$, pois $1 \mid n, \forall n \in \mathbb{Z}^{+}$
+      \item<3-> $\bot = 1$, pois $1 \mid n, \forall n \in \mathbb{Z}^{+}$
     \end{itemize}
-\item Considere o \emph{poset} $(\mathcal{P}(T), \subseteq)$. É possível
-        identificar elementos extremos?
+    \item<4-> Considere o \emph{poset} $(\mathcal{P}(T), \subseteq)$. É
+        possível identificar elementos extremos?
     \begin{itemize}[itemsep=0pt]
-      \item Tome um subconjunto qualquer $t \in \mathcal{P}(T)$
-      \item Observe que $\emptyset \subseteq t$, e portanto $\bot = \emptyset$
-      \item Da mesma maneira, $t \subseteq T$, e portanto $\top = T$
+      \item<5-> Tome um subconjunto qualquer $t \in \mathcal{P}(T)$
+      \item<6-> Observe que $\emptyset \subseteq t$, e portanto $\bot =
+          \emptyset$
+      \item<7-> Da mesma maneira, $t \subseteq T$, e portanto $\top = T$
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -525,10 +537,10 @@
     \end{tikzpicture}
   }
   \begin{itemize}
-    \item Considere o diagrama de Hasse acima. É possível identificar elementos
-        extremos?
-    \item $S_{\min} = \{\{x\}, \{y\}, \{z\}\}, S_{\max} = \{\{x, y\}, \{x, z\},
-        \{y, z\}\}$
+    \item<1-> Considere o diagrama de Hasse acima. É possível identificar
+        elementos extremos?
+    \item<2-> $S_{\min} = \{\{x\}, \{y\}, \{z\}\}, S_{\max} = \{\{x, y\}, \{x,
+        z\}, \{y, z\}\}$
   \end{itemize}
 \end{frame}
 
@@ -586,9 +598,9 @@
           (30) edge (60)  (1) edge  (2)  (1) edge  (3)  (1) edge  (5);
   \end{tikzpicture}
   \begin{itemize}
-    \item Considere o \emph{poset} de divisores de $60$ e $K = \{6, 15\}$
+    \item<1-> Considere o \emph{poset} de divisores de $60$ e $K = \{6, 15\}$
     \begin{itemize}[itemsep=0pt]
-      \item A cota superior é $\{30, 60\}$, a cota inferior é $\{1, 3\}$,
+      \item<2-> A cota superior é $\{30, 60\}$, a cota inferior é $\{1, 3\}$,
           $\inf(K) = 30$ e $\sup(K) = 3$
     \end{itemize}
   \end{itemize}
@@ -613,9 +625,9 @@
             (b) edge (e);
   \end{tikzpicture}
   \begin{itemize}
-    \item Considere o \emph{poset} acima e $K = \{a, c, d, f\}$
+    \item<1-> Considere o \emph{poset} acima e $K = \{a, c, d, f\}$
     \begin{itemize}[itemsep=0pt]
-      \item A cota superior é $\{f, h, j\}$, a cota inferior é $\{a\}$,
+      \item<2-> A cota superior é $\{f, h, j\}$, a cota inferior é $\{a\}$,
           $\inf(K) = f$ e $\sup(K) = a$
     \end{itemize}
   \end{itemize}
