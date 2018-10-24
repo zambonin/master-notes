@@ -30,7 +30,7 @@ The amount of data transmitted through digital means has grown exponentially in 
 
 Nonetheless, current digital signature schemes are proven to be secure only under the assumption that there are no quantum adversaries. This is the case because quantum computers can solve problems such as integer factorisation or discrete logarithm efficiently~\cite{}, unlike classical computers. Ergo, it is imperative to study cryptography that is quantum-resistant, \emph{i.e.} post-quantum, even if quantum computers are still only of theoretical threat. One of the main approaches for instantiating post-quantum digital signature schemes is based on multivariate quadratic equations. The problems upon which these are based are polynomial system solving and isomorphism of polynomials, not known to be solved more efficiently with a quantum computer~\cite{}. Ergo, these schemes appear to be good candidates for replacing currently used ones.
 
-Multivariate cryptography provides a variety of signature schemes families, such as those based on finite field extensions (HFE and its variations~\cite{}) and those restricted to a single finite field (most schemes based on the Oil--Vinegar principle~\cite{}).
+Multivariate cryptography provides a variety of signature schemes families, such as those based on finite field extensions (HFE and its variations~\cite{}) and those restricted to a single finite field (most schemes based on the Oil--Vinegar principle, such as UOV~\cite{} and Rainbow~\cite{}). The latter ones present the most balanced signature and key sizes with respect to security parameters~\cite{}, as well as being easier to describe and implement accurately. 
 
 \section{Related Works}
 
