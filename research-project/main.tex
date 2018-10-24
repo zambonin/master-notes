@@ -1,0 +1,161 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts, amsmath, array, multirow, hyperref}
+
+\sloppy
+
+\title{\footnote{
+    As submitted to the INE410111 class (Research Methodology in Computer Science).}}
+
+\author{Gustavo Zambonin\inst{1}}
+
+\address{
+  Departamento de Informática e Estatística, Universidade Federal de Santa Catarina \\
+  88040-900, Florianópolis, Brazil
+  \email{gustavo.zambonin@posgrad.ufsc.br}
+}
+
+\begin{document} 
+
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+
+Security in communications is necessary to ensure trust between parties. For example, a handwritten signature may be placed on a document to attest that the signer is in agreement with its contents. This is no exception when considering digital transit of data, for instance electronic mail or messages between devices. In this context, cryptographic techniques such as digital signature schemes must be employed to ensure desirable properties, namely authenticity, integrity and non-repudiation. These mathematical frameworks permit a signer to hold a private key and a correspondent public key, uniquely related in the sense that one can decode only what its dual has encoded. 
+
+Furthermore, to prevent forgery of signatures by any malicious actor, schemes are naturally bound to computational problems, virtually unsolvable without the private key. Integer factorisation and discrete logarithm are the most common examples, related respectively to the RSA and ECDSA schemes. Yet, such problems are provably computable in polynomial time by a quantum computer~\cite{Shor:article:1997:oct}. Ergo, post-quantum digital signature schemes are paramount in maintaining secure inter-communications.
+
+One of the approaches for constructing post-quantum schemes is based on systems of linear equations with multiple variables, and is appropriately called multivariate cryptography. Performing computations with these equations is generally very efficient, suitable for performance-, energy-constrained devices. Still, considering common key sizes of at most 512 bits for elliptic curve cryptography, the size of keys for multivariate schemes is prohibitive, as seen in~\cite[Table 6.4]{Petzoldt:phd:2013:jul} and~\cite[Table 1]{Ding:article:2017:jul}. Naturally, it is imperative to research strategies with the intent of reducing these keys, which are at least a few KB in size.
+
+We focus on reducing the public key size of the Rainbow scheme due to Ding and Schmidt~\cite{Ding:inproc:2005:jun}, a generalised version of the Unbalanced Oil and Vinegar (UOV) scheme by Kipnis \emph{et al.}~\cite{Kipnis:inproc:1999:apr}, that itself already reduces key sizes and signature length. We apply the strategy described in~\cite[Chapter 7]{Petzoldt:phd:2013:jul}, namely choosing part of the public key instead of a central map, and generating remaining elements as needed.
+
+\subsection{Related Works}
+Reduction of private keys is featured much more commonly in the literature, as seen in the works of Yasuda \emph{et al.}~\cite{Yasuda:inproc:2013:may, Yasuda:inproc:2014:apr, Yasuda:article:2014:sep} and, more recently, Peng and Tang~\cite{Peng:article:2017:jun}, through the use of clever matrix representations. While these approaches cut up to $80\%$ of the private key, we note that public keys are (evidently) more frequently distributed and stored throughout various devices, creating additional limitations for devices that sign or verify messages with various public keys. Hence, it is compelling to elaborate strategies to reduce these.
+
+\subsection{Organization}
+In Section~\ref{sec:rainbow}, a straightforward description of the Rainbow signature scheme is given. Afterwards, the rationale behind generating a public key with a special structure is explained in Section~\ref{sec:cyclic}. A comparison between practical instances of the new and old schemes is given in Section~\ref{sec:effect}. Finally, Section~\ref{sec:conclusion} concludes the paper and suggests future works.
+
+\section{Classic Rainbow Signature Scheme}\label{sec:rainbow}
+
+We describe below the Rainbow digital signature scheme, that consists of several ``oil and vinegar'' layers. Consider a finite field $\mathbb{F}_{q}$, and a sequence of integers $0 = v_{0} < v_{1} < v_{2} < \dots < v_{u+1} = n$, with $m = n - v_{1}$. For $i = \{1, \dots, u\}$, let the vinegar variables be $V_{i} = \{1, \dots, v_{i}\}$ and oil variables be $O_{i} = \{v_{i} + 1, \dots, v_{i+1}\}$, with $o_{i} = |O_{i}|$. Denote an instance of the scheme by Rainbow$(\mathbb{F}_{q}, v_{1}, o_{1}, \dots, o_{u})$. Note that when $u = 1$, we get the UOV scheme. 
+
+\subsection{Key Generation}
+We randomly generate linear or affine maps $\mathcal{S}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{m}$ and $\mathcal{T}: \mathbb{F}_{q}^{n} \rightarrow \mathbb{F}_{q}^{n}$. The central map $\mathcal{F}: \mathbb{F}_{q}^{m} \rightarrow \mathbb{F}_{q}^{n}$
+has a special structure. It consists of $m$ quadratic polynomials of the form
+\begin{equation}\label{eq:0}
+f^{(k)} = \sum_{i, j \in V_{\ell}, i \leq j} a_{ij}^{(k)} x_{i} x_{j}
+        + \sum_{i \in V_{\ell}, j \in O_{\ell}} b_{ij}^{(k)} x_{i} x_{j}
+        + \sum_{i \in V_{\ell} \cup O_{\ell}} c_{i}^{(k)} x_{i} + d^{(k)},
+\end{equation}
+with $k \in \{v_{1} + 1, \dots, n\}$, where $\ell$ is the only integer such that $k \in O_{\ell}$. The private key is the triple $(\mathcal{S}, \mathcal{F}, \mathcal{T})$. We hide the structure of $\mathcal{F}$ in the public key through its composition with the other maps. Hence, the public key is the map $\mathcal{P} = \mathcal{S} \circ \mathcal{F} \circ \mathcal{T} : \mathbb{F}_{q}^{n} \rightarrow \mathbb{F}_{q}^{m}$.
+
+\subsection{Signature Generation} 
+To sign a message $\alpha$, consider a cryptographic hash function $\mathcal{H} : \{0, 1\}^{*} \rightarrow \mathbb{F}_{q}^{m}$, and obtain the digest $d = \mathcal{H}(\alpha)$. Compute $x = \mathcal{S}^{-1}(d)$. To compute $y = \mathcal{F}^{-1}(x)$, every UOV layer must be inverted recursively. Randomly choose values of $x_{1}, \dots, x_{v_{1}}$ and substitute them into $\mathcal{F}$. Due to its construction, assigning values to the vinegar variables will lead to a system of linear equations formed by the first $o_{1}$ polynomials in $x_{v_{1} + 1}, \dots, x_{v_{2}}$, that may be solvable through Gaussian elimination. If the system does not have a solution, the vinegar variables need to be randomly chosen again. The newly-obtained variables may then be substituted into the remaining polynomials. This process can be repeated for all layers, resulting in $y = (x_{1}, \dots, x_{n})$. Finally, compute $\sigma = \mathcal{T}^{-1}(y)$.
+
+\subsection{Signature Verification}
+To verify a signature, compute $d' = \mathcal{P}(\sigma)$. If $d = d'$, then the signature is accepted, and otherwise rejected.
+
+\section{Obtaining a Cyclical Structure}\label{sec:cyclic}
+
+We apply the rationale given by Petzoldt \emph{et al.} in~\cite{Petzoldt:inproc:2010:jun} to the key generation step of the Rainbow scheme. We restrict ourselves to the case of $u = 2$, but the generalised process is akin~\cite[Section 7.2]{Petzoldt:phd:2013:jul}. Recall that the public key of Rainbow is the composition of three maps, $\mathcal{P} = \mathcal{S} \circ \mathcal{F} \circ \mathcal{T}$. Let $\mathcal{Q} = \mathcal{F} \circ \mathcal{T}$. 
+
+If we fix coefficients $t_{ij} \in \mathcal{T}$, the public key composition represents a linear relation between coefficients $q_{ij}^{(k)}, f_{ij}^{(k)}$ of the monomial $x_{i} x_{j}$ in the $k$-th component of $\mathcal{Q}$ and $\mathcal{F}$ respectively, with the form
+\begin{equation}\label{eq:1}
+q_{ij}^{(k)} = \sum_{r = 1}^{n} \sum_{s = r}^{n} \alpha_{ij}^{rs} f_{rs}^{(k)}, \quad \alpha_{ij}^{rs} =
+\begin{cases}
+t_{ri} t_{si}                   & \text{if } i = j, \\
+t_{ri} t_{sj} + t_{rj} t_{si}   & \text{otherwise}
+\end{cases},
+\end{equation}
+$k \in \{v_{1} + 1, \dots, n\}$ and $i, j \in \{1, \dots, n\}$. Eq.~\ref{eq:1} can be reduced if we consider that $\mathcal{F}$ does not allow quadratic monomials with only oil variables. Hence,
+\begin{equation}\label{eq:2}
+    q_{ij}^{(k)} = \sum_{r = 1}^{v_{1}} \sum_{s = r}^{v_{2}} \alpha_{ij}^{rs} f_{rs}^{(k)}, \; k \in O_{1}, \quad    q_{ij}^{(k)} = \sum_{r = 1}^{v_{2}} \sum_{s = r}^{n} \alpha_{ij}^{rs} f_{rs}^{(k)}, \; k \in O_{2}.
+\end{equation}
+
+Operating on these coefficients will lead us to useful relations. Let $D_{w} = v_{w}(v_{w} + 1)/2 + v_{w} o_{w}$ be the number of quadratic terms in the central polynomials of the $w$-th layer, and $D = n(n + 1)/2$ be the number of quadratic terms in the public polynomials. Further, define a monomial ordering that acts as following. The $D_{w}$ monomials that appear only in the central polynomials of the $w$-th layer shall appear before the $D_{w + 1}$ monomials, with $w \in \{1, \dots, u\}$. The remaining $D - D_{u}$ quadratic monomials come after all layers. The linear and constant monomials come last. Lexicographic ordering is used to order the elements inside of these ``blocks''.
+
+These definitions enable us to represent Eq.~\ref{eq:2} in a more compact form. Define a $D_{2} \times D_{2}$ matrix as
+$
+    A = (\alpha_{ij}^{rs}),\; 1 \leq i \leq v_{2}, i \leq j \leq n \text{ (rows)},\; 1 \leq r \leq v_{2}, r \leq s \leq n \text{ (columns)},
+$
+with the above ordering. Additionally, you can create similar matrices for the coefficients of $\mathcal{P}, \mathcal{Q}$ and $\mathcal{F}$, as pictured in~\cite[Figure 7.5]{Petzoldt:phd:2013:jul}. By contemplating only the coefficients of quadratic terms, we have matrices $P, Q, F$ with $D_{2}$ columns. Let $A_{11}$ be the upper left $D_{1} \times D_{1}$ sub-matrix of $A$, $S_{22}$ be the lower right $o_{2} \times o_{2}$ sub-matrix of $S$, and other sub-matrices defined analogously. By also specifically partitioning $P$ and $F$, we get the following relations:
+\begin{align}\label{eq:3}
+    P &= S \cdot Q \rightarrow
+    \begin{pmatrix}
+        B_{1} & \begin{matrix} C_{1} \\ B_{2} \end{matrix} \\
+    \end{pmatrix} =
+    \begin{pmatrix}
+        S_{11} & S_{12} \\
+        S_{21} & S_{22}
+    \end{pmatrix} \cdot
+    \begin{pmatrix}
+        Q_{11} & Q_{12} \\
+        Q_{21} & Q_{22}
+    \end{pmatrix}, \\
+    \label{eq:4}
+    Q &= F \cdot A^{T} \rightarrow
+    \begin{pmatrix}
+        Q_{11} & Q_{12} \\
+        Q_{21} & Q_{22}
+    \end{pmatrix} =
+    \begin{pmatrix}
+        F_{1} & 0 \\
+        \multicolumn{2}{c}{F_{2}}
+    \end{pmatrix} \cdot
+    \begin{pmatrix}
+        A_{11}^{T} & A_{12}^{T} \\
+        A_{21}^{T} & A_{22}^{T}
+    \end{pmatrix}.
+\end{align}
+
+With this strategy, we can configure the $m \times D_{1}$ matrix $B_{1}$ and the $o_{2} \times (D_{2} - D_{1})$ matrix $B_{2}$ with elements that generate a small structure, deriving the central map from $\mathcal{P}$.
+
+\subsection{Key Generation}
+Randomly choose vectors $a^{(1)} \in \mathbb{F}_{q}^{D_{1}}, a^{(2)} \in \mathbb{F}_{q}^{D_{2} - D_{1}}$, and set 
+\begin{equation}
+    b_{ij}^{(1)} = a_{((j - i) \pmod{D_{1}}) + 1}^{(1)}, \quad b_{ij}^{(2)} = a_{((j - i) \pmod{D_{2} - D_{1}}) + 1}^{(2)}.
+\end{equation}
+Choose at random a map $\mathcal{S}$ with the additional restriction that $S_{22}$ must be invertible. Also generate randomly a map $\mathcal{T}$ and compute $A$ through Eq.~\ref{eq:2}. If $A$ or $A_{11}$ are not invertible, choose another $\mathcal{T}$. To obtain $\mathcal{F}$, by Eq.~\ref{eq:3}, compute $(Q_{11} \; Q_{21})^{T} = S^{-1} \cdot B_{1}$, and obtain the quadratic coefficients of the central polynomials for the first Rainbow layer through Eq.~\ref{eq:4}, with $F_{1} = Q_{11} \cdot (A_{11}^{-1})^{T}$. Again, by Eq.~\ref{eq:4}, compute $Q_{12} = F_{1} \cdot A_{21}^{T}$ and by Eq.~\ref{eq:3}, $Q_{22} = S_{22}^{-1} \cdot (B_{2} - S_{21} \cdot Q_{12})$. Obtain the quadratic coefficients for the second layer by Eq.~\ref{eq:4} with $F_{2} = (Q_{21} \; Q_{22}) \cdot (A^{-1})^{T}$. Choose linear and constant terms of the central polynomials randomly. Finally, the private key is the triple $(\mathcal{S}, \mathcal{Q}, \mathcal{T})$, and the public key is composed of the vectors $a^{(1)}, a^{(2)}$, the sub-matrix $C_{11} = S_{11} \cdot Q_{12} + S_{12} \cdot Q_{22}$, and the last $(n + 1)(n + 2)/2 - D_{2}$ columns of the matrix $P$.
+
+The signature generation and verification steps are left unmodified. The new scheme is called CyclicRainbow.
+
+\section{Effect of the Construction}\label{sec:effect}
+
+As seen in~\cite[Section 9.3]{Petzoldt:phd:2013:jul}, none of the known attacks against the classical Rainbow scheme work better against CyclicRainbow. As such, finding weaknesses in this construction remains an open question. Hence, to prevent efficient instances of these attacks, we suggest parameter sets that are similar to the original Rainbow$(\mathbb{F}_{2^{8}}, 17, 13, 13)$.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|L|L|L|L|}
+\hline
+Parameters & Security level (bit) & Signature size (bit) & Private key size (KB) & Public key size (KB) \\ \hline
+R$(\mathbb{F}_{{2}^{4}}, 17, 23, 17)$           & \multirow{2}{*}{80}  & \multirow{2}{*}{228} & \multirow{2}{*}{21.9}  & 33.4                 \\ \cline{1-1} \cline{5-5} 
+CR$(\mathbb{F}_{{2}^{4}}, 17, 23, 17)$     &                      &                      &                        & 15.6                 \\ \hline
+R$(\mathbb{F}_{{2}^{5} - 1}, 14, 19, 14)$       & \multirow{2}{*}{80}  & \multirow{2}{*}{256} & \multirow{2}{*}{17.1}  & 25.3                 \\ \cline{1-1} \cline{5-5} 
+CR$(\mathbb{F}_{{2}^{5} - 1}, 14, 19, 14)$ &                      &                      &                        & 12.0                 \\ \hline
+R$(\mathbb{F}_{{2}^{8}}, 17, 17, 13)$           & \multirow{2}{*}{80}  & \multirow{2}{*}{344} & \multirow{2}{*}{19.1}  & 25.1                 \\ \cline{1-1} \cline{5-5} 
+CR$(\mathbb{F}_{{2}^{8}}, 17, 17, 13)$     &                      &                      &                        & 10.4                 \\ \hline
+R$(\mathbb{F}_{{2}^{8}}, 26, 16, 17)$           & \multirow{2}{*}{100} & \multirow{2}{*}{472} & \multirow{2}{*}{45.0}  & 59.0                 \\ \cline{1-1} \cline{5-5} 
+CR$(\mathbb{F}_{{2}^{8}}, 26, 16, 17)$     &                      &                      &                        & 21.7                 \\ \hline
+R$(\mathbb{F}_{{2}^{8}}, 36, 21, 22)$           & \multirow{2}{*}{128} & \multirow{2}{*}{632} & \multirow{2}{*}{102.5} & 136.1                \\ \cline{1-1} \cline{5-5} 
+CR$(\mathbb{F}_{{2}^{8}}, 36, 21, 22)$     &                      &                      &                        & 47.3                 \\ \hline
+\end{tabular}
+\caption{Comparison between instances of the Rainbow scheme with (CR) and without (R) partially cyclic keys. Adapted from~\cite[Table 9.8]{Petzoldt:phd:2013:jul}.}\label{tab:comp}
+\end{table}
+
+
+Deriving the size of public keys from the schemes described in Sections~\ref{sec:rainbow} and~\ref{sec:cyclic}, the size for a Rainbow public key is $m \cdot (n + 1)(n + 2)/2$ field elements, and in the case of CyclicRainbow with two layers, the size is $(m \cdot (n + 1)(n + 2)/2) - o_{1} D_{1} - (o_{2} - 1) D_{2}$. Table~\ref{tab:comp} compares average instances of our scheme to the original Rainbow with regards to various security levels and layer sizes. Note that the reduction factor grows with the increase in the number of polynomials and variables, varying between a half and a third of the original public key size.
+
+\section{Conclusion}\label{sec:conclusion}
+
+By extending the approach presented in~\cite{Petzoldt:inproc:2010:jun}, we are able to introduce a cyclic structure in the public key of the Rainbow signature scheme, yielding a new scheme featuring public keys with almost a third of their original size. This scheme can be used in computational devices with constraints in storage or networking. Furthermore, it is also shown that these modifications do not impact the security of the scheme. As points of interest for future works, we suggest the inspection of characteristics in the new scheme that may introduce security weaknesses, and the use of pseudo-random number generators to construct the public key, further reducing its size.
+
+\bibliographystyle{plain}
+{\small
+\bibliography{sbc-template}}
+
+\end{document}
