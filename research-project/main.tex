@@ -43,9 +43,7 @@ Moreover, there are also works that deal with the special case of Rainbow known 
 
 \section{Hypothesis}
 
-It is evident that no works in the literature have reduced both private and public keys on the Rainbow signature scheme. Thus, our target research question asks if there are any restrictions in doing so. It is known that public key cryptography features a duality in the sense that codifications done by a private key will only be undone by its corresponding public key, and vice-versa, that is, both keys are intrinsically related. The usual procedure is to use a seeded pseudo-random number generator to create a private key, and derive the public key from that. Can this procedure be further simplified to eliminate the need for a generator and use only 
-
-Still, does there exist matrices with a desirable symmetry that may act as a key pair in Rainbow-like signature schemes?
+It is evident that no works in the literature have reduced both private and public keys on the Rainbow signature scheme. Thus, our target research question asks if there are any restrictions in doing so. It is known that public key cryptography features a duality in the sense that codifications done by a private key will only be undone by its corresponding public key, and vice-versa, that is, both keys are intrinsically related. The usual procedure is to use a seeded pseudo-random number generator to create a private key, and derive the public key from that. In the case of Rainbow, we wish to know if this method can be executed using only matrices with a desirable symmetry that may act as a key pair of this scheme. 
 
 \section{Objectives}
 
@@ -55,9 +53,8 @@ With this project, we aim to reduce the size of both private and public keys on 
     \item Establish matrix symmetries that are fit to be used in the context of multivariate public key cryptography, that is, observe if public keys generated from specially composed private keys will maintain their underlying structure;
     \item Verify whether these matrix structures (\emph{e.g.} Hessenberg, Hankel, centrosymmetric) may be used to generate key pairs and their direct effect on the security of the scheme;
     \item Development of a Rainbow signature scheme variant employing a matrix structure with the intent of reducing private and public key sizes;
-    \item Provide sets of parameters reasonable for environments with distinct security requirements, \emph{e.g.} desktop computers, mobile and embedded devices, servers etc..
+    \item Provide sets of parameters reasonable for environments with distinct security requirements, for instance, desktop computers, mobile and embedded devices, servers etc..
 \end{enumerate}
-
 
 \section{Methodology}
 
