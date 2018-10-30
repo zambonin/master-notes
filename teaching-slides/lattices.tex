@@ -1,0 +1,517 @@
+\documentclass[12pt]{beamer}
+
+\usepackage[brazil]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem, xcolor, tikz}
+
+\setitemize{
+  itemsep=1em,
+  label=\usebeamerfont*{itemize item}
+    \usebeamercolor[fg]{itemize item}
+    \usebeamertemplate{itemize item}
+}
+
+\usetikzlibrary{positioning, decorations.markings}
+\tikzset{small/.style={draw,fill,circle,inner sep=1pt,outer sep=0pt}}
+
+\setbeamertemplate{footline}[frame number]{}
+\setbeamertemplate{navigation symbols}{}
+
+\title{Introdução à teoria de reticulados}
+\author{Gustavo Zambonin}
+\institute{
+  \includegraphics[scale=0.15]{ufsc}                    \\ \vspace{-4mm}
+  Universidade Federal de Santa Catarina                \\
+  Departamento de Informática e Estatística             \\
+  INE5601 --- Fundamentos Matemáticos da Informática    \\ \vspace{2mm}
+  \texttt{gustavo.zambonin@posgrad.ufsc.br}
+}
+\date{}
+
+\begin{document}
+
+\begin{frame}[plain,noframenumbering]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Contexto}
+  \begin{itemize}
+    \item<1-> Conjuntos parcialmente ordenados (\emph{posets})
+    \begin{itemize}
+      \item Par ordenado de conjunto qualquer com relação reflexiva,
+          antissimétrica e transitiva
+    \end{itemize}
+    \item<2-> Diagramas de Hasse
+    \begin{itemize}
+      \item Representação gráfica intuitiva de \emph{posets}
+    \end{itemize}
+    \item<3-> Cota superior, inferior, elementos extremos
+    \begin{itemize}
+      \item Supremo e ínfimo
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplos práticos}
+  \begin{itemize}
+    \item Ontologias (representação de entidades e evento de acordo com
+        categorias)
+    \item Fluxo de informação entre dois processos estocásticos
+    \item Descrição de herança múltipla em linguagens de programação orientadas
+        a objetos
+    \item<2-> Ideia geral: estruturas abstratas que permitem a
+        operacionalização de vários elementos em um conjunto
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{O termo ``reticulado''}
+  \begin{itemize}
+    \item Não são relacionados exclusivamente à teoria de ordem
+    \item Existem reticulados geométricos (malha de pontos no plano Euclidiano)
+    \begin{itemize}
+      \item Utilizados em ciência dos materiais e criptografia
+    \end{itemize}
+    \item<2-> Todo reticulado geométrico pode ser ``convertido'' para uma
+        descrição utilizando um \emph{poset}
+    \begin{itemize}
+      \item O contrário não se aplica
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Notação}
+  \begin{itemize}
+    \item O supremo de um subconjunto $K$ de um \emph{poset}, $\sup(K)$, é
+        também chamado de junção ou \emph{join}, e denotado $\vee K$
+    \item O ínfimo de um subconjunto $K$ de um \emph{poset}, $\inf(K)$, é
+        também chamado de encontro ou \emph{meet}, e denotado $\wedge K$
+    \item Um reticulado também pode ser chamado de \emph{lattice}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Semirreticulados}
+  \begin{itemize}
+    \item<1-> Um \emph{poset} onde todos os pares de elementos possuem supremo,
+        ou todos possuem ínfimo
+    \item<2-> Se todos possuem supremo, é chamado de \textbf{semirreticulado de
+        junção}, ou \emph{join-semilattice}
+    \item<3-> Se todos possuem ínfimo, é chamado de \textbf{semirreticulado de
+        encontro}, ou \emph{meet-semilattice}
+    \item<4-> Junção e encontro são, portanto, operações binárias sobre os
+        elementos do semirreticulado
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Semirreticulados}
+  \begin{itemize}
+    \item<1-> Formalmente, dado um \emph{poset} $(S, \preccurlyeq)$ e, $\forall
+        s_1, s_2 \in S$
+    \begin{itemize}[itemsep=0pt]
+      \item O \emph{poset} é \emph{join-semilattice} se $\sup(\{s_1, s_2\})$,
+          também denotado $s_1 \vee s_2$
+      \item O \emph{poset} é \emph{meet-semilattice} se $\inf(\{s_1, s_2\})$,
+          também denotado $s_1 \wedge s_2$
+    \end{itemize}
+    \item<2-> Note que $s_1 \vee s_2 = s_2$ e $s_1 \wedge s_2 = s_1$, para $s_1
+        \preccurlyeq s_2$
+    \item<3-> Exemplo clássico: tome um conjunto qualquer $T$
+    \begin{itemize}[itemsep=0pt]
+      \item O \emph{poset} $(\mathcal{P}(T) \; \backslash \; \emptyset,
+          \subseteq)$ é um \emph{join-semilattice}
+      \item O \emph{poset} $(\mathcal{P}(T) \; \backslash \; T, \subseteq)$ é
+          um \emph{meet-semilattice}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reticulados}
+  \begin{itemize}
+    \item Um \emph{poset} onde qualquer par do conjunto possui um ínfimo e um
+        supremo
+    \item Formalmente, um \emph{poset} $(S, \preccurlyeq)$ é um
+        \textbf{reticulado} ou \emph{lattice} quando, $\forall s_1, s_2 \in S$,
+          $\inf(\{s_1, s_2\})$ e $\sup(\{s_1, s_2\})$ existem
+    \item De maneira equivalente, um reticulado é um \emph{poset} que, ao
+        mesmo tempo, é um \emph{join-semilattice} e \emph{meet-semilattice}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplo}
+  \framesubtitle{Reticulados}
+  \begin{itemize}
+    \item<1-> Considere o \emph{poset} $(\mathbb{Z}^{+}, \mid)$. Este
+        \emph{poset} é um reticulado?
+    \begin{itemize}[itemsep=0pt]
+      \item<2-> Observe que, para quaisquer $a, b \in \mathbb{Z}^{+}$,
+          $\inf(\{a, b\}) = \text{mmc}(a, b)$ e $\sup(\{a, b\}) = \text{mdc}(a,
+            b)$
+      \item<2-> Portanto, $(\mathbb{Z}^{+}, \mid)$ é um reticulado
+    \end{itemize}
+    \item<3-> Considere o \emph{poset} $(\mathcal{P}(T), \subseteq)$. Este
+        \emph{poset} é um reticulado?
+    \begin{itemize}[itemsep=0pt]
+      \item<4-> Observe que, para quaisquer $t_1, t_2 \in \mathcal{P}(T)$,
+          $\inf(\{t_1, t_2\}) = t_1 \cap t_2$ e $\sup(\{t_1, t_2\}) = t_1 \cup
+            t_2$
+      \item<4-> Portanto, $(\mathcal{P}(T), \subseteq)$ é um reticulado
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplo}
+  \framesubtitle{Reticulados}
+  \centering
+  \begin{tikzpicture}
+    \node [small,          label=above:{\tiny f}] (f) {};
+    \node [small, below    = of j, label=right:{\tiny e}] (e) {};
+    \node [small, below    = of e, label=right:{\tiny c}] (c) {};
+    \node [small, below left = of f, label=left:{\tiny d}] (d) {};
+    \node [small, below    = of d, label=left:{\tiny b}] (b) {};
+    \node [small, below left = of c, label=below:{\tiny a}] (a) {};
+    \draw (a) edge (b) (a) edge (c) (d) edge (b) (d) edge (f)
+    (e) edge (c) (e) edge (f) (b) edge (e) (c) edge (d);
+  \end{tikzpicture} \qquad
+  \begin{tikzpicture}
+    \node [small,           label=above:{\tiny h}] (h) {};
+    \node [small, below left  = of h, label=left:{\tiny e}] (e) {};
+    \node [small, below     = of h, label=right:{\tiny f}] (f) {};
+    \node [small, below right = of h, label=right:{\tiny g}] (g) {};
+    \node [small, below     = of e, label=left:{\tiny b}] (b) {};
+    \node [small, below     = of f, label=right:{\tiny c}] (c) {};
+    \node [small, below     = of g, label=right:{\tiny d}] (d) {};
+    \node [small, below     = of c, label=below:{\tiny a}] (a) {};
+    \draw (g) edge (h) (e) edge (h) (f) edge (h) (e) edge (b) (f) edge (c)
+    (g) edge (d) (b) edge (a) (c) edge (a) (d) edge (a);
+  \end{tikzpicture}
+  \begin{itemize}
+    \item Considere os \emph{posets} acima. Estes são reticulados?
+    \begin{itemize}[itemsep=0pt]
+      \item<2-> O primeiro \emph{poset} não é um reticulado, pois não existe
+          $\inf(\{b, c\})$, enquanto o segundo \emph{poset} é
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reticulados limitados}
+  \begin{itemize}
+    \item Um reticulado que possui elementos máximo e mínimo, ou seja, $\top$ e
+        $\bot$, é chamado de \textbf{limitado}
+    \item Respectivamente, são os elementos identidade para as operações de
+        encontro e junção
+    \item<2-> Portanto, dado um reticulado $(S, \preccurlyeq)$, e $\forall s
+        \in S$,
+    \begin{itemize}[itemsep=0pt]
+      \item $\bot \preccurlyeq s \preccurlyeq \top$
+      \item $s \vee \bot = s, \quad s \wedge \bot = \bot$
+      \item $s \wedge \top = s, \quad s \vee \top = \top$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reticulados completos}
+  \begin{itemize}
+    \item Um reticulado onde todos os seus subconjuntos têm supremo e ínfimo é
+        chamado de \textbf{completo}
+    \item Formalmente, para um reticulado $(S, \preccurlyeq),\: \forall T \in
+        \mathcal{P}(S)$, $\wedge T$ e $\vee T$ existem
+    \item De maneira equivalente, um reticulado é completo se é um
+        \emph{join-semilattice} completo e um \emph{meet-semilattice} completo
+          ao mesmo tempo
+    \item Todo reticulado completo é também limitado
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sub-reticulados}
+  \begin{itemize}
+    \item Dado um reticulado $(S, \preccurlyeq)$, um \textbf{sub-reticulado},
+        ou \emph{sublattice}, é um subconjunto não-vazio finito de $S$ com as
+          operações de junção e encontro herdadas de $\preccurlyeq$
+    \item Exemplo: tome o reticulado abaixo
+    \begin{figure}
+      \begin{tikzpicture}
+        \node [small, label=above:{\tiny $\top$}] (xyz) at (0, 0) {};
+        \node [small, below left=of xyz, label=left:{\tiny e}] (xy) {};
+        \node [small, below right=of xyz, label=right:{\tiny f}] (yz) {};
+        \node [small, below=of xyz, label=below:{\tiny c}] (xz) {};
+        \node [small, below=of xy, label=left:{\tiny a}] (x) {};
+        \node [small, below=of yz, label=right:{\tiny b}] (z) {};
+        \node [below=of xz] (y) {};
+        \node [small, below=of y, label=below:{\tiny $\bot$}] (0) {};
+        \draw (0)  edge (x)  (0)  edge (z)  (x)  edge (xy)  (x)  edge (xz)
+              (z)  edge (xz) (z)  edge (yz) (xy) edge (xyz) (xz) edge (xyz)
+              (yz) edge (xyz);
+      \end{tikzpicture}
+    \end{figure}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sub-reticulados}
+  \begin{itemize}
+    \item<1-> O subconjunto parcialmente ordenado abaixo é um sub-reticulado do
+        reticulado apresentado anteriormente?
+    \begin{figure}
+      \begin{tikzpicture}
+        \node [small, label=above:{\tiny $\top$}] (xyz) at (0, 0) {};
+        \node [small, below left=of xyz, label=left:{\tiny e}] (xy) {};
+        \node [small, below right=of xyz, label=right:{\tiny f}] (yz) {};
+        \node [below=of xyz] (xz) {};
+        \node [small, below=of xy, label=left:{\tiny a}] (x) {};
+        \node [small, below=of yz, label=right:{\tiny b}] (z) {};
+        \node [below=of xz] (y) {};
+        \node [small, below=of y, label=below:{\tiny $\bot$}]
+          (0) at (0, -2.12) {};
+        \draw (0)  edge (x)  (0)  edge (z)   (x)  edge (xy)
+              (z)  edge (yz) (xy) edge (xyz) (yz) edge (xyz);
+      \end{tikzpicture}
+    \end{figure}
+    \item<2-> Não, pois $a \vee b = c$, que não está presente
+    \begin{itemize}
+        \item Entretanto, é um reticulado por si só
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sub-reticulados}
+  \begin{itemize}
+    \item Os subconjuntos parcialmente ordenados abaixo são sub-reticulados do
+        reticulado apresentado anteriormente?
+    \begin{figure}
+      \begin{tikzpicture}
+        \node [small, label=above:{\tiny $\top$}] (xyz) at (0, 0) {};
+        \node [small, below left=of xyz, label=left:{\tiny e}] (xy) {};
+        \node [small, below right=of xyz, label=right:{\tiny f}] (yz) {};
+        \node [below=of xyz] (xz) {};
+        \node [small, below=of xy, label=left:{\tiny a}] (x) {};
+        \node [small, below=of yz, label=right:{\tiny b}] (z) {};
+        \node [below=of xz] (y) {};
+        \draw (x) edge (xy) (z) edge (yz) (xy) edge (xyz) (yz) edge (xyz);
+      \end{tikzpicture}
+      \begin{tikzpicture}
+        \node [small, label=above:{\tiny c}] (xz) at (0, 0) {};
+        \node [small, below left=of xz, label=left:{\tiny a}] (x) {};
+        \node [small, below right=of xz, label=right:{\tiny b}] (z) {};
+        \node [small, below=of xz, label=below:{\tiny $\bot$}]
+          (0) at (0, -1.12) {};
+        \draw (0) edge (x) (0) edge (z) (x) edge (xz) (z) edge (xz);
+      \end{tikzpicture}
+    \end{figure}
+    \item Respectivamente, sim, e não, pois $a \wedge b$ e $a \vee b$ não estão
+        presentes
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Isomorfismo entre reticulados}
+  \begin{itemize}
+    \item<1-> Uma função bijetora que mapeia elementos de um reticulado para
+        outro pode ser chamada de isomorfismo
+    \item<2-> Formalmente, tome dois reticulados $(S_{1},
+        \textcolor{green}{\preccurlyeq}), (S_{2},
+          \textcolor{red}{\preccurlyeq})$, uma função $f : S_{1} \rightarrow
+          S_{2}$, e elementos quaisquer $a, b \in S_{1}$
+    \item<3-> Para que exista um isomorfismo, $f$ deve preservar as operações
+        de junção e encontro
+    \begin{itemize}[itemsep=0pt]
+      \item<4-> $f(a \mathbin{\textcolor{green}{\vee}} b) = f(a)
+          \mathbin{\textcolor{red}{\vee}} f(b)$ (isomorfismo de junção)
+      \item<5-> $f(a \mathbin{\textcolor{green}{\wedge}} b) = f(a)
+          \mathbin{\textcolor{red}{\wedge}} f(b)$ (isomorfismo de encontro)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplo}
+  \framesubtitle{Isomorfismo entre reticulados}
+  \begin{figure}
+    \begin{tikzpicture}
+      \node [small, label=above:{\tiny 30}] (xyz) at (0, 0) {};
+      \node [small, below left=of xyz, label=left:{\tiny 6}] (xy) {};
+      \node [small, below=of xyz, label=right:{\tiny 10}] (xz) {};
+      \node [small, below right=of xyz, label=right:{\tiny 15}] (yz) {};
+      \node [small, below=of xy, label=left:{\tiny 2}] (x) {};
+      \node [small, below=of xz, label=right:{\tiny 3}] (y) {};
+      \node [small, below=of yz, label=right:{\tiny 5}] (z) {};
+      \node [small, below=of y, label=below:{\tiny 1}] (0) {};
+      \draw (0) edge (x)  (0)  edge (y)   (0)  edge (z)   (x)  edge (xy)
+            (x) edge (xz) (y)  edge (xy)  (y)  edge (yz)  (z)  edge (xz)
+            (z) edge (yz) (xy) edge (xyz) (xz) edge (xyz) (yz) edge (xyz);
+    \end{tikzpicture} \quad
+    \begin{tikzpicture}
+      \node [small, label=above:{\tiny $\{x, y, z\}$}] (xyz) at (0, 0) {};
+      \node [small, below left=of xyz, label=left:{\tiny $\{x, y\}$}] (xy) {};
+      \node [small, below right=of xyz, label=right:{\tiny $\{y, z\}$}] (yz) {};
+      \node [small, below=of xyz, label=right:{\tiny $\{x, z\}$}] (xz) {};
+      \node [small, below=of xy, label=left:{\tiny $\{x\}$}] (x) {};
+      \node [small, below=of xz, label=right:{\tiny $\{y\}$}] (y) {};
+      \node [small, below=of yz, label=right:{\tiny $\{z\}$}] (z) {};
+      \node [small, below=of y, label=below:{\tiny $\emptyset$}] (0) {};
+      \draw (0) edge (x)  (0)  edge (y)   (0)  edge (z)   (x)  edge (xy)
+            (x) edge (xz) (y)  edge (xy)  (y)  edge (yz)  (z)  edge (xz)
+            (z) edge (yz) (xy) edge (xyz) (xz) edge (xyz) (yz) edge (xyz);
+    \end{tikzpicture}
+  \end{figure}
+  \begin{itemize}
+    \item Os reticulados acima são isomórficos, pois, por exemplo, $f(2 \vee 5)
+        = f(2) \vee f(5) \Rightarrow \{x, z\} =  \{x\} \vee \{z\}$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reticulados como estruturas algébricas}
+  \begin{itemize}
+    \item<1-> Operações binárias através de supremos e ínfimos
+    \item<1-> Identidades através da possível presença de elementos máximo e
+        mínimo
+    \item<2-> Uma álgebra é uma tupla composta de um conjunto e operações de
+        aridade finita e relações
+    \begin{itemize}[itemsep=0pt]
+      \item Reticulados admitem uma descrição algébrica
+      \item Notação equivalente: $(S, \preccurlyeq) \Leftrightarrow (S, \vee,
+          \wedge)$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reticulados como estruturas algébricas}
+  \begin{itemize}
+    \item<1-> Consolidando as definições mostradas anteriormente
+    \item<1-> Para um reticulado $(S, \preccurlyeq)$, existe um reticulado $(S,
+        \vee, \wedge)$ de tal modo que, $\forall s_1, s_2 \in S$
+    \begin{itemize}[itemsep=0pt]
+      \item<2-> $\sup(\{s_1, s_2\}) \Leftrightarrow s_1 \vee s_2$
+      \item<3-> $\inf(\{s_1, s_2\}) \Leftrightarrow s_1 \wedge s_2$
+      \item<4-> $s_1 \preccurlyeq s_2 \Leftrightarrow \quad s_1 \vee s_2 = s_2,
+          s_1 \wedge s_2 = s_1$
+    \end{itemize}
+    \item<5-> No caso de um reticulado limitado, existe um reticulado $(S, \vee,
+        \wedge, \bot, \top)$ de tal modo que, adicionalmente,
+    \begin{itemize}[itemsep=0pt]
+      \item<6-> $\bot \preccurlyeq s_1 \preccurlyeq \top$
+      \item<7-> $s_1 \vee \bot = s_1, \quad s_1 \wedge \bot = \bot$
+      \item<8-> $s_1 \wedge \top = s_1, \quad s_1 \vee \top = \top$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Identidades axiomáticas para um reticulado}
+  \begin{itemize}
+    \item<1-> Para um reticulado qualquer $(S, \vee, \wedge)$, e $\forall a, b,
+        c \in S$
+    \begin{itemize}[itemsep=0pt]
+      \item<2-> $a \vee b = b \vee a,\; a \wedge b = b \wedge a$
+          (comutatividade)
+      \item<3-> $a \vee (b \vee c) = (a \vee b) \vee c,\; a \wedge (b \wedge c)
+          = (a \wedge b) \wedge c$ (associatividade)
+      \item<4-> $a \vee (a \wedge b) = a,\; a \wedge (a \vee b) = a$ (absorção)
+      \item<5-> $a \vee a = a,\; a \wedge a = a$ (idempotência, derivada da
+          absorção)
+    \end{itemize}
+    \item<6-> Para um reticulado limitado qualquer $(S, \vee, \wedge, \bot,
+        \top)$
+    \begin{itemize}
+      \item<7-> $a \vee \bot = a,\; a \wedge \top = a$ (identidade)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reticulados complementados}
+  \begin{itemize}
+    \item Um reticulado qualquer $(S, \vee, \wedge, \bot, \top)$ é
+        \textbf{complementado} se, $\forall a, b \in S$, $a \vee b = \top$ e $a
+          \wedge b = \bot$
+    \item Então, $a$ é complemento de $b$ e vice-versa
+    \begin{itemize}
+      \item Um complemento de $a$ pode ser denotado por $a^{\bot}$
+    \end{itemize}
+    \item Complementos não necessariamente são únicos
+    \begin{itemize}
+      \item Dois elementos estão relacionados se têm um complemento em comum
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reticulados distributivos}
+  \begin{itemize}
+    \item<1-> Um reticulado qualquer $(S, \vee, \wedge, \bot, \top)$ é
+        \textbf{distributivo} se, $\forall a, b, c \in S$,
+    \begin{itemize}[itemsep=0pt]
+      \item<2-> $a \vee (b \wedge c) = (a \vee b) \wedge (a \vee c)$
+          (distribuição de $\vee$ sobre $\wedge$)
+      \item<3-> $a \wedge (b \vee c) = (a \wedge b) \vee (a \wedge c)$
+          (distribuição de $\wedge$ sobre $\vee$)
+    \end{itemize}
+    \item Todo elemento de um reticulado distributivo terá até um complemento
+    \item Todo reticulado distribuído é isomórfico a um reticulado
+        $(\mathcal{P}(S), \cup,\, \cap,\, \emptyset, S)$, para qualquer $S$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplo}
+  \framesubtitle{Reticulados distributivos}
+ \begin{figure}
+    \begin{tikzpicture}
+      \node [small, below=of xyz, label=above:{\tiny $\top$}] (xz) {};
+      \node [small, below=of xy, label=left:{\tiny x}] (x) {};
+      \node [small, below=of xz, label=right:{\tiny y}] (y) {};
+      \node [small, below=of yz, label=right:{\tiny z}] (z) {};
+      \node [small, below=of y, label=below:{\tiny $\bot$}] (0) {};
+      \draw (0) edge (x)  (0) edge (y)  (0)  edge (z)
+            (x) edge (xz) (y) edge (xz) (z)  edge (xz);
+    \end{tikzpicture} \qquad
+    \begin{tikzpicture}
+      \node [small, label=above:{\tiny $\top$}] (xyz) at (0, 0) {};
+      \node [small, below left=of xyz, label=left:{\tiny x}] (xy) {};
+      \node [small, below=of yz, label=right:{\tiny y}] (z) {};
+      \node [small, below=of xy, label=left:{\tiny z}] (x) {};
+      \node [small, below=of y, label=below:{\tiny $\bot$}] (0) {};
+      \draw (0)  edge (x)  (0)  edge (z) (x)  edge (xy) (z)  edge (xyz)
+            (xy) edge (xyz);
+    \end{tikzpicture}
+  \end{figure}
+  \begin{itemize}
+    \item<1-> Um reticulado é distributivo se e somente se não ter um
+        sub-reticulado isomórfico a $M_{3}$ ou $N_{5}$
+    \begin{itemize}[itemsep=0pt]
+      \item<2-> $M_{3}: x \wedge (y \vee z) = x \wedge 1 \neq 0 \vee 0 = (x
+          \wedge y) \vee (x \wedge z)$
+      \item<3-> $N_{5}: x \wedge (y \vee z) = x \wedge 1 \neq 0 \vee z = (x
+          \wedge y) \vee (x \wedge z)$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Material de estudo}
+  \nocite{*}
+  \bibliographystyle{plain}
+  \bibliography{ref}
+  \begin{itemize}[itemsep=0pt]
+    \item Kolman: leitura das páginas 207-215 e resolução dos exercícios 1-7,
+        11, 13-16, 20, na página 216.
+    \item Rosen: leitura das páginas 626-627 e resolução dos exercícios 43-44,
+        46-48, 50-52, na página 632.
+  \end{itemize}
+\end{frame}
+
+\end{document}
