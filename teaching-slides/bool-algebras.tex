@@ -1,0 +1,350 @@
+\documentclass[12pt]{beamer}
+
+\usepackage[brazil]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem, hyperref, tikz}
+
+\setitemize{
+  itemsep=1em,
+  label=\usebeamerfont*{itemize item}
+    \usebeamercolor[fg]{itemize item}
+    \usebeamertemplate{itemize item}
+}
+
+\usetikzlibrary{positioning, decorations.markings}
+\tikzset{small/.style={draw,fill,circle,inner sep=1pt,outer sep=0pt}}
+
+\setbeamertemplate{footline}[frame number]{}
+\setbeamertemplate{navigation symbols}{}
+
+\title{Álgebras Booleanas finitas}
+\author{Gustavo Zambonin}
+\institute{
+  \includegraphics[scale=0.15]{ufsc}                    \\ \vspace{-4mm}
+  Universidade Federal de Santa Catarina                \\
+  Departamento de Informática e Estatística             \\
+  INE5601 --- Fundamentos Matemáticos da Informática    \\ \vspace{2mm}
+  \texttt{gustavo.zambonin@posgrad.ufsc.br}
+}
+\date{}
+
+\begin{document}
+
+\begin{frame}[plain,noframenumbering]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Contexto}
+  \begin{itemize}
+    \item<1-> Reticulados
+    \begin{itemize}[itemsep=0pt]
+      \item \emph{Poset} onde qualquer par de elementos tem supremo e ínfimo
+      \item Representado também como estrutura algébrica
+    \end{itemize}
+    \item<2-> Isomorfismo entre reticulados
+    \begin{itemize}[itemsep=0pt]
+      \item Função bijetora que mapeia elementos entre dois reticulados
+    \end{itemize}
+    \item<3-> Tipos de reticulados
+    \begin{itemize}[itemsep=0pt]
+      \item Limitado, complementado, distributivo
+      \item<4->
+          \href{https://upload.wikimedia.org/wikipedia/en/c/cc/Lattice_v4.png}{Mapa
+            de reticulados}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplos práticos}
+  \begin{itemize}
+    \item<1-> Cálculo proposicional pode ser demonstrado logicamente
+        equivalente a uma expressão Booleana
+    \item<2-> Modelagem de circuitos em engenharia elétrica, para representar
+        estados de alta e baixa tensão
+    \begin{itemize}
+      \item Criação de portas lógicas (AND, OR, NAND, NOR, XOR, XNOR)
+    \end{itemize}
+    \item<3-> Construção de caixas de substituição em criptografia simétrica,
+        com funções Booleanas
+    \item<4-> Ideia geral: formalismo para descrever operações lógicas
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reticulados de conjuntos sob inclusão}
+  \begin{itemize}
+    \item Considere um \emph{poset} $(\mathcal{P}(S), \subseteq)$, onde $S$ é
+        finito
+    \begin{itemize}[itemsep=0pt]
+      \item $\forall t_1, t_2 \in \mathcal{P}(S)$, \\
+          $\inf(\{t_1, t_2\}) = t_1 \cap t_2, \quad
+           \sup(\{t_1, t_2\}) = t_1 \cup t_2$
+    \end{itemize}
+    \item<2-> Tome $S_{1} = \{x_{1}, \dots, x_{n}\}, S_{2} = \{y_{1}, \dots,
+        y_{n}\}$
+    \begin{itemize}[itemsep=0pt]
+      \item Existe um isomorfismo $f$ que mapeia $x_{i} \rightarrow y_{i}, i
+          \in \{1, \dots, n\}$
+      \item Para quaisquer subconjuntos $A, B \subseteq S$, então $A \subseteq
+          B \Leftrightarrow f(A) \subseteq f(B)$
+    \end{itemize}
+    \item<3-> Então, $(\mathcal{P}(S_{1}), \subseteq)$ e $(\mathcal{P}(S_{2}),
+        \subseteq)$ são isomórficos
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplo}
+  \framesubtitle{Isomorfismo entre reticulados}
+  \begin{figure}
+  \resizebox{10cm}{!}{
+    \begin{tikzpicture}
+      \node [small, label=above:{\tiny $\{2, 3, 5\}$}] (xyz) at (0, 0) {};
+      \node [small, below left=of xyz, label=left:{\tiny $\{2, 3\}$}] (xy) {};
+      \node [small, below right=of xyz, label=right:{\tiny $\{3, 5\}$}] (yz) {};
+      \node [small, below=of xyz, label=right:{\tiny $\{2, 5\}$}] (xz) {};
+      \node [small, below=of xy, label=left:{\tiny $\{2\}$}] (x) {};
+      \node [small, below=of xz, label=right:{\tiny $\{3\}$}] (y) {};
+      \node [small, below=of yz, label=right:{\tiny $\{5\}$}] (z) {};
+      \node [small, below=of y, label=below:{\tiny $\emptyset$}] (0) {};
+      \draw (0) edge (x)  (0)  edge (y)   (0)  edge (z)   (x)  edge (xy)
+            (x) edge (xz) (y)  edge (xy)  (y)  edge (yz)  (z)  edge (xz)
+            (z) edge (yz) (xy) edge (xyz) (xz) edge (xyz) (yz) edge (xyz);
+    \end{tikzpicture} \quad
+    \begin{tikzpicture}
+      \node [small, label=above:{\tiny $\{x, y, z\}$}] (xyz) at (0, 0) {};
+      \node [small, below left=of xyz, label=left:{\tiny $\{x, y\}$}] (xy) {};
+      \node [small, below right=of xyz, label=right:{\tiny $\{y, z\}$}] (yz) {};
+      \node [small, below=of xyz, label=right:{\tiny $\{x, z\}$}] (xz) {};
+      \node [small, below=of xy, label=left:{\tiny $\{x\}$}] (x) {};
+      \node [small, below=of xz, label=right:{\tiny $\{y\}$}] (y) {};
+      \node [small, below=of yz, label=right:{\tiny $\{z\}$}] (z) {};
+      \node [small, below=of y, label=below:{\tiny $\emptyset$}] (0) {};
+      \draw (0) edge (x)  (0)  edge (y)   (0)  edge (z)   (x)  edge (xy)
+            (x) edge (xz) (y)  edge (xy)  (y)  edge (yz)  (z)  edge (xz)
+            (z) edge (yz) (xy) edge (xyz) (xz) edge (xyz) (yz) edge (xyz);
+    \end{tikzpicture}
+  }
+  \end{figure}
+  \begin{itemize}[itemsep=0pt]
+    \item Seja $S_{1} = \{2, 3, 5\}, S_{2} = \{x, y, z\}$, então $n = 3$
+    \item<2-> $f : S_{1} \rightarrow S_{2}$ \\
+        $f(\emptyset) = \emptyset,\; f(\{2\}) = \{x\},\; f(\{3\}) = \{y\},\;
+          \dots$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reticulado $(\mathcal{P}(S), \subseteq)$ genérico}
+  \begin{itemize}
+    \item Portanto, $(\mathcal{P}(S), \subseteq)$ independe de $S$
+    \item Reticulado determinado apenas por $n = |S|$
+    \begin{itemize}
+      \item O número de elementos do reticulado sempre será da forma
+          $|\mathcal{P}(S)| = 2^{n}$
+    \end{itemize}
+    \item<2-> É possível construir um reticulado genérico, composto de
+        $n$-tuplas de 0 e 1, chamado $B_{n}$
+    \begin{itemize}
+      \item 0 denota a ausência do elemento no subconjunto, e 1 a presença
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ordenamento em $B_{n}$}
+  \begin{itemize}
+    \item<1-> Tome $x = x_{1} x_{2} \dots x_{n}, y = y_{1} y_{2} \dots y_{n}
+        \in B_{n}$ quaisquer
+    \begin{itemize}[itemsep=0pt]
+      \item<2-> Ordenação ``lexicográfica'': $x \preccurlyeq y \Leftrightarrow
+          a_{k} \preccurlyeq b_{k}, k \in \{1, \dots, n\}$
+      \item<3-> $x \wedge y = s_{1} s_{2} \dots s_{n}, \quad s_{k} =
+          \min{(a_{k}, b_{k})}$
+      \item<4-> $x \vee y = z_{1} z_{2} \dots z_{n}, \quad z_{k} =
+          \max{(a_{k}, b_{k})}$
+      \item<5-> Complemento: se $z_{k} = 1, z'_{k} = 0$ e vice-versa
+    \end{itemize}
+    \item<6-> Note que $(B_{n}, \preccurlyeq)$ é isomórfico a $(\mathcal{P}(S),
+        \subseteq)$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ordenamento em $B_{n}$}
+  \begin{itemize}
+    \item<1-> Então, existe uma correspondência entre reticulados sob conjuntos
+        e $B_{n}$, da seguinte forma
+    \item Para quaisquer subconjuntos $A, B \in \mathcal{P}(S)$
+    \begin{itemize}[itemsep=0pt]
+      \item<2-> $x \preccurlyeq y \Leftrightarrow A \subseteq B$
+      \item<3-> $x \wedge y \Leftrightarrow A \cap B$
+      \item<4-> $x \vee y \Leftrightarrow A \cup B$
+      \item<5-> $x' \Leftrightarrow \overline{A}$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Álgebras Booleanas finitas}
+  \begin{itemize}
+    \item Um reticulado complementado distributivo é chamado de
+        \textbf{álgebra Booleana}
+    \item De maneira equivalente, um reticulado finito isomórfico a $B_{n}$ é
+        uma álgebra Booleana
+    \item Note que é possível representar quaisquer reticulados
+        $(\mathcal{P}(S), \subseteq)$ como $B_{|S|}$
+    \begin{itemize}
+      \item Ou seja, todo reticulado isomórfico a $(\mathcal{P}(S),
+          \subseteq)$ também é uma álgebra Booleana
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplo}
+  \framesubtitle{Álgebras Booleanas finitas}
+  \vspace{-1cm}
+  \begin{figure}
+    \begin{tikzpicture}
+      \node [small, label=below:{\tiny \color{white}{0}}] (xyz) at (0, 0) {};
+    \end{tikzpicture} \qquad
+    \begin{tikzpicture}
+      \node [small, label=above:{\tiny $1$}] (xyz) at (0, 0) {};
+      \node [small, below=of xyz, label=below:{\tiny $0$}] (xz) {};
+      \draw (xz) edge (xyz);
+    \end{tikzpicture} \qquad
+    \begin{tikzpicture}
+      \node [small, label=above:{\tiny $11$}] (xyz) at (0, 0) {};
+      \node [small, below left=of xyz, label=left:{\tiny $01$}] (xy) {};
+      \node [small, below right=of xyz, label=right:{\tiny $10$}] (yz) {};
+      \node [small, below=of xz, label=below:{\tiny $0$}] (y) {};
+      \draw (y)  edge (xy)  (y)  edge (yz)  (xy) edge (xyz)  (yz) edge (xyz);
+    \end{tikzpicture} \qquad
+    \begin{tikzpicture}
+      \node [small, label=above:{\tiny $111$}] (xyz) at (0, 0) {};
+      \node [small, below left=of xyz, label=left:{\tiny $110$}] (xy) {};
+      \node [small, below right=of xyz, label=right:{\tiny $011$}] (yz) {};
+      \node [small, below=of xyz, label=right:{\tiny $101$}] (xz) {};
+      \node [small, below=of xy, label=left:{\tiny $100$}] (x) {};
+      \node [small, below=of xz, label=right:{\tiny $010$}] (y) {};
+      \node [small, below=of yz, label=right:{\tiny $001$}] (z) {};
+      \node [small, below=of y, label=below:{\tiny $000$}] (0) {};
+      \draw (0) edge (x)  (0)  edge (y)   (0)  edge (z)   (x)  edge (xy)
+            (x) edge (xz) (y)  edge (xy)  (y)  edge (yz)  (z)  edge (xz)
+            (z) edge (yz) (xy) edge (xyz) (xz) edge (xyz) (yz) edge (xyz);
+    \end{tikzpicture}
+  \end{figure}
+  \begin{itemize}
+    \item Álgebras Booleanas mais simples: $B_{0}, B_{1}, B_{2}, B_{3}$
+    \item Número de elementos: $2^{0} = 1, 2^{1} = 2, 2^{2} = 4, 2^{3} = 8$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Outros reticulados isomórficos a $B_{n}$}
+  \begin{itemize}
+    \item<1-> Reticulados que não são da forma $(\mathcal{P}(S), \subseteq)$
+        também podem ser álgebras Booleanas
+    \item<2-> Considere o reticulado $D_{n}$, onde $S$ é composto pelos
+        divisores de $n$ e a relação parcial é de divisibilidade
+    \begin{itemize}
+      \item $D_{30} = (\{1, 2, 3, 5, 6, 10, 15, 30\}, \mid)$
+    \end{itemize}
+    \item<3-> Observe que $D_{30}$ é isomórfico a $B_{3}$
+    \begin{itemize}
+      \item<4-> {\small $f(1) = 000, f(2) = 100, f(3) = 010, f(5) = 001, f(6) =
+          110, f(10) = 101, f(15) = 011, f(30) = 111$}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Determinação de álgebras Booleanas}
+  \begin{itemize}
+    \item<1-> Todo reticulado que não tenha $2^{n}$ elementos não pode ser uma
+        álgebra Booleana
+    \item<2-> Um reticulado com $2^{n}$ elementos é uma condição necessária, mas
+        não suficiente
+    \begin{itemize}[itemsep=0pt]
+      \item<3-> É necessário demonstrar o isomorfismo com $B_{n}$ ou
+          $(\mathcal{P}(S), \subseteq)$
+      \item<3-> Comparar o diagrama de Hasse é possível para conjuntos pequenos
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Determinação de álgebras Booleanas}
+  \begin{itemize}
+    \item<1-> Todo reticulado não limitado não será álgebra Booleana
+    \item<2-> Todo elemento deverá ter um único complemento
+    \item<3-> O reticulado $D_{p}$, onde $p = p_{1} \times p_{2} \times \dots
+        \times p_{k}$, com $p_{1} \neq p_{2} \neq \dots \neq p_{k}$, é álgebra
+          Booleana?
+    \begin{itemize}[itemsep=0pt]
+      \item $S = (\{p_{1}, \dots, p_{k}\})$, então $D_{p} = (S, \mid)$
+      \item<4-> Note que existe um isomorfismo $f$, de modo que $\forall T \in
+          \mathcal{P}(S),\; f(T) = t_1 \dots t_{k}$
+      \item<5-> Portanto, $D_{p}$ é uma álgebra Booleana
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Identidades axiomáticas de álgebras Booleanas}
+  \begin{itemize}
+    \item<1-> Defina uma álgebra Booleana como $(S, \vee, \wedge, \neg, \bot,
+        \top)$
+    \begin{itemize}
+      \item Ou seja, um conjunto finito $S$, operações binárias de junção e
+          encontro, operação unária de complemento, elementos mínimo e máximo
+    \end{itemize}
+    \item<2-> Então, as leis abaixo são verdade
+    \begin{itemize}
+      \item Associatividade, comutatividade, absorção, identidade,
+          distributividade, complementação
+    \end{itemize}
+    \item<3-> Note que estes axiomas são derivados das definições de reticulado
+        limitado, distributivo e complementado
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Identidades axiomáticas de álgebras Booleanas}
+  \begin{itemize}
+    \item<1-> Outras três propriedades podem ser derivadas
+    \item<1-> Para elementos quaisquer $x, y$ de uma álgebra Booleana
+    \begin{itemize}[itemsep=0pt]
+      \item<2-> $\neg (\neg x) = x$ (lei da involução)
+      \item<3-> $\neg (x \wedge y) = \neg x \vee \neg y$ (lei de De Morgan I)
+      \item<3-> $\neg (x \vee y) = \neg x \wedge \neg y$ (lei de De Morgan II)
+    \end{itemize}
+    \item<4-> Assim como em conjuntos, pois para $S$ qualquer e $A, B \subseteq
+        S$ quaisquer
+    \begin{itemize}
+      \item $\overline{(\overline{A})}, \quad \overline{(A \cap B)} =
+          \overline{A} \cup \overline{B}, \quad \overline{(A \cup B)} =
+            \overline{A} \cap \overline{B}$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Material de estudo}
+  \bibliographystyle{apalike}
+  \bibliography{ref}
+  \begin{itemize}[itemsep=0pt]
+    \nocite{Kolman:book:1999}
+    \item Kolman: leitura das páginas 217-223 (especialmente p. 222) e
+        resolução dos exercícios 1-21
+    \nocite{Rosen:book:2011}
+    \item Rosen: leitura das páginas 811-817 e resolução dos
+        exercícios 1-4, 24-28
+  \end{itemize}
+\end{frame}
+
+\end{document}
