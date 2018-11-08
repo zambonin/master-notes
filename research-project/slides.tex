@@ -31,7 +31,7 @@
 \title{Reduction of Key Sizes on Rainbow-like Multivariate Signature Schemes}
 \author{Gustavo Zambonin}
 \institute{
-  \includegraphics[scale=0.15]{ufsc}                    \\ \vspace{-4mm}
+  \includegraphics[scale=0.15]{ufsc}                     \\
   INE410111 --- Research Methodology in Computer Science \\ \vspace{2mm}
   \texttt{gustavo.zambonin@posgrad.ufsc.br}
 }
@@ -41,7 +41,7 @@
 
 \catcode`\@=11
 \def\chron@selectmonth#1{\ifcase#1\or Jan\or Feb\or Mar\or Apr\or%
-  May\or Jun\or Jul\or Aug\or Sep\or Oct\or Nov\or Dec\fi}
+  May\or Jun\or Jul\or Mid\or Sep\or Oct\or Nov\or Dec\fi}
 
 \begin{frame}[plain,noframenumbering]
   \titlepage
@@ -97,7 +97,8 @@
           verification} -- (h);
       \end{tikzpicture}
     \end{figure}
-    \item Fast operations, small signature sizes, large keys
+    \item Fast operations, small signature sizes and large keys, compared to
+        classical schemes
   \end{itemize}
 \end{frame}
 
@@ -117,32 +118,37 @@
   \frametitle{Related works}
   \begin{figure}[htbp]
     \tiny
-    \startchronology[startyear=2010,stopyear=2018,startdate=false,
+    \vspace{-1.5cm}
+    \startchronology[startyear=2010,stopyear=2020,startdate=false,
       stopdate=false,arrow=false,height=3pt]
-    \chronoevent[markdepth=-50pt]{6/2010}{\cite{Petzoldt:inproc:2010:jun}}
-    \chronoevent{12/2010}{\cite{Petzoldt:inproc:2010:dec}}
-    \chronoevent[markdepth=-20pt]{3/2011}{\cite{Petzoldt:inproc:2011:mar}}
-    \chronoevent[markdepth=40pt]{9/2011}{\cite{Petzoldt:inproc:2011:sep}}
-    \chronoevent[markdepth=-50pt]{2/2012}{\cite{Yasuda:inproc:2012:feb}}
-    \chronoevent{11/2012}{\cite{Petzoldt:inproc:2012:nov}}
-    \chronoevent[markdepth=70pt]{5/2013}{\cite{Yasuda:inproc:2013:may}}
-    \chronoevent[markdepth=-20pt]{6/2013}{\cite{Petzoldt:inproc:2013:jun}}
-    \chronoevent[markdepth=40pt]{7/2013}{\cite{Petzoldt:phd:2013:jul}}
-    \chronoevent[markdepth=-50pt]{1/2014}{\cite{Yasuda:article:2014:jan}}
-    \chronoevent{4/2014}{\cite{Yasuda:inproc:2014:apr}}
-    \chronoevent[markdepth=-20pt]{9/2014}{\cite{Yasuda:article:2014:sep}}
-    \chronoevent{12/2015}{\cite{Shim:inproc:2015:dec}}
-    \chronoevent[markdepth=-50pt]{6/2017}{\cite{Peng:article:2017:jun}}
-    \chronoevent{6/2017}{\cite{Szepieniec:inproc:2017:jun}}
-    \chronoevent[markdepth=-20pt]{12/2017}{\cite{Beullens:inproc:2017:dec}}
-    \stopchronology
+    \chronoevent[colorbox=blue!10,markdepth=-50pt]{6/2010}{\cite{Petzoldt:inproc:2010:jun}$^{*}$}
+    \chronoevent[colorbox=blue!20]{12/2010}{\cite{Petzoldt:inproc:2010:dec}}
+    \chronoevent[colorbox=blue!30,markdepth=-20pt]{3/2011}{\cite{Petzoldt:inproc:2011:mar}$^{*}$}
+    \chronoevent[colorbox=blue!30,markdepth=40pt]{9/2011}{\cite{Petzoldt:inproc:2011:sep}}
+    \chronoevent[colorbox=red!20,markdepth=-50pt]{2/2012}{\cite{Yasuda:inproc:2012:feb}$^{\dagger}$}
+    \chronoevent[colorbox=blue!40,markdepth=40pt]{11/2012}{\cite{Petzoldt:inproc:2012:nov}}
+    \chronoevent[colorbox=red!30]{5/2013}{\cite{Yasuda:inproc:2013:may}$^{*}$}
+    \chronoevent[colorbox=blue!20,markdepth=-50pt]{6/2013}{\cite{Petzoldt:inproc:2013:jun}}
+    \chronoevent[colorbox=blue!40,markdepth=-20pt]{7/2013}{\cite{Petzoldt:phd:2013:jul}}
+    \chronoevent[colorbox=red!30,markdepth=40pt]{4/2014}{\cite{Yasuda:inproc:2014:apr}$^{*}$}
+    \chronoevent[colorbox=red!40,markdepth=-20pt]{9/2014}{\cite{Yasuda:article:2014:sep}$^{*}$}
+    \chronoevent[colorbox=blue!30]{12/2015}{\cite{Shim:inproc:2015:dec}}
+    \chronoevent[colorbox=red!40,markdepth=-50pt]{6/2017}{\cite{Peng:article:2017:jun}$^{\dagger}$}
+    \chronoevent[colorbox=blue!20]{6/2017}{\cite{Szepieniec:inproc:2017:jun}}
+    \chronoevent[colorbox=blue!20,markdepth=-20pt]{12/2017}{\cite{Beullens:inproc:2017:dec}}
+    \chronoevent[colorbox=purple!50]{8/2019}{Ours}
+    \stopchronology \vspace{.5cm}
+    {\scriptsize Schemes in blue optimise public keys, while red ones reduce
+      private keys. Darker tones mean greater success. Asterisks denote
+      reparametrized works and crosses denote broken schemes.}
   \end{figure}
 \end{frame}
 
 \begin{frame}
   \frametitle{Hypothesis}
   \begin{itemize}
-    \item Works have reduced either private or public keys, separately
+    \item To the best of our knowledge, works have reduced either private or
+        public keys
     \item Do there exist any restrictions in doing both at the same time?
     \item Is it possible to generate a structured public key from a similarly
         composed private key?
@@ -193,7 +199,7 @@
 \begin{frame}[plain, allowframebreaks]
   \frametitle{References}
   \bibliographystyle{alpha}
-  {\scriptsize \bibliography{\jobname}}
+  {\tiny \bibliography{\jobname}}
 \end{frame}
 \backupend
 
