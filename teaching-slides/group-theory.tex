@@ -1,0 +1,424 @@
+\documentclass[12pt]{beamer}
+
+\usepackage[brazil]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{caption, enumitem, gensymb, hyperref, tikz}
+
+\setitemize{
+  itemsep=1em,
+  label=\usebeamerfont*{itemize item}
+    \usebeamercolor[fg]{itemize item}
+    \usebeamertemplate{itemize item}
+}
+
+\usetikzlibrary{positioning, decorations.markings}
+\tikzset{small/.style={draw,fill,circle,inner sep=1pt,outer sep=0pt}}
+
+\setbeamertemplate{footline}[frame number]{}
+\setbeamertemplate{navigation symbols}{}
+
+\title{Introdução à teoria de grupos}
+\author{Gustavo Zambonin}
+\institute{
+  \includegraphics[scale=0.15]{ufsc}                    \\ \vspace{-4mm}
+  Universidade Federal de Santa Catarina                \\
+  Departamento de Informática e Estatística             \\
+  INE5601 --- Fundamentos Matemáticos da Informática    \\ \vspace{2mm}
+  \texttt{gustavo.zambonin@posgrad.ufsc.br}
+}
+\date{}
+
+\begin{document}
+
+\captionsetup{justification=centering}
+
+\begin{frame}[plain,noframenumbering]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Contexto}
+  \begin{itemize}
+    \item<1-> Reticulados como estruturas algébricas
+    \begin{itemize}[itemsep=0pt]
+      \item Duas operações binárias, encontro $\wedge$ e junção $\vee$
+      \item Reticulados limitados, complementados, distributivos
+    \end{itemize}
+    \item<2-> Álgebras Booleanas
+    \begin{itemize}[itemsep=0pt]
+      \item Reticulado complementado distributivo
+      \item Encontro, junção, e operação unária de complementação
+          $^{\bot}$
+    \end{itemize}
+    \item<3-> Estrutura algébrica geral
+    \begin{itemize}
+      \item Conjunto equipado com um número finito de operações de aridade
+          finita
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplos práticos}
+  \begin{itemize}
+    \item<1-> Fundamental em muitas áreas da matemática
+    \begin{itemize}
+      \item Teoria de números, álgebra linear, geometria, combinatória,
+          criptografia, teoria de códigos etc.
+    \end{itemize}
+    \item<2-> Física, química, biologia, ciência dos materiais
+    \begin{itemize}
+      \item Modelagem de estruturas e leis da natureza, estudo de partículas
+    \end{itemize}
+    \item<3-> Ideia geral: operacionalização de elementos de um conjunto
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Teoria de grupos}
+  \begin{itemize}
+    \item<1-> Estudo de simetrias de um objeto
+    \item<1-> Uma simetria é um estado de um objeto que ocupa o mesmo lugar no
+        espaço após um movimento rígido
+    \item<2-> Podem ser aplicadas repetidamente, desfeitas, ou simplesmente não
+        mudar o objeto
+    \begin{itemize}[itemsep=0pt]
+      \item Ou seja, as propriedades de composição, elemento inverso e elemento
+          neutro são satisfeitas
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplo}
+  \framesubtitle{Teoria de grupos}
+  \begin{figure}[htbp]
+    \resizebox{4cm}{!}{
+      \begin{tikzpicture}
+        \node [small, label=above:{\tiny $1$}] (xy) at (-1, 0) {};
+        \node [small, label=above:{\tiny $2$}] (xyz) at (0, 0) {};
+        \node [small, label=below:{\tiny $3$}] (xz) at (0, -1) {};
+        \node [small, label=below:{\tiny $4$}] (x) at (-1, -1) {};
+        \draw (x)  edge (xy) (x)  edge (xz) (xy) edge (xyz) (xz) edge (xyz);
+        \draw[dashdotted] (-1.2, -0.5) -- (0.2, -0.5)
+          node[pos=1.15]{{\tiny $x$}};
+        \draw[dashdotted] (-0.5, -1.2) -- (-0.5, 0.2)
+          node[pos=-0.15]{{\tiny $y$}};
+        \draw[dashdotted] (0.15, 0.15) -- (-1.15, -1.15)
+          node[pos=-0.15]{{\tiny $z$}};
+        \draw[dashdotted] (-1.15, 0.15) -- (0.15, -1.15)
+          node[pos=1.15]{{\tiny $w$}};
+      \end{tikzpicture}
+    }
+  \end{figure}
+  \begin{itemize}
+    \item Um quadrado sobre um plano qualquer tem oito simetrias, que levam de
+      vértice em vértice
+    \item Rotações no sentido horário e reflexões sobre eixos
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplo}
+  \framesubtitle{Teoria de grupos}
+  \begin{figure}[htbp]
+    \begin{tikzpicture}
+      \node [small, left=of xyz, label=below right:{\tiny \color{red}{$1$}}] (xy) {};
+      \node [small, label=below left:{\tiny \color{blue}{$2$}}] (xyz) at (0, 0) {};
+      \node [small, below=of xyz, label=above left:{\tiny \color{green}{$3$}}] (xz) {};
+      \node [small, below=of xy, label=above right:{\tiny \color{gray}{$4$}}] (x) {};
+      \draw (x)  edge (xy) (x)  edge (xz) (xy) edge (xyz) (xz) edge (xyz);
+    \end{tikzpicture} \qquad
+    \begin{tikzpicture}
+      \node [small, left=of xyz, label=below right:{\tiny \color{gray}{$4$}}] (xy) {};
+      \node [small, label=below left:{\tiny \color{red}{$1$}}] (xyz) at (0, 0) {};
+      \node [small, below=of xyz, label=above left:{\tiny \color{blue}{$2$}}] (xz) {};
+      \node [small, below=of xy, label=above right:{\tiny \color{green}{$3$}}] (x) {};
+      \draw (x)  edge (xy) (x)  edge (xz) (xy) edge (xyz) (xz) edge (xyz);
+    \end{tikzpicture} \qquad
+    \begin{tikzpicture}
+      \node [small, left=of xyz, label=below right:{\tiny \color{green}{$3$}}] (xy) {};
+      \node [small, label=below left:{\tiny \color{gray}{$4$}}] (xyz) at (0, 0) {};
+      \node [small, below=of xyz, label=above left:{\tiny \color{red}{$1$}}] (xz) {};
+      \node [small, below=of xy, label=above right:{\tiny \color{blue}{$2$}}] (x) {};
+      \draw (x)  edge (xy) (x)  edge (xz) (xy) edge (xyz) (xz) edge (xyz);
+    \end{tikzpicture} \qquad
+    \begin{tikzpicture}
+      \node [small, left=of xyz, label=below right:{\tiny \color{blue}{$2$}}] (xy) {};
+      \node [small, label=below left:{\tiny \color{green}{$3$}}] (xyz) at (0, 0) {};
+      \node [small, below=of xyz, label=above left:{\tiny \color{gray}{$4$}}] (xz) {};
+      \node [small, below=of xy, label=above right:{\tiny \color{red}{$1$}}] (x) {};
+      \draw (x)  edge (xy) (x)  edge (xz) (xy) edge (xyz) (xz) edge (xyz);
+    \end{tikzpicture}
+    \caption*{Rotações no sentido horário de 0\degree, 90\degree, 180\degree
+      e 270\degree, respectivamente ($R_{0}, R_{1}, R_{2}, R_{3}$).}
+  \end{figure}
+  \vspace{-.5cm}
+  \begin{figure}[htbp]
+    \begin{tikzpicture}
+      \node [small, left=of xyz, label=below right:{\tiny \color{gray}{$4$}}] (xy) {};
+      \node [small, label=below left:{\tiny \color{green}{$3$}}] (xyz) at (0, 0) {};
+      \node [small, below=of xyz, label=above left:{\tiny \color{blue}{$2$}}] (xz) {};
+      \node [small, below=of xy, label=above right:{\tiny \color{red}{$1$}}] (x) {};
+      \draw (x)  edge (xy) (x)  edge (xz) (xy) edge (xyz) (xz) edge (xyz);
+    \end{tikzpicture} \qquad
+    \begin{tikzpicture}
+      \node [small, left=of xyz, label=below right:{\tiny \color{blue}{$2$}}] (xy) {};
+      \node [small, label=below left:{\tiny \color{red}{$1$}}] (xyz) at (0, 0) {};
+      \node [small, below=of xy, label=above right:{\tiny \color{green}{$3$}}] (x) {};
+      \node [small, below=of xyz, label=above left:{\tiny \color{gray}{$4$}}] (xz) {};
+      \draw (x)  edge (xy) (x)  edge (xz) (xy) edge (xyz) (xz) edge (xyz);
+    \end{tikzpicture} \qquad
+    \begin{tikzpicture}
+      \node [small, left=of xyz, label=below right:{\tiny \color{green}{$3$}}] (xy) {};
+      \node [small, label=below left:{\tiny \color{blue}{$2$}}] (xyz) at (0, 0) {};
+      \node [small, below=of xyz, label=above left:{\tiny \color{red}{$1$}}] (xz) {};
+      \node [small, below=of xy, label=above right:{\tiny \color{gray}{$4$}}] (x) {};
+      \draw (x)  edge (xy) (x)  edge (xz) (xy) edge (xyz) (xz) edge (xyz);
+    \end{tikzpicture} \qquad
+    \begin{tikzpicture}
+      \node [small, left=of xyz, label=below right:{\tiny \color{red}{$1$}}] (xy) {};
+      \node [small, label=below left:{\tiny \color{gray}{$4$}}] (xyz) at (0, 0) {};
+      \node [small, below=of xyz, label=above left:{\tiny \color{green}{$3$}}] (xz) {};
+      \node [small, below=of xy, label=above right:{\tiny \color{blue}{$2$}}] (x) {};
+      \draw (x)  edge (xy) (x)  edge (xz) (xy) edge (xyz) (xz) edge (xyz);
+    \end{tikzpicture}
+    \caption*{Reflexões com relação aos eixos $x, y, z$ e $w$,
+      respectivamente ($X, Y, Z, W$).}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Operações binárias}
+  \begin{itemize}
+    \item<1-> Tome $G$ como um conjunto qualquer. Uma \textbf{operação binária}
+        sobre $G$ é uma função $* : G \times G \rightarrow G$
+    \item<2-> $*$ é definida para todo par $(a, b)$ de elementos, e associa-os
+        unicamente
+    \begin{itemize}[itemsep=0pt]
+      \item A aplicação $*(a, b)$ será denotada como $a * b$
+    \end{itemize}
+    \item<3-> Definição pode ser estendida para operações $n$-árias
+    \begin{itemize}
+      \item Teoria de grupos trabalha geralmente com operações entre dois
+          elementos
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Operações binárias}
+  \begin{itemize}
+   \item<1-> Definição implica que a operação é fechada
+    \begin{itemize}[itemsep=0pt]
+      \item Imagem da função sempre estará no conjunto base
+      \item Descrição mais genérica pode ignorar essa limitação
+    \end{itemize}
+   \item<2-> Se existe um elemento neutro para qualquer operação $*$ sobre um
+       conjunto $G$, ele é único
+   \item<3-> Pode ser associativa, comutativa, distributiva
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplos}
+  \framesubtitle{Operações binárias}
+  \begin{table}
+    \begin{tabular}{c|cccccccc}
+      $*$ & $R_{0}$ & $R_{1}$ & $R_{2}$ & $R_{3}$ & $X$ & $Y$ & $Z$ & $W$ \\
+        \hline
+      $R_{0}$ & $R_{0}$ & $R_{1}$ & $R_{2}$ & $R_{3}$ & $X$ & $Y$ & $Z$ & $W$
+        \\
+      $R_{1}$ & $R_{1}$ & $R_{2}$ & $R_{3}$ & $R_{0}$ & $Z$ & $W$ & $Y$ & $X$
+        \\
+      $R_{2}$ & $R_{2}$ & $R_{3}$ & $R_{0}$ & $R_{1}$ & $Y$ & $X$ & $W$ & $Z$
+        \\
+      $R_{3}$ & $R_{3}$ & $R_{0}$ & $R_{1}$ & $R_{2}$ & $W$ & $Z$ & $X$ & $Y$
+        \\
+      $X$ & $X$ & $Z$ & $Y$ & $W$ & $R_{0}$ & $R_{2}$ & $R_{1}$ & $R_{3}$ \\
+      $Y$ & $Y$ & $W$ & $X$ & $Z$ & $R_{2}$ & $R_{0}$ & $R_{3}$ & $R_{1}$ \\
+      $Z$ & $Z$ & $Y$ & $W$ & $X$ & $R_{3}$ & $R_{1}$ & $R_{0}$ & $R_{2}$ \\
+      $W$ & $W$ & $X$ & $Z$ & $Y$ & $R_{1}$ & $R_{3}$ & $R_{2}$ & $R_{0}$ \\
+    \end{tabular}
+    \caption*{Tabela de operações para as simetrias do quadrado.}
+  \end{table}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplos}
+  \framesubtitle{Operações binárias}
+  \begin{itemize}
+    \item<1-> Operações comutativas
+    \begin{itemize}[itemsep=0pt]
+      \item<2-> $+$, a adição usual em $\mathbb{Z}, \mathbb{Q}, \mathbb{R},
+          \mathbb{C}$
+      \item<3-> $\times$, a multiplicação usual em $\mathbb{Z}, \mathbb{Q},
+          \mathbb{R}, \mathbb{C}$
+    \end{itemize}
+    \item<1-> Operações não comutativas
+    \begin{itemize}[itemsep=0pt]
+      \item<4-> $-$, subtração usual em $\mathbb{Z}, \mathbb{Q}, \mathbb{R},
+          \mathbb{C}$
+      \item<5-> $\times$, a multiplicação de matrizes de mesma dimensão
+    \end{itemize}
+    \item<1-> Operações não associativas e não comutativas
+    \begin{itemize}[itemsep=0pt]
+      \item<6-> $\div$, a divisão usual em $\mathbb{Q}, \mathbb{R}$
+      \item<7-> $\times$, o produto vetorial de dois elementos $\mathbb{R}^{3}$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Grupos}
+  \begin{itemize}
+    \item<1-> Conjunto de elementos munido de uma operação binária que satisfaz
+        certas propriedades
+    \item<2-> Dado um conjunto $G$ e uma operação binária $*$, um \textbf{grupo} é
+        o par ordenado $(G, *)$ onde, $\forall a, b, c \in G$
+    \begin{itemize}[itemsep=0pt]
+      \item<3-> $*$ é fechada, ou seja, $a * b \in G$
+      \item<4-> $*$ é associativa, ou seja, $(a * b) * c = a * (b * c)$
+      \item<5-> $*$ possui a identidade única $e \in G$, ou seja, $a * e  = a$
+      \item<6-> Existe $d \in G$ único tal que $a * d = e = d * a$, chamado de
+          inverso de $a$ ou $a^{-1}$
+    \end{itemize}
+    \item<7-> Note que $G \neq \emptyset$, visto que $e \in G$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplos}
+  \framesubtitle{Grupos}
+  \begin{itemize}
+    \item<1-> Com relação à adição usual, tome $e = 0$ e $a^{-1} = -a$
+    \begin{itemize}
+      \item $(\mathbb{Z}, +), (\mathbb{Q}, +), (\mathbb{R}, +), (\mathbb{C},
+          +)$ são todos grupos
+    \end{itemize}
+    \item<2-> Com relação à multiplicação usual, tome $e = 1$ e $a^{-1} =
+        \frac{1}{a}$
+    \begin{itemize}
+      \item $(\mathbb{Q}^{*}, \times), (\mathbb{R}^{*}, \times),
+          (\mathbb{C}^{*}, \times)$ são todos grupos
+    \end{itemize}
+    \item<3-> Com relação à adição módulo $n$, tome $e = 0$ e $a +
+        a^{-1} \equiv 0 \pmod{n}$; $\mathbb{Z}_{n}$ é um grupo
+    \item<4-> Com relação à multiplicação módulo $n$, tome $e = 1$ e $a \times
+        a^{-1} \equiv 1 \pmod{n}$; $\mathbb{Z}_{n}^{*}$ é um grupo
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Grupos}
+  \begin{itemize}
+    \item<1-> Grupos respeitam várias propriedades intuitivas
+    \begin{itemize}[itemsep=0pt]
+      \item<2-> A inversa da identidade é ela mesma, ou seja, $e^{-1} = e$
+      \item<3-> A inversa da inversa de um elemento é ele mesmo, ou seja,
+          ${(a^{-1})}^{-1} = a$
+      \item<4-> $(a * b)^{-1} = b^{-1} * a^{-1}$
+      \item<5-> Leis do cancelamento à direita e à esquerda, ou seja, $a * c = b *
+          c \Leftrightarrow a = b$ e $c * a = c * b \Leftrightarrow a = b$
+    \end{itemize}
+    \item<6-> $x^{n} = x * x * \dots * x$, $n$ vezes; $x^{0} = e$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Grupos}
+  \begin{itemize}
+    \item A ordem de um grupo $(G, *)$, denotada $|G|$, é o número de elementos
+        de $G$
+    \item A ordem de um elemento $g \in G$, denotada $|g|$, é o menor $n \in
+        \mathbb{N}^{*}$ tal que $g^{n} = e$
+    \item<2-> Se a operação do grupo é comutativa, então este é chamado de
+        grupo \textbf{abeliano}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Grupos}
+  \begin{itemize}
+    \item<1-> Um subconjunto $H \subseteq G$ que é fechado sob $*$ e
+        cujas inversas estão em $H$ é chamado de \textbf{subgrupo}
+    \begin{itemize}
+      \item Os inteiros pares munidos da adição usual são um subgrupo de
+          $(\mathbb{Z}, +)$
+    \end{itemize}
+    \item<2-> Uma função $\varphi$ entre dois grupos que preserva $*$ é chamada
+        de \textbf{homomorfismo}
+    \begin{itemize}[itemsep=0pt]
+      \item Ou seja, dados $(G_{1}, {\color{blue}*}), (G_{2},
+          {\color{red}*}),\; \varphi : G_{1} \rightarrow G_{2}$, então $\forall
+            g_{11}, g_{12} \in G_{1},\; g_{11}\; {\color{blue}*}\; g_{12} =
+            \varphi(g_{11})\; {\color{red}*}\; \varphi(g_{12})$
+      \item<3-> Se esta correspondência é bijetora, a função é chamada de
+          isomorfismo
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Grupos cíclicos}
+  \begin{itemize}
+    \item<1-> O conjunto gerador de um grupo é um subconjunto cujos elementos,
+        suas potências e inversas geram todos os elementos do grupo
+    \item<2-> Um grupo abeliano que é gerado por apenas um elemento é chamado
+        de \textbf{cíclico}
+    \item<3-> Todos os grupos de ordem prima são cíclicos
+    \item<4-> O grupo $\mathbb{Z}_n$ é cíclico, bem como o grupo das simetrias do
+        quadrado
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Grupos diedrais}
+  \begin{itemize}
+    \item<1-> As simetrias do quadrado são definidas como um grupo
+    \item<1-> Note que essas funções admitem uma forma de descrição matricial
+    \begin{itemize}
+      \item<2-> Represente-as como
+        $R_{0} =
+        \begin{pmatrix}
+          1 & 2 & 3 & 4 \\
+          1 & 2 & 3 & 4
+        \end{pmatrix},\; \dots$
+    \end{itemize}
+    \item<3-> Então, $G = \{R_{0}, R_{1}, R_{2}, R_{3}, X, Y, Z, W\}$, munido
+        da operação de composição de funções $\circ$, é um grupo
+    \begin{itemize}
+      \item<4-> Não é abeliano, pois por exemplo, $X \circ R_{3} = W \neq Z =
+          R_{3} \circ X$
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Grupos diedrais}
+  \begin{itemize}
+    \item<1-> Este conceito pode ser generalizado para qualquer polígono regular
+    \begin{itemize}
+      \item Grupos dessa forma são chamados de \textbf{diedrais} ou $D_{n}$,
+          onde $n$ é o número de vértices do polígono
+    \end{itemize}
+    \item<2-> Ordem do grupo é sempre $2n$
+    \item<3-> Exemplo gráfico:
+        \href{https://upload.wikimedia.org/wikipedia/commons/9/96/Dihedral8.png}{o
+          grupo $D_{8}$}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Material de estudo}
+  \bibliographystyle{apalike}
+  \bibliography{ref}
+  \begin{itemize}
+    \nocite{Dummit:book:2003}
+    \item Leitura das páginas 16-32 e resolução dos exercícios 1-10 de cada
+        subseção
+  \end{itemize}
+\end{frame}
+
+\end{document}
