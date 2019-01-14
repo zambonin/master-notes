@@ -40,11 +40,11 @@
 \begin{document}
 
 \catcode`\@=11
-\def\chron@selectmonth#1{\ifcase#1\or Jan\or Feb\or Mar\or Apr\or%
-  May\or Jun\or Jul\or Mid\or Sep\or Oct\or Nov\or Dec\fi}
+\def\chron@selectmonth#1{\ifcase#1\or{} Jan\or{} Feb\or{} Mar\or{} Apr\or{}%
+  May\or{} Jun\or{} Jul\or{} Mid\or{} Sep\or{} Oct\or{} Nov\or{} Dec\fi}
 
 \begin{frame}[plain,noframenumbering]
-  \titlepage
+  \titlepage{}
 \end{frame}
 
 \begin{frame}
@@ -195,12 +195,12 @@
   \end{itemize}
 \end{frame}
 
-\backupbegin
+\backupbegin{}
 \begin{frame}[plain, allowframebreaks]
   \frametitle{References}
   \bibliographystyle{alpha}
   {\tiny \bibliography{\jobname}}
 \end{frame}
-\backupend
+\backupend{}
 
 \end{document}

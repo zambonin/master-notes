@@ -34,7 +34,7 @@
 \captionsetup{justification=centering}
 
 \begin{frame}[plain,noframenumbering]
-  \titlepage
+  \titlepage{}
 \end{frame}
 
 \begin{frame}
@@ -129,21 +129,24 @@
       \node [small, below=of xyz, label=above left:{\tiny \color{green}{$3$}}] (xz) {};
       \node [small, below=of xy, label=above right:{\tiny \color{gray}{$4$}}] (x) {};
       \draw (x)  edge (xy) (x)  edge (xz) (xy) edge (xyz) (xz) edge (xyz);
-    \end{tikzpicture} \qquad
+    \end{tikzpicture}
+    \qquad
     \begin{tikzpicture}
       \node [small, left=of xyz, label=below right:{\tiny \color{gray}{$4$}}] (xy) {};
       \node [small, label=below left:{\tiny \color{red}{$1$}}] (xyz) at (0, 0) {};
       \node [small, below=of xyz, label=above left:{\tiny \color{blue}{$2$}}] (xz) {};
       \node [small, below=of xy, label=above right:{\tiny \color{green}{$3$}}] (x) {};
       \draw (x)  edge (xy) (x)  edge (xz) (xy) edge (xyz) (xz) edge (xyz);
-    \end{tikzpicture} \qquad
+    \end{tikzpicture}
+    \qquad
     \begin{tikzpicture}
       \node [small, left=of xyz, label=below right:{\tiny \color{green}{$3$}}] (xy) {};
       \node [small, label=below left:{\tiny \color{gray}{$4$}}] (xyz) at (0, 0) {};
       \node [small, below=of xyz, label=above left:{\tiny \color{red}{$1$}}] (xz) {};
       \node [small, below=of xy, label=above right:{\tiny \color{blue}{$2$}}] (x) {};
       \draw (x)  edge (xy) (x)  edge (xz) (xy) edge (xyz) (xz) edge (xyz);
-    \end{tikzpicture} \qquad
+    \end{tikzpicture}
+    \qquad
     \begin{tikzpicture}
       \node [small, left=of xyz, label=below right:{\tiny \color{blue}{$2$}}] (xy) {};
       \node [small, label=below left:{\tiny \color{green}{$3$}}] (xyz) at (0, 0) {};
@@ -151,8 +154,9 @@
       \node [small, below=of xy, label=above right:{\tiny \color{red}{$1$}}] (x) {};
       \draw (x)  edge (xy) (x)  edge (xz) (xy) edge (xyz) (xz) edge (xyz);
     \end{tikzpicture}
-    \caption*{Rotações no sentido horário de 0\degree, 90\degree, 180\degree
-      e 270\degree, respectivamente ($R_{0}, R_{1}, R_{2}, R_{3}$).}
+    \caption*{Rotações no sentido horário de 0\degree{}, 90\degree{},
+      180\degree{} e 270\degree{}, respectivamente ($R_{0}, R_{1}, R_{2},
+      R_{3}$).}
   \end{figure}
   \vspace{-.5cm}
   \begin{figure}[htbp]
@@ -162,21 +166,24 @@
       \node [small, below=of xyz, label=above left:{\tiny \color{blue}{$2$}}] (xz) {};
       \node [small, below=of xy, label=above right:{\tiny \color{red}{$1$}}] (x) {};
       \draw (x)  edge (xy) (x)  edge (xz) (xy) edge (xyz) (xz) edge (xyz);
-    \end{tikzpicture} \qquad
+    \end{tikzpicture}
+    \qquad
     \begin{tikzpicture}
       \node [small, left=of xyz, label=below right:{\tiny \color{blue}{$2$}}] (xy) {};
       \node [small, label=below left:{\tiny \color{red}{$1$}}] (xyz) at (0, 0) {};
       \node [small, below=of xy, label=above right:{\tiny \color{green}{$3$}}] (x) {};
       \node [small, below=of xyz, label=above left:{\tiny \color{gray}{$4$}}] (xz) {};
       \draw (x)  edge (xy) (x)  edge (xz) (xy) edge (xyz) (xz) edge (xyz);
-    \end{tikzpicture} \qquad
+    \end{tikzpicture}
+    \qquad
     \begin{tikzpicture}
       \node [small, left=of xyz, label=below right:{\tiny \color{green}{$3$}}] (xy) {};
       \node [small, label=below left:{\tiny \color{blue}{$2$}}] (xyz) at (0, 0) {};
       \node [small, below=of xyz, label=above left:{\tiny \color{red}{$1$}}] (xz) {};
       \node [small, below=of xy, label=above right:{\tiny \color{gray}{$4$}}] (x) {};
       \draw (x)  edge (xy) (x)  edge (xz) (xy) edge (xyz) (xz) edge (xyz);
-    \end{tikzpicture} \qquad
+    \end{tikzpicture}
+    \qquad
     \begin{tikzpicture}
       \node [small, left=of xyz, label=below right:{\tiny \color{red}{$1$}}] (xy) {};
       \node [small, label=below left:{\tiny \color{gray}{$4$}}] (xyz) at (0, 0) {};
@@ -225,9 +232,8 @@
   \frametitle{Exemplos}
   \framesubtitle{Operações binárias}
   \begin{table}
-    \begin{tabular}{c|cccccccc}
+    \begin{tabular}{ccccccccc}
       $*$ & $R_{0}$ & $R_{1}$ & $R_{2}$ & $R_{3}$ & $X$ & $Y$ & $Z$ & $W$ \\
-        \hline
       $R_{0}$ & $R_{0}$ & $R_{1}$ & $R_{2}$ & $R_{3}$ & $X$ & $Y$ & $Z$ & $W$
         \\
       $R_{1}$ & $R_{1}$ & $R_{2}$ & $R_{3}$ & $R_{0}$ & $Z$ & $W$ & $Y$ & $X$
@@ -318,9 +324,10 @@
       \item<2-> A inversa da identidade é ela mesma, ou seja, $e^{-1} = e$
       \item<3-> A inversa da inversa de um elemento é ele mesmo, ou seja,
           ${(a^{-1})}^{-1} = a$
-      \item<4-> $(a * b)^{-1} = b^{-1} * a^{-1}$
-      \item<5-> Leis do cancelamento à direita e à esquerda, ou seja, $a * c = b *
-          c \Leftrightarrow a = b$ e $c * a = c * b \Leftrightarrow a = b$
+      \item<4-> ${(a * b)}^{-1} = b^{-1} * a^{-1}$
+      \item<5-> Leis do cancelamento à direita e à esquerda, ou seja,
+          $a * c = b * c \Leftrightarrow a = b$ e
+            $c * a = c * b \Leftrightarrow a = b$
     \end{itemize}
     \item<6-> $x^{n} = x * x * \dots * x$, $n$ vezes; $x^{0} = e$
   \end{itemize}
@@ -416,7 +423,7 @@
   \bibliography{ref}
   \begin{itemize}
     \nocite{Dummit:book:2003}
-    \item Leitura das páginas 16-32 e resolução dos exercícios 1-10 de cada
+    \item Leitura das páginas 16--32 e resolução dos exercícios 1--10 de cada
         subseção
   \end{itemize}
 \end{frame}

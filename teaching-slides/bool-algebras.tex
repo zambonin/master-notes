@@ -32,7 +32,7 @@
 \begin{document}
 
 \begin{frame}[plain,noframenumbering]
-  \titlepage
+  \titlepage{}
 \end{frame}
 
 \begin{frame}
@@ -113,7 +113,8 @@
       \draw (0) edge (x)  (0)  edge (y)   (0)  edge (z)   (x)  edge (xy)
             (x) edge (xz) (y)  edge (xy)  (y)  edge (yz)  (z)  edge (xz)
             (z) edge (yz) (xy) edge (xyz) (xz) edge (xyz) (yz) edge (xyz);
-    \end{tikzpicture} \quad
+    \end{tikzpicture}
+    \quad
     \begin{tikzpicture}
       \node [small, label=above:{\tiny $\{x, y, z\}$}] (xyz) at (0, 0) {};
       \node [small, below left=of xyz, label=left:{\tiny $\{x, y\}$}] (xy) {};
@@ -211,19 +212,22 @@
   \begin{figure}
     \begin{tikzpicture}
       \node [small, label=below:{\tiny \color{white}{0}}] (xyz) at (0, 0) {};
-    \end{tikzpicture} \qquad
+    \end{tikzpicture}
+    \qquad
     \begin{tikzpicture}
       \node [small, label=above:{\tiny $1$}] (xyz) at (0, 0) {};
       \node [small, below=of xyz, label=below:{\tiny $0$}] (xz) {};
       \draw (xz) edge (xyz);
-    \end{tikzpicture} \qquad
+    \end{tikzpicture}
+    \qquad
     \begin{tikzpicture}
       \node [small, label=above:{\tiny $11$}] (xyz) at (0, 0) {};
       \node [small, below left=of xyz, label=left:{\tiny $01$}] (xy) {};
       \node [small, below right=of xyz, label=right:{\tiny $10$}] (yz) {};
       \node [small, below=of xz, label=below:{\tiny $0$}] (y) {};
       \draw (y)  edge (xy)  (y)  edge (yz)  (xy) edge (xyz)  (yz) edge (xyz);
-    \end{tikzpicture} \qquad
+    \end{tikzpicture}
+    \qquad
     \begin{tikzpicture}
       \node [small, label=above:{\tiny $111$}] (xyz) at (0, 0) {};
       \node [small, below left=of xyz, label=left:{\tiny $110$}] (xy) {};
@@ -339,11 +343,11 @@
   \bibliography{ref}
   \begin{itemize}[itemsep=0pt]
     \nocite{Kolman:book:1999}
-    \item Kolman: leitura das páginas 217-223 (especialmente p. 222) e
-        resolução dos exercícios 1-21
+    \item Kolman: leitura das páginas 217--223 (especialmente p. 222) e
+        resolução dos exercícios 1--21
     \nocite{Rosen:book:2011}
-    \item Rosen: leitura das páginas 811-817 e resolução dos
-        exercícios 1-4, 24-28
+    \item Rosen: leitura das páginas 811--817 e resolução dos
+        exercícios 1--4, 24--28
   \end{itemize}
 \end{frame}
 

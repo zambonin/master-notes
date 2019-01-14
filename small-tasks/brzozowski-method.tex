@@ -73,7 +73,7 @@ complement. We present the output of this rationale below.
           (q2) edge               node {0} (q3) edge [loop below] node {1} (q2)
           (q3) edge [bend right]  node {0} (q0) edge              node {1} (q4)
           (q4) edge [bend right]  node {0} (q0) edge              node {1} (q5)
-          (q5) edge [bend left]   node {1} (q2)
+          (q5) edge [bend left]   node {1} (q2);
   \end{tikzpicture}
   \caption{NFA that accepts $\mathcal{L}$.}
 \end{figure}
@@ -135,58 +135,61 @@ We use Eq.~\ref{eq:arden} on Eq.~\ref{eq:aaqq2} with $L = Q_2,\ U = 1^*0111,\
 V = 1^*(\e + 0(\e + 0Q_0 + 1(\e + 0Q_0 + 1)))$ to
 remove its last circular definition, obtaining
 \begin{align}\label{eq:aaaqq2}
-  Q_2 &= (1^*0111)^*(1^*(\e + 0(\e + 0Q_0 + 1(\e + 0Q_0 + 1)))).
+  Q_2 &= {(1^*0111)}^*(1^*(\e + 0(\e + 0Q_0 + 1(\e + 0Q_0 + 1)))).
 \end{align}
 
 Now, we are able to substitute Eq.~\ref{eq:aaaqq2} into Eq.~\ref{eq:aqq0}, and
 expand it, so Eq.~\ref{eq:arden} may be used.
 \begin{align}
-    Q_0 &= 0^*(\e + 1(\e + 0Q_0 + 1(1^*0111)^*(
+  Q_0 &= 0^*(\e + 1(\e + 0Q_0 + {1(1^*0111)}^*(
     1^*(\e + 0(\e + 0Q_0 + 1(\e + 0Q_0 + 1)))))) \\
-    \label{eq:aqqq0}    &= 0^*10Q_0 + 0^*(\e + 1(\e + 1(1^*0111)^*(
+  \label{eq:aqqq0}    &= 0^*10Q_0 + 0^*(\e + 1(\e + {1(1^*0111)}^*(
     1^*(\e + 0(\e + 0Q_0 + 1(\e + 0Q_0 + 1))))))
 \end{align}
 
 We use Eq.~\ref{eq:arden} on Eq.~\ref{eq:aqqq0} with $L = Q_0,\ U = 0^*10,\ \\
-V = 0^*(\e + 1(\e + 1(1^*0111)^*(1^*(\e + 0(\e + 0Q_0 + 1(\e + 0Q_0 + 1))))))$,
-and expand it again, obtaining
+V = 0^*(\e + 1(\e + {1(1^*0111)}^*(1^*(\e + 0(\e + 0Q_0 + 1(\e + 0Q_0 +
+1))))))$, and expand it again, obtaining
 \begin{align}
-  Q_0 &= (0^*10)^*0^*(\e + 1(\e + 1(1^*0111)^*1^*(\e
+  Q_0 &= {(0^*10)}^*0^*(\e + 1(\e + {1(1^*0111)}^*1^*(\e
     + 0(\e + 0Q_0 + 1(\e + 0Q_0 + 1))))) \\
       \begin{split}\label{eq:aqqqq0}
-        &= (0^*10)^*0^*11(1^*0111)^*1^*00Q_0 \\
-        & \quad + (0^*10)^*0^*(\e + 1(\e + 1(1^*0111)^*1^*(\e
+        &= {(0^*10)}^*0^*{11(1^*0111)}^*1^*00Q_0 \\
+        & \quad + {(0^*10)}^*0^*(\e + 1(\e + {1(1^*0111)}^*1^*(\e
           + 0(\e + 1(\e + 0Q_0 + 1))))).
       \end{split}
 \end{align}
 
 We use Eq.~\ref{eq:arden} on Eq.~\ref{eq:aqqqq0} with $L = Q_0,\
-U = (0^*10)^*0^*11(1^*0111)^*1^*00,\
-V = (0^*10)^*0^*(\e + 1(\e + 1(1^*0111)^*1^*(\e + 0(\e + 1(\e + 0Q_0 + 1)))))$,
-and expand it for the last time, obtaining
+U = {(0^*10)}^*0^*{11(1^*0111)}^*1^*00,\
+V = {(0^*10)}^*0^*(\e + 1(\e + {1(1^*0111)}^*1^*(\e + 0(\e + 1(\e + 0Q_0 +
+1)))))$, and expand it for the last time, obtaining
 \begin{align}
   \begin{split}
-    Q_0 &= ((0^*10)^*0^*11(1^*0111)^*1^*00)^* \\
-        & \quad \cdot (0^*10)^*0^*(\e + 1(\e + 1(1^*0111)^*1^*(\e
+    Q_0 &= {({(0^*10)}^*0^*{11(1^*0111)}^*1^*00)}^* \\
+        & \quad \cdot {(0^*10)}^*0^*(\e + 1(\e + {1(1^*0111)}^*1^*(\e
           + 0(\e + 1(\e + 0Q_0 + 1)))))
   \end{split} \\
   \begin{split} \label{eq:aqqqqq0}
-    &= ((0^*10)^*0^*11(1^*0111)^*1^*00)^*(0^*10)^*0^*11(1^*0111)^*1^*010Q_0 \\
-    & \quad + ((0^*10)^*0^*11(1^*0111)^*1^*00)^*(0^*10)^*0^*(\e + 1(\e
-      + 1(1^*0111)^*1^*(\e + 0(\e + 1(\e + 1))))).
+    &= {({(0^*10)}^*0^*{11(1^*0111)}^*1^*00)}^*
+      {(0^*10)}^*0^*{11(1^*0111)}^*1^*010Q_0 \\
+    & \quad + {({(0^*10)}^*0^*{11(1^*0111)}^*1^*00)}^*{(0^*10)}^*0^*(\e + 1(\e
+      + {1(1^*0111)}^*1^*(\e + 0(\e + 1(\e + 1))))).
   \end{split}
 \end{align}
 
 Finally, we use Eq.~\ref{eq:arden} on Eq.~\ref{eq:aqqqqq0} with $L = Q_0,\ \\
-U = ((0^*10)^*0^*11(1^*0111)^*1^*00)^*(0^*10)^*0^*11(1^*0111)^*1^*010,\ \\
-V = ((0^*10)^*0^*11(1^*0111)^*1^*00)^*(0^*10)^*0^*(\e + 1(\e
-+ 1(1^*0111)^*1^*(\e + 0(\e + 1(\e + 1)))))$, and obtain a closed form regular
+U = {({(0^*10)}^*0^*{11(1^*0111)}^*1^*00)}^*\
+{(0^*10)}^*0^*{11(1^*0111)}^*1^*010,\ \\
+V = {({(0^*10)}^*0^*{11(1^*0111)}^*1^*00)}^*{(0^*10)}^*0^*(\e + 1(\e
++ {1(1^*0111)}^*1^*(\e + 0(\e + 1(\e + 1)))))$, and obtain a closed form regular
 expression:
 \begin{align}
   \begin{split}
-    Q_0 &= (((0^*10)^*0^*11(1^*0111)^*1^*00)^*(0^*10)^*0^*11(1^*0111)^*1^*010)^*
-    \\  & \quad \cdot ((0^*10)^*0^*11(1^*0111)^*1^*00)^*(0^*10)^*0^*(\e + 1(\e
-        + 1(1^*0111)^*1^*(\e + 0(\e + 1(\e + 1))))).
+    Q_0 &= {({({(0^*10)}^*0^*{11(1^*0111)}^*1^*00)}^*
+      {(0^*10)}^*0^*{11(1^*0111)}^*1^*010)}^*
+    \\  & \quad \cdot {({(0^*10)}^*0^*{11(1^*0111)}^*1^*00)}^*{(0^*10)}^*0^*
+      (\e + 1(\e + {1(1^*0111)}^*1^*(\e + 0(\e + 1(\e + 1))))).
   \end{split}
 \end{align}
 

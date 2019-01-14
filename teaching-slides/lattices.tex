@@ -32,7 +32,7 @@
 \begin{document}
 
 \begin{frame}[plain,noframenumbering]
-  \titlepage
+  \titlepage{}
 \end{frame}
 
 \begin{frame}
@@ -172,6 +172,7 @@
   \framesubtitle{Reticulados}
   \centering
   \begin{tikzpicture}
+    \node (j) {};
     \node [small,          label=above:{\tiny f}] (f) {};
     \node [small, below    = of j, label=right:{\tiny e}] (e) {};
     \node [small, below    = of e, label=right:{\tiny c}] (c) {};
@@ -180,7 +181,8 @@
     \node [small, below left = of c, label=below:{\tiny a}] (a) {};
     \draw (a) edge (b) (a) edge (c) (d) edge (b) (d) edge (f)
     (e) edge (c) (e) edge (f) (b) edge (e) (c) edge (d);
-  \end{tikzpicture} \qquad
+  \end{tikzpicture}
+  \qquad
   \begin{tikzpicture}
     \node [small,           label=above:{\tiny h}] (h) {};
     \node [small, below left  = of h, label=left:{\tiny e}] (e) {};
@@ -351,7 +353,8 @@
       \draw (0) edge (x)  (0)  edge (y)   (0)  edge (z)   (x)  edge (xy)
             (x) edge (xz) (y)  edge (xy)  (y)  edge (yz)  (z)  edge (xz)
             (z) edge (yz) (xy) edge (xyz) (xz) edge (xyz) (yz) edge (xyz);
-    \end{tikzpicture} \quad
+    \end{tikzpicture}
+    \quad
     \begin{tikzpicture}
       \node [small, label=above:{\tiny $\{x, y, z\}$}] (xyz) at (0, 0) {};
       \node [small, below left=of xyz, label=left:{\tiny $\{x, y\}$}] (xy) {};
@@ -478,7 +481,8 @@
       \node [small, below=of y, label=below:{\tiny $\bot$}] (0) {};
       \draw (0) edge (x)  (0) edge (y)  (0)  edge (z)
             (x) edge (xz) (y) edge (xz) (z)  edge (xz);
-    \end{tikzpicture} \qquad
+    \end{tikzpicture}
+    \qquad
     \begin{tikzpicture}
       \node [small, label=above:{\tiny $\top$}] (xyz) at (0, 0) {};
       \node [small, below left=of xyz, label=left:{\tiny x}] (xy) {};
@@ -507,11 +511,11 @@
   \bibliography{ref}
   \begin{itemize}[itemsep=0pt]
     \nocite{Kolman:book:1999}
-    \item Kolman: leitura das páginas 207-215 e resolução dos exercícios 1-7,
-        11, 13-16, 20, na página 216
+    \item Kolman: leitura das páginas 207--215 e resolução dos exercícios 1--7,
+        11, 13--16, 20, na página 216
     \nocite{Rosen:book:2011}
-    \item Rosen: leitura das páginas 626-627 e resolução dos exercícios 43-44,
-        46-48, 50-52, na página 632
+    \item Rosen: leitura das páginas 626--627 e resolução dos exercícios
+        43--44, 46--48, 50--52, na página 632
   \end{itemize}
 \end{frame}
 

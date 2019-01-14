@@ -57,7 +57,7 @@ even if the data is stored in an insecure place. Outputs of these functions are
 generally called digests. For any $\hh{}$ to be considered cryptographic,
 solving the three problems listed below should be computationally infeasible:
 
-\begin{enumerate}[label=(\roman*)]
+\begin{enumerate}[label= (\roman*)]
   \item Given a digest $h$, find the original message $m$ such that
     $\hash{m} = h$. $\hh{}$ is said to be \emph{preimage} resistant if
     this cannot be solved efficiently.
@@ -93,7 +93,7 @@ to prevent impersonation, one of the keys is kept private, while the other is
 published to enable verification by any party. Digital signature schemes are
 defined as a triple of algorithms, listed below.
 
-\begin{enumerate}[label=(\roman*)]
+\begin{enumerate}[label= (\roman*)]
   \item Key pair generation \textsc{Gen}, that takes as input a security
     parameter $1^{n}, n \in \mathbb{N}^{*}$ and outputs a random key pair
     $(\sk{}, \pk{})$.

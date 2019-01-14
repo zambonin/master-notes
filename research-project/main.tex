@@ -9,73 +9,181 @@
 
 \sloppy
 
-\title{Reduction of Key Sizes on Rainbow-like Multivariate Signature Schemes\footnote{
-    As submitted to the INE410111 class (Research Methodology in Computer Science).}}
+\title{Reduction of Key Sizes on Rainbow-like Multivariate Signature
+    Schemes\footnote{As submitted to the INE410111 class (Research Methodology
+    in Computer Science).}}
 
 \author{Gustavo Zambonin\inst{1}}
 
 \address{Departamento de Informática e Estatística \\
   Universidade Federal de Santa Catarina \\
-  88040-900, Florianópolis, Brazil
+  88040-900, Florianópolis, Brazil % chktex-file 8
   \email{gustavo.zambonin@posgrad.ufsc.br}}
 
-\begin{document} 
+\begin{document}
 
 \maketitle
 
 \section{Research Subject}
 
-The amount of data transmitted through digital means has grown exponentially in the last decades. Advances in engineering have provided smaller and cheaper devices, usually integrated with wireless capabilities, facilitating heterogeneous communications. Still, the matter of trusting data received from another, possibly unknown machine, is highly important. Digital signatures are cryptographic frameworks employed to solve matters of authenticity, integrity and non-repudiation of messages. Protecting information with this method is sufficient to prevent malicious actors from forging a message or reading private matters, according to Goldreich~\cite{Goldreich:book:2004}.
+The amount of data transmitted through digital means has grown exponentially in
+the last decades. Advances in engineering have provided smaller and cheaper
+devices, usually integrated with wireless capabilities, facilitating
+heterogeneous communications. Still, the matter of trusting data received from
+another, possibly unknown machine, is highly important. Digital signatures are
+cryptographic frameworks employed to solve matters of authenticity, integrity
+and non-repudiation of messages. Protecting information with this method is
+sufficient to prevent malicious actors from forging a message or reading
+private matters, according to Goldreich~\cite{Goldreich:book:2004}.
 
-Nonetheless, current digital signature schemes are proven to be secure only under the assumption that there are no quantum adversaries. Unlike classical computers, quantum machines can execute Shor's algorithm~\cite{Shor:article:1997:oct} to efficiently solve problems such as integer factorisation or discrete logarithm. Ergo, it is imperative to study cryptography that is quantum-resistant, \emph{i.e.} post-quantum, even if classical machines are still the norm. One of the main approaches for instantiating post-quantum digital signature schemes is based on multivariate quadratic equations. The problems upon which these are based are not known to be solved more efficiently with a quantum computer~\cite{Bernstein:book:2008}. Ergo, these schemes appear to be good candidates for replacing currently used ones.
+Nonetheless, current digital signature schemes are proven to be secure only
+under the assumption that there are no quantum adversaries. Unlike classical
+computers, quantum machines can execute Shor's
+algorithm~\cite{Shor:article:1997:oct} to efficiently solve problems such as
+integer factorisation or discrete logarithm. Ergo, it is imperative to study
+cryptography that is quantum-resistant, \emph{i.e.} post-quantum, even if
+classical machines are still the norm. One of the main approaches for
+instantiating post-quantum digital signature schemes is based on multivariate
+quadratic equations. The problems upon which these are based are not known to
+be solved more efficiently with a quantum computer~\cite{Bernstein:book:2008}.
+Ergo, these schemes appear to be good candidates for replacing currently used
+ones.
 
-Multivariate cryptography provides a variety of signature schemes, categorised by their underlying mathematical structures. They are extremely efficient when signing and verifying messages~\cite{Ding:book:2006}, since most computations are based on finite field arithmetic. Still, schemes are highly distinct with respect to the balance between security parameters, signature and key sizes~\cite{Ding:article:2017:jul}. One of the most balanced schemes in this context is called Rainbow, due to Ding and Schmidt~\cite{Ding:inproc:2005:jun}. It is a generalisation of the classical Unbalanced Oil and Vinegar (UOV) scheme~\cite{Kipnis:inproc:1999:apr}, featuring structures that are easy to describe and implement accurately. This is important when considering, for instance, limited environments such as smart cards and embedded devices. These still need secure communications, but are restrained with regards to memory and processing power, when operating a signed message.
+Multivariate cryptography provides a variety of signature schemes, categorised
+by their underlying mathematical structures. They are extremely efficient when
+signing and verifying messages~\cite{Ding:book:2006}, since most computations
+are based on finite field arithmetic. Still, schemes are highly distinct with
+respect to the balance between security parameters, signature and key
+sizes~\cite{Ding:article:2017:jul}. One of the most balanced schemes in this
+context is called Rainbow, due to Ding and Schmidt~\cite{Ding:inproc:2005:jun}.
+It is a generalisation of the classical Unbalanced Oil and Vinegar (UOV)
+scheme~\cite{Kipnis:inproc:1999:apr}, featuring structures that are easy to
+describe and implement accurately. This is important when considering, for
+instance, limited environments such as smart cards and embedded devices. These
+still need secure communications, but are restrained with regards to memory and
+processing power, when operating a signed message.
 
-Nevertheless, while signature sizes for Rainbow are already excellent, key sizes are orders of magnitude greater than currently used schemes (\emph{e.g.} RSA has 512 bytes keys). This may be addressed by means of employing special structures into its public and private keys. Since these can be stored as matrices, sparseness and cyclic approaches are common strategies. However, it is important to note that the restriction of key pairs to matrices with these characteristics may negatively impact the overall security of the scheme. Thus, we will focus on the creation of secure methods for the reduction of public and private keys on the Rainbow signature scheme.
+Nevertheless, while signature sizes for Rainbow are already excellent, key
+sizes are orders of magnitude greater than currently used schemes (\emph{e.g.}
+RSA has 512 bytes keys). This may be addressed by means of employing special
+structures into its public and private keys. Since these can be stored as
+matrices, sparseness and cyclic approaches are common strategies. However, it
+is important to note that the restriction of key pairs to matrices with these
+characteristics may negatively impact the overall security of the scheme. Thus,
+we will focus on the creation of secure methods for the reduction of public and
+private keys on the Rainbow signature scheme.
 
 \section{Related Works}
 
-There has been a considerable amount of work done when dealing with reduction of private and public keys on the Rainbow signature scheme. Still, not all of the published works maintain the security of their common predecessor. A scheme based on non-commutative rings due to Yasuda \emph{et al.}~\cite{Yasuda:inproc:2012:feb} reduces private keys by up to $75\%$, but was broken by independent researchers~\cite{Hashimoto:inproc:2013:feb,Thomae:inproc:2012:sep}. A scheme based on circulant matrices by Peng and Tang~\cite{Peng:article:2017:jun} gives secure parameters for other works of Yasuda \emph{et al.}~\cite{Yasuda:inproc:2013:may,Yasuda:inproc:2014:apr}. Yet, its $45\%$ private key reduction was deemed insecure by Hashimoto~\cite{Hashimoto:misc:2018:oct}. 
+There has been a considerable amount of work done when dealing with reduction
+of private and public keys on the Rainbow signature scheme. Still, not all of
+the published works maintain the security of their common predecessor. A scheme
+based on non-commutative rings due to Yasuda \emph{et
+al.}~\cite{Yasuda:inproc:2012:feb} reduces private keys by up to $75\%$, but
+was broken by independent
+researchers~\cite{Hashimoto:inproc:2013:feb,Thomae:inproc:2012:sep}. A scheme
+based on circulant matrices by Peng and Tang~\cite{Peng:article:2017:jun} gives
+secure parameters for other works of Yasuda \emph{et
+al.}~\cite{Yasuda:inproc:2013:may,Yasuda:inproc:2014:apr}. Yet, its $45\%$
+private key reduction was deemed insecure by
+Hashimoto~\cite{Hashimoto:misc:2018:oct}.
 
-Still, there are various examples of schemes that resist currently known cryptanalysis. Petzoldt \emph{et al.} suggest a scheme based on cyclic matrices~\cite{Petzoldt:inproc:2010:dec} that reduces the public key size by as much as $62\%$. A scheme due to Yasuda \emph{et al.}~\cite{Yasuda:article:2014:sep} uses sparse matrices to reduce private key sizes by up to $76\%$. Petzoldt~\cite{Petzoldt:phd:2013:jul} also uses linear recurring sequences to reduce the public key size by a factor of 7.5. 
+Still, there are various examples of schemes that resist currently known
+cryptanalysis. Petzoldt \emph{et al.} suggest a scheme based on cyclic
+matrices~\cite{Petzoldt:inproc:2010:dec} that reduces the public key size by as
+much as $62\%$. A scheme due to Yasuda \emph{et
+al.}~\cite{Yasuda:article:2014:sep} uses sparse matrices to reduce private key
+sizes by up to $76\%$. Petzoldt~\cite{Petzoldt:phd:2013:jul} also uses linear
+recurring sequences to reduce the public key size by a factor of 7.5.
 
-Moreover, there are also generic constructions that reduce the public key in exchange of increasing the signature. This is the case of the works of Szepieniec \emph{et al.}~\cite{Szepieniec:inproc:2017:jun} and Beullens~\cite{Beullens:msc:2017:jun}. Another strategy by Beullens and Preneel~\cite{Beullens:inproc:2017:dec} works for any scheme based on the Oil--Vinegar principle, and is based on lifting public and central maps to an extension field. However, none of the aforementioned works deal with reduction of both keys in the key pair.
+Moreover, there are also generic constructions that reduce the public key in
+exchange of increasing the signature. This is the case of the works of
+Szepieniec \emph{et al.}~\cite{Szepieniec:inproc:2017:jun} and
+Beullens~\cite{Beullens:msc:2017:jun}. Another strategy by Beullens and
+Preneel~\cite{Beullens:inproc:2017:dec} works for any scheme based on the
+Oil---Vinegar principle, and is based on lifting public and central maps to an
+extension field. However, none of the aforementioned works deal with reduction
+of both keys in the key pair.
 
 \section{Hypothesis}
 
-It is evident that no works in the literature have reduced both private and public keys on the Rainbow signature scheme. Thus, our target research question asks if there are any restrictions in doing so. It is known that, in public key cryptography, codifications done by a private key will only be undone by its corresponding public key and vice-versa, \emph{i.e.} both keys are intrinsically related. The usual procedure is to use a seeded pseudo-random number generator to create a private key, and derive the public key from that. In the case of Rainbow, we wish to know if this method can be executed using only matrices with a desirable symmetry, that may act as a key pair of this scheme. 
+It is evident that no works in the literature have reduced both private and
+public keys on the Rainbow signature scheme. Thus, our target research question
+asks if there are any restrictions in doing so. It is known that, in public key
+cryptography, codifications done by a private key will only be undone by its
+corresponding public key and vice-versa, \emph{i.e.} both keys are
+intrinsically related. The usual procedure is to use a seeded pseudo-random
+number generator to create a private key, and derive the public key from that.
+In the case of Rainbow, we wish to know if this method can be executed using
+only matrices with a desirable symmetry, that may act as a key pair of this
+scheme.
 
 \section{Objectives}
 
-With this project, we aim to reduce the size of both private and public keys on the Rainbow signature scheme. This will be done through the introduction of a special structure into the matrix representation of both keys, allowing their compact presentation and decreasing overall storage requirements for the scheme. Based on this, the following specific objectives are presented.
+With this project, we aim to reduce the size of both private and public keys on
+the Rainbow signature scheme. This will be done through the introduction of a
+special structure into the matrix representation of both keys, allowing their
+compact presentation and decreasing overall storage requirements for the
+scheme. Based on this, the following specific objectives are presented.
 
 \begin{enumerate}[label=\alph*.]
-    \item Verify whether symmetric matrix structures (\emph{e.g.} Hessenberg, Hankel, centrosymmetric) may be used to generate key pairs and their direct effect on the security of the scheme;
-    \item Establish structures that are fit to be used in the context of multivariate public key cryptography, that is, observe if public keys generated from specially composed private keys will maintain their underlying structure;
-    \item Development of a Rainbow signature scheme variant employing a matrix structure with the intent of reducing private and public key sizes;
-    \item Provide sets of parameters reasonable for environments with distinct security requirements, for instance, desktop computers, mobile and embedded devices, servers etc..
+  \item Verify whether symmetric matrix structures (\emph{e.g.} Hessenberg,
+      Hankel, centrosymmetric) may be used to generate key pairs and their
+      direct effect on the security of the scheme;
+  \item Establish structures that are fit to be used in the context of
+      multivariate public key cryptography, that is, observe if public keys
+      generated from specially composed private keys will maintain their
+      underlying structure;
+  \item Development of a Rainbow signature scheme variant employing a matrix
+      structure with the intent of reducing private and public key sizes;
+  \item Provide sets of parameters reasonable for environments with distinct
+      security requirements, for instance, desktop computers, mobile and
+      embedded devices, servers etc..
 \end{enumerate}
 
 \section{Methodology}
 
-We will demonstrate the previously mentioned objectives through a chronological list of activities presented below. These partial endeavours will enhance our knowledge in special matrix structures, the Oil--Vinegar principle, the Rainbow signature scheme and its modern variants, as well as new cryptanalytic methods. Furthermore, note that there are some specific literary and oral productions that must be created, as part of the master's program requirements.
+We will demonstrate the previously mentioned objectives through a chronological
+list of activities presented below. These partial endeavours will enhance our
+knowledge in special matrix structures, the Oil---Vinegar principle, the
+Rainbow signature scheme and its modern variants, as well as new cryptanalytic
+methods. Furthermore, note that there are some specific literary and oral
+productions that must be created, as part of the master's program requirements.
 
 \begin{enumerate}[label=\alph*.]
-    \item Bibliographic review and maintenance of a database with works that are related to the Rainbow signature scheme. We will mainly focus on variations that feature reduction of public or private key sizes, and related cryptanalysis;
-    \item Deep study of matrix-like structures that may be represented in a compact form;
-    \item Creation of an algorithm that can generate a compact private-public key pair;
-    \item Procedure to check if the reduced key space of compact key pairs is still large enough to prevent brute-force search;
-    \item Apply currently known cryptanalytic methods to the new Rainbow-like signature scheme and compare it with the original method;
-    \item Compare the new algorithm with other schemes that also reduce key sizes through experiments;
-    \item At least one scientific contribution in the form of a conference paper or journal article;
-    \item Oral presentation about the work done so far, that will act as a qualification exam;
-    \item Production of a dissertation about the subject;
-    \item Oral presentation about the concluded work.
+  \item Bibliographic review and maintenance of a database with works that
+      are related to the Rainbow signature scheme. We will mainly focus on
+      variations that feature reduction of public or private key sizes, and
+      related cryptanalysis;
+  \item Deep study of matrix-like structures that may be represented in a
+      compact form;
+  \item Creation of an algorithm that can generate a compact private-public key
+      pair;
+  \item Procedure to check if the reduced key space of compact key pairs is
+      still large enough to prevent brute-force search;
+  \item Apply currently known cryptanalytic methods to the new Rainbow-like
+      signature scheme and compare it with the original method;
+  \item Compare the new algorithm with other schemes that also reduce key sizes
+      through experiments;
+  \item At least one scientific contribution in the form of a conference paper
+      or journal article;
+  \item Oral presentation about the work done so far, that will act as a
+      qualification exam;
+  \item Production of a dissertation about the subject;
+  \item Oral presentation about the concluded work.
 \end{enumerate}
 
 \section{Expected Results}
 
-We wish to collaborate with individuals and institutions alike, with the intent of broadening our knowledge and push the boundaries of optimisations with regards to reducing key sizes in single-field schemes. As such, we expect the publication of scientific material on this subject, collaboration with students, professors, independent and contracted researchers. Further, we also aim to promote our university through oral presentations of this research, provide free, open-source software implementations of these algorithms, and create a breakthrough result on the relation between compact private and public keys on Rainbow.
+We wish to collaborate with individuals and institutions alike, with the intent
+of broadening our knowledge and push the boundaries of optimisations with
+regards to reducing key sizes in single-field schemes. As such, we expect the
+publication of scientific material on this subject, collaboration with
+students, professors, independent and contracted researchers. Further, we also
+aim to promote our university through oral presentations of this research,
+provide free, open-source software implementations of these algorithms, and
+create a breakthrough result on the relation between compact private and public
+keys on Rainbow.
 
 \bibliographystyle{../sbc/sbc}
 \bibliography{sbc-template}
