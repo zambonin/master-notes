@@ -1,0 +1,8 @@
+Assorted written assignments given throughout classes taken by the author:
+
+  * very basic notes on the first lecture of Coursera's "Bitcoin and
+    Cryptocurrency Technologies";
+  * a convoluted example of the Brzozowski method for converting
+    non-deterministic finite automata to regular expressions;
+  * a proposal for a research problem on the Winternitz digital signature
+    scheme, much alike the other document on this repository.
