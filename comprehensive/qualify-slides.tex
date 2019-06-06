@@ -3,7 +3,7 @@
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{enumitem, tikz, chronosys}
+\usepackage{enumitem, tikz, chronosys, booktabs, multirow}
 
 \usetikzlibrary{patterns}
 
@@ -33,9 +33,9 @@
 \title{Reduction of Key Sizes on Rainbow-like Multivariate Signature Schemes}
 \author{Gustavo Zambonin}
 \institute{
-  \includegraphics[scale=0.15]{ufsc}                        \\
-  Qualification Exam                                        \\
-  Graduate Program in Computer Science                      \\ \vspace{2mm}
+  \includegraphics[scale=0.15]{ufsc}    \\
+  Qualification Exam                    \\
+  Graduate Program in Computer Science  \\ \vspace{2mm}
   \texttt{gustavo.zambonin@posgrad.ufsc.br}
 }
 \date{}
@@ -47,9 +47,32 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Outline}
+  \begin{itemize}
+    \item Context
+    \begin{itemize}[itemsep=0pt]
+      \item Motivation
+      \item Multivariate cryptography
+    \end{itemize}
+    \item Research object
+    \begin{itemize}[itemsep=0pt]
+      \item Related works
+      \item Hypothesis
+      \item Rainbow signature scheme
+    \end{itemize}
+    \item Our proposal
+    \begin{itemize}[itemsep=0pt]
+      \item Open problems
+      \item Preliminary results
+    \end{itemize}
+    \item Chronology
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
   \frametitle{Context}
   \begin{itemize}
-    \item Guarantee protection and privacy of messages sent digitally
+    \item Guarantee authenticity of messages sent digitally
     \item Security of digital signature schemes is based on problems from
         number theory
     \begin{itemize}
@@ -77,8 +100,8 @@
 \begin{frame}
   \frametitle{Multivariate cryptography}
   \begin{itemize}
-    \item Cryptography based on systems of multivariate quadratic equations
-        over finite fields
+    \item Cryptography based on systems of multivariate equations over finite
+        fields
     \item Bipolar construction:
     \begin{figure}
       \vspace{2mm}
@@ -97,8 +120,8 @@
           verification} -- (h);
       \end{tikzpicture}
     \end{figure}
-    \item Fast operations, small signature sizes and large keys, compared to
-        conventional schemes
+    \item Focus on signatures ($m \leq n$): fast operations, small signatures
+        and large keys, compared to current schemes
   \end{itemize}
 \end{frame}
 
@@ -128,7 +151,7 @@
     \chronosp[colorbox=blue!30,markdepth=40pt]{09/2011}{\cite{Petzoldt:inproc:2011:sep}}
     \chronosp[colorbox=red!20,markdepth=-50pt]{02/2012}{\cite{Yasuda:inproc:2012:feb}$\dagger$}
     \chronosp[colorbox=blue!40,markdepth=40pt]{11/2012}{\cite{Petzoldt:inproc:2012:nov}}
-    \chronosp[colorbox=red!30]{5/2013}{\cite{Yasuda:inproc:2013:may}*}
+    \chronosp[colorbox=red!30]{05/2013}{\cite{Yasuda:inproc:2013:may}*}
     \chronosp[colorbox=blue!20,markdepth=-50pt]{06/2013}{\cite{Petzoldt:inproc:2013:jun}}
     \chronosp[colorbox=blue!40,markdepth=-20pt]{07/2013}{\cite{Petzoldt:phd:2013:jul}}
     \chronosp[colorbox=red!30,markdepth=40pt]{04/2014}{\cite{Yasuda:inproc:2014:apr}*}
@@ -150,7 +173,7 @@
   \frametitle{Hypothesis}
   \begin{itemize}
     \item To the best of our knowledge, works have reduced either private or
-        public keys
+        public keys, but not both
     \item Introduction of structures in the keys may lower security
   \end{itemize}
   \vspace{1cm}
@@ -172,8 +195,8 @@
     \begin{align*}
       P_{\ell} = \sum_{i, j \in V_{\ell}} \alpha_{ij}  x_{i}  x_{j}
         + \sum_{i \in V_{\ell}, j \in O_{\ell}} \beta_{ij}  x_{i}  x_{j}
-        + \sum_{i \in V_{\ell} \cup O_{\ell}} \gamma_{i}  x_{i} + \delta, \\
-        \alpha_{ij}, \beta_{ij}, \gamma_{i}, \delta \in \mathbb{F}_{q}
+        + \sum_{i \in V_{\ell} \cup O_{\ell}} \gamma_{i}  x_{i} + \;\; \delta,
+        \\ \alpha_{ij}, \beta_{ij}, \gamma_{i}, \delta \in \mathbb{F}_{q}
     \end{align*}
   \end{itemize}
 \end{frame}
@@ -313,8 +336,8 @@
   \begin{itemize}
     \item Consider a cryptographic hash function
         $\mathcal{H} : \{0, 1\}^{*} \to \mathbb{F}_{q}^{m}$ and a message $M$,
-          and compute the digest $\mathbf{d} = \mathcal{H}(M)$
-    \item Obtain the value $\mathbf{x} = \mathcal{L}_{1}^{-1}(\mathbf{d})$
+          and compute the digest $\mathbf{h} = \mathcal{H}(M)$
+    \item Obtain the value $\mathbf{x} = \mathcal{L}_{1}^{-1}(\mathbf{h})$
     \item Generate the pre-image of $\mathbf{x}$ under the central map,
         $\mathbf{y} = \mathcal{C}^{-1}(\mathbf{x})$, as per the operations
           above
@@ -327,9 +350,9 @@
   \frametitle{Rainbow signature scheme}
   \framesubtitle{Signature verification}
   \begin{itemize}
-    \item Obtain $\mathbf{d}$ from the message $M$
-    \item Compute $\mathbf{d}' = \mathcal{P}(\mathbf{z})$
-    \item The signature is valid if $\mathbf{d} = \mathbf{d}'$, and invalid
+    \item Obtain $\mathbf{h}$ from the message $M$
+    \item Compute $\mathbf{h}' = \mathcal{P}(\mathbf{z})$
+    \item The signature is valid if $\mathbf{h} = \mathbf{h}'$, and invalid
         otherwise
   \end{itemize}
 \end{frame}
@@ -386,6 +409,70 @@
         strategy?
     \item Do there exist parameter sets which optimize the private key size?
   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Preliminary results~\cite{Zambonin:inproc:2019:jul}}
+  \begin{table}[htbp]
+    \footnotesize
+    \renewcommand{\arraystretch}{1.2}
+    \setlength{\tabcolsep}{7pt}
+    \centering
+    \begin{tabular}{*{1}{l}*{5}{r}}
+      \toprule
+      Parameters & Variant
+        & $|\mathcal{K}_{Pr}|$ & $|\mathcal{K}_{Pr}^{\eta}|$
+        & $|\mathcal{K}_{Pu}|$ & Difference \\ \midrule
+      \multirow{3}{*}{$(\mathbb{F}_{256}, 17, 13, 13)$}
+        &  Classic &  \multirow{3}{*}{ 19546} &  \multirow{3}{*}{ 6524}
+                                                &   25740 & $-28.76\%$ \\
+        &   Cyclic &                          & &   10618 & $-62.15\%$ \\
+        &     LRS2 &                          & &    9789 & $-63.98\%$ \\
+      \multirow{3}{*}{$(\mathbb{F}_{256}, 26, 16, 17)$}
+        &  Classic &  \multirow{3}{*}{ 46131} &  \multirow{3}{*}{12474}
+                                                &   60390 & $-31.60\%$ \\
+        &   Cyclic &                          & &   22246 & $-67.41\%$ \\
+        &     LRS2 &                          & &   20662 & $-68.89\%$ \\
+      \multirow{3}{*}{$(\mathbb{F}_{256}, 36, 21, 22)$}
+        &  Classic &  \multirow{3}{*}{105006} &  \multirow{3}{*}{24924}
+                                                &  139320 & $-32.78\%$ \\
+        &   Cyclic &                          & &   48411 & $-69.98\%$ \\
+        &     LRS2 &                          & &   45547 & $-71.16\%$ \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Chronology}
+  \begin{figure}[htbp]
+    \vspace{-2cm}
+    \footnotesize
+    \begin{chronology}[startyear=2018, stopyear=2021, height=3pt, dates=false,
+        arrow=false, align=center]
+      \chronoperiodecoloralternation{lightgray, gray}
+      \definechronoevent{sp}[datesseparation=/, conversionmonth=false, year=false]
+      \chronoperiode[dateselevation=5pt]{2018}{2019}{}
+      \chronoperiode[dates=false]{2019}{2020}{}
+      \chronoperiode[dateselevation=5pt]{2020}{2021}{}
+      \chronosp[markdepth=-25pt, datestyle=\textbf]{30/07/2018}{\textbf{Start of
+        M.Sc.}}
+      \chronosp[markdepth=-60pt]{15/02/2019}{English proficiency}
+      \chronosp[markdepth=55pt]{09/03/2019}{1\textsuperscript{st}
+        submission}
+      \chronosp[markdepth=5pt]{02/05/2019}{1\textsuperscript{st}
+        notification}
+      \chronosp[markdepth=-25pt]{12/06/2019}{Qualification exam}
+      \chronosp[markdepth=20pt]{20/01/2020}{2\textsuperscript{nd}
+        submission}
+      \chronosp[markdepth=-60pt]{20/03/2020}{2\textsuperscript{nd}
+        notification}
+      \chronosp[markdepth=-25pt]{01/06/2020}{Manuscript}
+      \chronosp[markdepth=55pt]{01/07/2020}{Defense}
+      \chronosp[markdepth=5pt, datestyle=\textbf]{30/07/2020}{\textbf{End of
+        M.Sc.}}
+    \end{chronology}
+  \end{figure}
 \end{frame}
 
 \backupbegin{}
