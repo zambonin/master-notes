@@ -102,7 +102,7 @@
   \begin{itemize}
     \item Cryptography based on systems of multivariate equations over finite
         fields
-    \item Bipolar construction:
+    \item Bipolar construction, with central trapdoor:
     \begin{figure}
       \vspace{2mm}
       \centering
@@ -132,7 +132,7 @@
         currently on Round 2 of the NIST standardization process
     \item Easy description, good balance between signature and key sizes
     \item Keys are one to two orders of magnitude greater than
-        conventional ones
+        conventional ones (RSA at 512 bytes, ECDSA at 256 bits)
     \item Generalized version of Unbalanced Oil and
         Vinegar~\cite{Kipnis:inproc:1999:apr}
   \end{itemize}
@@ -174,7 +174,7 @@
   \begin{itemize}
     \item To the best of our knowledge, works have reduced either private or
         public keys, but not both
-    \item Introduction of structures in the keys may lower security
+    \item Current methods to reduce keys are not compatible between themselves
   \end{itemize}
   \vspace{1cm}
   \begin{itemize}
@@ -301,8 +301,9 @@
         \node at (5.5, -0.875) {$0$};
       \end{tikzpicture}
     \end{figure}
-    \item Solve linear $o_{1}$ equations in the first layer to obtain $V_{2}$,
-        and then solve the remaining $o_{2}$ equations \vspace{.25cm}
+    \item Solve linear $o_{1}$ equations in the first layer to obtain $V_{2}$
+        (if possible), and then solve the remaining $o_{2}$ equations
+          \vspace{.25cm}
     \begin{figure}
       \begin{tikzpicture}
         \node (v1v1) at (0.5, 1) {\tiny $V_{1} \times V_{1}$};
@@ -334,10 +335,10 @@
   \frametitle{Rainbow signature scheme}
   \framesubtitle{Signature generation}
   \begin{itemize}
-    \item Consider a cryptographic hash function
-        $\mathcal{H} : \{0, 1\}^{*} \to \mathbb{F}_{q}^{m}$ and a message $M$,
-          and compute the digest $\mathbf{h} = \mathcal{H}(M)$
-    \item Obtain the value $\mathbf{x} = \mathcal{L}_{1}^{-1}(\mathbf{h})$
+    \item Consider a cryptographic hash function $\mathcal{H}$ and a message
+        $M$, and compute the digest $\mathbf{h} = \mathcal{H}(M)$
+    \item With possession of the private key, obtain the value $\mathbf{x} =
+        \mathcal{L}_{1}^{-1}(\mathbf{h})$
     \item Generate the pre-image of $\mathbf{x}$ under the central map,
         $\mathbf{y} = \mathcal{C}^{-1}(\mathbf{x})$, as per the operations
           above
@@ -351,7 +352,8 @@
   \framesubtitle{Signature verification}
   \begin{itemize}
     \item Obtain $\mathbf{h}$ from the message $M$
-    \item Compute $\mathbf{h}' = \mathcal{P}(\mathbf{z})$
+    \item With possession of the public key, compute
+        $\mathbf{h}' = \mathcal{P}(\mathbf{z})$
     \item The signature is valid if $\mathbf{h} = \mathbf{h}'$, and invalid
         otherwise
   \end{itemize}
@@ -360,9 +362,8 @@
 \begin{frame}
   \frametitle{Our proposal}
   \begin{itemize}
-    \item Introduction of structures in the private key is dangerous and may
-        lead to security holes
-    \item Observe that, to invert the central map, vinegar variables are
+    \item Introduction of structures in the private key may be undesired
+    \item Recall that, to invert the central map, vinegar variables are
         chosen randomly every time a preimage is computed
     \item If these variables are changed less often, or fixed, they simplify
         the central map matrix representation
@@ -414,26 +415,45 @@
 \begin{frame}
   \frametitle{Preliminary results~\cite{Zambonin:inproc:2019:jul}}
   \begin{table}[htbp]
-    \footnotesize
+    \renewcommand{\arraystretch}{1.2}
+    \setlength{\tabcolsep}{8pt}
+    \centering
+    \begin{tabular}{*{2}{l}*{5}{r}}
+      \toprule
+      Security & $n$ & $m$ & $|\mathcal{K}_{Pr}|$
+        & $|\mathcal{K}_{Pr} ^{\eta}|$ & Difference \\ \midrule
+       80  &    43 &   26 &    19208 &    5914 & $-69.21\%$ \\
+      100  &    69 &   43 &    75440 &   23193 & $-69.26\%$ \\
+      128  &    79 &   43 &   103704 &   22110 & $-78.68\%$ \\
+      192  &   131 &   68 &   440638 &   71773 & $-83.71\%$ \\
+      256  &   178 &   93 &  1086971 &  164721 & $-84.85\%$ \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Preliminary results~\cite{Zambonin:inproc:2019:jul}}
+  \begin{table}[htbp]
     \renewcommand{\arraystretch}{1.2}
     \setlength{\tabcolsep}{7pt}
     \centering
     \begin{tabular}{*{1}{l}*{5}{r}}
       \toprule
-      Parameters & Variant
+      Security & Variant
         & $|\mathcal{K}_{Pr}|$ & $|\mathcal{K}_{Pr}^{\eta}|$
         & $|\mathcal{K}_{Pu}|$ & Difference \\ \midrule
-      \multirow{3}{*}{$(\mathbb{F}_{256}, 17, 13, 13)$}
+      \multirow{3}{*}{80}
         &  Classic &  \multirow{3}{*}{ 19546} &  \multirow{3}{*}{ 6524}
                                                 &   25740 & $-28.76\%$ \\
         &   Cyclic &                          & &   10618 & $-62.15\%$ \\
         &     LRS2 &                          & &    9789 & $-63.98\%$ \\
-      \multirow{3}{*}{$(\mathbb{F}_{256}, 26, 16, 17)$}
+      \multirow{3}{*}{100}
         &  Classic &  \multirow{3}{*}{ 46131} &  \multirow{3}{*}{12474}
                                                 &   60390 & $-31.60\%$ \\
         &   Cyclic &                          & &   22246 & $-67.41\%$ \\
         &     LRS2 &                          & &   20662 & $-68.89\%$ \\
-      \multirow{3}{*}{$(\mathbb{F}_{256}, 36, 21, 22)$}
+      \multirow{3}{*}{128}
         &  Classic &  \multirow{3}{*}{105006} &  \multirow{3}{*}{24924}
                                                 &  139320 & $-32.78\%$ \\
         &   Cyclic &                          & &   48411 & $-69.98\%$ \\
