@@ -1,5 +1,7 @@
 \documentclass[12pt]{beamer}
 
+% chktex-file 35
+
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -143,25 +145,27 @@
   \begin{figure}[htbp]
     \tiny
     \vspace{-1.5cm}
-    \startchronology[startyear=2010,stopyear=2020,dates=false,arrow=false,height=3pt]
-    \definechronoevent{sp}[datesseparation=/, conversionmonth=false]
-    \chronosp[colorbox=blue!10,markdepth=-50pt]{06/2010}{\cite{Petzoldt:inproc:2010:jun}*}
-    \chronosp[colorbox=blue!20]{12/2010}{\cite{Petzoldt:inproc:2010:dec}}
-    \chronosp[colorbox=blue!30,markdepth=-20pt]{03/2011}{\cite{Petzoldt:inproc:2011:mar}*}
-    \chronosp[colorbox=blue!30,markdepth=40pt]{09/2011}{\cite{Petzoldt:inproc:2011:sep}}
-    \chronosp[colorbox=red!20,markdepth=-50pt]{02/2012}{\cite{Yasuda:inproc:2012:feb}$\dagger$}
-    \chronosp[colorbox=blue!40,markdepth=40pt]{11/2012}{\cite{Petzoldt:inproc:2012:nov}}
-    \chronosp[colorbox=red!30]{05/2013}{\cite{Yasuda:inproc:2013:may}*}
-    \chronosp[colorbox=blue!20,markdepth=-50pt]{06/2013}{\cite{Petzoldt:inproc:2013:jun}}
-    \chronosp[colorbox=blue!40,markdepth=-20pt]{07/2013}{\cite{Petzoldt:phd:2013:jul}}
-    \chronosp[colorbox=red!30,markdepth=40pt]{04/2014}{\cite{Yasuda:inproc:2014:apr}*}
-    \chronosp[colorbox=red!40,markdepth=-20pt]{09/2014}{\cite{Yasuda:article:2014:sep}*}
-    \chronosp[colorbox=blue!30]{12/2015}{\cite{Shim:inproc:2015:dec}}
-    \chronosp[colorbox=red!40,markdepth=-50pt]{06/2017}{\cite{Peng:article:2017:jun}$\dagger$}
-    \chronosp[colorbox=blue!20]{06/2017}{\cite{Szepieniec:inproc:2017:jun}}
-    \chronosp[colorbox=blue!20,markdepth=-20pt]{12/2017}{\cite{Beullens:inproc:2017:dec}}
-    \chronosp[colorbox=purple!50]{05/2019}{Ours}
-    \stopchronology \vspace{.5cm}
+    \begin{chronology}[startyear=2010, stopyear=2020, dates=false, arrow=false,
+      height=3pt]
+      \definechronoevent{sp}[datesseparation=/, conversionmonth=false]
+      \chronosp[colorbox=blue!10, markdepth=-50pt]{06/2010}{\cite{Petzoldt:inproc:2010:jun}*}
+      \chronosp[colorbox=blue!20]{12/2010}{\cite{Petzoldt:inproc:2010:dec}}
+      \chronosp[colorbox=blue!30, markdepth=-20pt]{03/2011}{\cite{Petzoldt:inproc:2011:mar}*}
+      \chronosp[colorbox=blue!30, markdepth=40pt]{09/2011}{\cite{Petzoldt:inproc:2011:sep}}
+      \chronosp[colorbox=red!20, markdepth=-50pt]{02/2012}{\cite{Yasuda:inproc:2012:feb}$\dagger$}
+      \chronosp[colorbox=blue!40, markdepth=40pt]{11/2012}{\cite{Petzoldt:inproc:2012:nov}}
+      \chronosp[colorbox=red!30]{05/2013}{\cite{Yasuda:inproc:2013:may}*}
+      \chronosp[colorbox=blue!20, markdepth=-50pt]{06/2013}{\cite{Petzoldt:inproc:2013:jun}}
+      \chronosp[colorbox=blue!40, markdepth=-20pt]{07/2013}{\cite{Petzoldt:phd:2013:jul}}
+      \chronosp[colorbox=red!30, markdepth=40pt]{04/2014}{\cite{Yasuda:inproc:2014:apr}*}
+      \chronosp[colorbox=red!40, markdepth=-20pt]{09/2014}{\cite{Yasuda:article:2014:sep}*}
+      \chronosp[colorbox=blue!30]{12/2015}{\cite{Shim:inproc:2015:dec}}
+      \chronosp[colorbox=red!40, markdepth=-50pt]{06/2017}{\cite{Peng:article:2017:jun}$\dagger$}
+      \chronosp[colorbox=blue!20]{06/2017}{\cite{Szepieniec:inproc:2017:jun}}
+      \chronosp[colorbox=blue!20, markdepth=-20pt]{12/2017}{\cite{Beullens:inproc:2017:dec}}
+      \chronosp[colorbox=purple!50]{05/2019}{Ours}
+    \end{chronology}
+    \vspace{.5cm}
     {\scriptsize
       Works in blue optimise public keys, while red ones reduce private keys.
       Asterisks denote reparametrized works and crosses denote broken schemes.
@@ -211,10 +215,10 @@
         $\mathcal{L}_{2} : \mathbb{F}_{q}^{n} \to \mathbb{F}_{q}^{n}$
     \item Central map is a function
         $\mathcal{C} : \mathbb{F}_{q}^{n} \to \mathbb{F}_{q}^{m}$
-      \begin{itemize}
-        \item A total of $o_{\ell}$ polynomials and respective coefficients are
-            randomly chosen from each $P_{\ell}$
-      \end{itemize}
+    \begin{itemize}
+      \item A total of $o_{\ell}$ polynomials and respective coefficients are
+          randomly chosen from each $P_{\ell}$
+    \end{itemize}
     \item Private key is the $3$-uple
         $(\mathcal{L}_{1}, \mathcal{C}, \mathcal{L}_{2})$, public key is the
           composition $\mathcal{P} = \mathcal{L}_{1} \circ \mathcal{C} \circ
@@ -270,7 +274,7 @@
   \framesubtitle{Inversion of the central map}
   \begin{itemize}
     \item Randomly choose variables in $V_{1}$ and substitute them
-          \vspace{.25cm}
+        \vspace{.25cm}
     \begin{figure}
       \begin{tikzpicture}
         \node (v1v1) at (0.5, 1) {\tiny $V_{1} \times V_{1}$};
@@ -337,8 +341,8 @@
   \begin{itemize}
     \item Consider a cryptographic hash function $\mathcal{H}$ and a message
         $M$, and compute the digest $\mathbf{h} = \mathcal{H}(M)$
-    \item With possession of the private key, obtain the value $\mathbf{x} =
-        \mathcal{L}_{1}^{-1}(\mathbf{h})$
+    \item With possession of the private key, obtain the value
+        $\mathbf{x} = \mathcal{L}_{1}^{-1}(\mathbf{h})$
     \item Generate the pre-image of $\mathbf{x}$ under the central map,
         $\mathbf{y} = \mathcal{C}^{-1}(\mathbf{x})$, as per the operations
           above
@@ -471,12 +475,13 @@
     \begin{chronology}[startyear=2018, stopyear=2021, height=3pt, dates=false,
         arrow=false, align=center]
       \chronoperiodecoloralternation{lightgray, gray}
-      \definechronoevent{sp}[datesseparation=/, conversionmonth=false, year=false]
+      \definechronoevent{sp}[datesseparation=/, conversionmonth=false,
+        year=false]
       \chronoperiode[dateselevation=5pt]{2018}{2019}{}
       \chronoperiode[dates=false]{2019}{2020}{}
       \chronoperiode[dateselevation=5pt]{2020}{2021}{}
-      \chronosp[markdepth=-25pt, datestyle=\textbf]{30/07/2018}{\textbf{Start of
-        M.Sc.}}
+      \chronosp[markdepth=-25pt, datestyle=\textbf]{30/07/2018}{\textbf{Start
+        of M.Sc.}}
       \chronosp[markdepth=-60pt]{15/02/2019}{English proficiency}
       \chronosp[markdepth=55pt]{09/03/2019}{1\textsuperscript{st}
         submission}
